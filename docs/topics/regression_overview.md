@@ -4,9 +4,9 @@
 
 Regression analysis is arguably the most widely-used tool in applied
 statistics, and has also inspired many important developments in statistical
-theory.  Here we define some concepts that can be used to understand some of
-the major approaches to regression.  Then we review some specific regression
-methods along with their key properties.
+theory.  Here we discuss some concepts that can be used to understand
+several of the most wideky-used approaches to regression.  Then we review
+some specific regression methods along with their key properties.
 
 Before proceeding, note that regression itself is somewhat difficult to
 define in a way that differentiates it from the rest of statistics.  In most
@@ -15,88 +15,120 @@ distribution of a variable $y$ given another variable $x$.  The symbols $y$
 and $x$ may denote either scalars or vectors.  Any analysis focusing on such
 a conditional distribution can be seen as a form of regression analysis.
 
+The variables $y$ and $x$ have various essentially equivalent names.
+The variable $y$ is known as the "outcome", the "response variable", and
+the "dependent variable", while "x" may be referred to as a "covariate", a
+"predictor", a "regressor", or an "explanatory variable".
+
 ## Major concepts
 
-* __Mean regression__: this term refers to any regression analysis where
-the population target is the conditional mean function $E[y | x]$; also
-known as "mean structure modeling".
+* __Prediction__: A major use case for regression is to predict (or
+"forecast") unobserved values of the dependent variable $y$ when the
+explanatory variables $x$ are observed.  However not all applications
+of regression analysis focus on prediction.  In basic research we may use
+regression analysis to understand whether and how two quantities are related,
+even when there is no practical need to make predictions.  It is also often
+of interest to understand relationships between variables that are too
+weak to be useful for prediction.  This can give insight into "mechanisms"
+relating the phenomena measured by $x$ and $y$.
+
+* __Mean regression__: this term refers to any regression analysis where the
+population target is the conditional mean function $E[y | x]$; also known as
+"mean structure modeling".
+
+* __Variance regression__: this is a class of approaches that model the
+conditional variance ${\rm var}[y|x]$ alone, or that model the conditional
+variance along with the conditional mean.  A common technique is to model
+the $\log {\rm var}[y|x]$ since a variance is always positive.
+
+* __Quantile regression__: this refers to any method that models a conditional
+quantile in terms of covariates.  A common form of quantile reqression is
+"median regression", which is sometimes favored over more conventional
+approaches targeting the conditional mean because it is more "robust".
+Quantile regression using probability points other than 0.5 can be used to
+understand the tails of the conditional distribution of $y$ given $x$.
 
 * __Single index models__: a single index model is any regression model that
-is expressed in terms of one "linear predictor" $b_1x_1 + \cdots + b_px_p$,
-where the $x_j$ are observed covariates (data) and the $b_j$ are unknown
-coefficients (parameters).  This means that all the information in $x$ that
-is related in any way to $y$ is contained in the given linear combination
-of the components of $x$.
+is expressed in terms of one "linear predictor" involving the covariates, i.e.
+$b_1x_1 + \cdots + b_px_p$, where the $x_j$ are observed covariates (data)
+and the $b_j$ are unknown coefficients (parameters).  This means that all
+the information in $x$ that is related to $y$ is contained in the given
+linear combination of the components of $x$.
 
-* __Linear model__: This is a very broad term which, depending on the
-context, can mean any of the following: (i) some property of the conditional
-distribution, most commonly the conditional mean, is linear in the covariates,
-(ii) some property of the conditional distribution is linear in the parameters,
-or (iii) the fitted values and/or parameter estimates are linear in the data.
-In common use, "linear model" refers to a linear model for the mean structure,
-e.g. $E[y|x] = \alpha + \beta x$, that is fit to the data using linear least
-squares.  This model always has properties (ii) and (iii) (in reference
-to the conditional mean).  It may not have property (i), since $E[y|x] =
-\alpha + \beta x + \gamma x^2$ can also be considered to be a linear model
-with properties (i) and (iii) but does not have property (ii).  Many people
-incorrectly think that linear models must have property (ii), and therefore
-are not capable of representing regression relationships between $y$ and $x$
+* __Linear model__: Depending on the context, this term can mean any of the
+following: (i) some property of the conditional distribution, most commonly the
+conditional mean, is modeled as a linear function of the covariates, (ii) some
+property of the conditional distribution is linear in the parameters, or (iii)
+the fitted values and/or parameter estimates are linear in the observed values
+of the response variable.  In common use, "linear model" refers to a linear
+model for the mean structure, e.g. $E[y|x] = \alpha + \beta x$, that is fit to
+the data using linear least squares.  This model always has properties (ii)
+and (iii) (in reference to the conditional mean).  It may not have property
+(i), since $E[y|x] = \alpha + \beta x + \gamma x^2$ can also be considered
+to be a linear model with properties (i) and (iii) but does not have property
+(ii).  It is incorrect to assert that linear models must have property (ii),
+and as a result cannot represent regression relationships between $y$ and $x$
 that are nonlinear.  An example of a model that does not have properties (i),
 (ii), or (iii) is the mean structure model $E[y|x] = \exp(\alpha + \beta x)$.
 
 * __Regression for independent observations__: Most basic regression methods
-are immediately suitable for samples of independent observations. These
-basic methods may or may not give meaningful results when the observations
-are statistically dependent.  More advanced regression methods have been
-developed that are specifically devised for use when the observations are
-known to be dependent.
+are directly applicable for samples of independent observations. These basic
+methods may or may not give meaningful results when the observations are
+statistically dependent.  More advanced regression methods have been devised
+for use when the observations are statistically dependent.
 
 * __Heteroscedasticity__: If the conditional variance ${\rm Var}[y|x]$ is
 constant (i.e. does not depend on $x$), then the conditional distribution
 of $y$ given $x$ is homoscedastic, otherwise it is heteroscedastic
 (alternative terminology is "constant variance" and "nonconstant variance").
 Heteroscedasticity can be accommodated by some regression procedures
-(e.g. Poisson regression works best if the mean and variance are equal).
-Some regression procedures, like ordinary least squares, work best when
-the population is homoscedastic, but can still give meaningful results
-(with some loss of power) if the population is heteroscedastic.
+(e.g. Poisson regression works best if the mean and variance are equal,
+which is a strong form of heteroscedasticity).  Some regression procedures,
+like ordinary least squares, work best when the population is homoscedastic,
+but can still give meaningful results (with some loss of power) if the
+population is heteroscedastic.
 
 * __Mean/variance relationship__: If the variance of a distribution is a
 function of the mean, there is a mean/variance relationship.  For example,
-in the Gaussian distribution, the variance is unrelated to the mean (i.e. it
-is a constant function of the mean), in the Poisson distribution, the variance
-is equal to the mean, and in the negative binomial distribution, the variance
-has the form $\mu + \alpha\mu^2$, where $\alpha \ge 0$ is a "shape parameter".
+in the Poisson distribution, the variance is equal to the mean, and
+in the negative binomial distribution the variance has the form $\mu +
+\alpha\mu^2$, where $\alpha \ge 0$ is a "shape parameter".  However in the
+Gaussian distribution, the variance is unrelated to the mean (i.e. it is a
+constant function of the mean) so there is no mean/variance relationship.
 
-* __Overdispersion/underdispersion__: If the conditional variance of the data
-is greater than the conditional variance of the population model being fit
-to the data, there is overdispersion.  If the conditional variance of the
-data is less than specified by the population model, there is underdispersion.
+* __Overdispersion/underdispersion__: these terms refer to misspecification of
+a working regression model relative to the population.  If the true conditional
+variance is greater than the conditional variance of the model being fit to
+the data, then there is overdispersion.  If the true conditional variance
+is less than the conditional variance of the model being fit to the data
+there is underdispersion.
 
 * __Repeated measures__: This is one reason that data may be non-independent.
 Repeated measures (or "clustering") refers to any setting in which the data
-fall into groups, and the observations in any one group are more similar
-to each other than they are to observations in other groups (perhaps due to
-unobserved covariates that are stable within a group).
+fall into groups, and the observations in any one group are more similar to
+each other than they are to observations in other groups.  This can happen,
+for example, due to unobserved covariates that are stable (constant) within
+a group.
 
 * __Marginal regression__: This is a form of regression analysis where the
 estimation target is the marginal regression function $E[y|x]$, even though
 the data may be clustered or otherwise dependent.  The marginal regression
 function remains an object of interest when the data are dependent, even
-though it does not capture the relationship between the independent and
-dependent variables in full.  Some methods for marginal regression also give
+though it may not fully capture the relationship between the independent
+and dependent variables.  Some methods for marginal regression also give
 insight into the marginal variance function ${\rm Var}[y|x]$ and marginal
 covariances ${\rm Cov}[y_1, y_2|x_1, x_2]$.
 
 * __Multilevel regression__: This is an alternative term for "random effects
 modeling".  It emphasizes the fact that in many data sets, there are complex
-inter-relationships between the observations that are not explained by the
-covariates.  These inter-relationships allow us to speak in terms of unobserved
-"random effects" that are incorporated into the linear predictors of one or
-more observations.  This gives rise to dependence, and also, in nonlinear
-models, gives rise to different ways of defining a "regression effect".
-Multilevel models can also be viewed as a way to model variances and
-covariances, but modeling them through random effects, rather than directly.
+inter-relationships between the observations that are not explained by
+the covariates.  These inter-relationships allow us to speak in terms of
+unobserved "random effects" that are incorporated into the linear predictors
+of one or more observations.  The random effects give rise to dependence,
+and also, in nonlinear models, they give rise to different ways of defining
+a "regression effect".  Multilevel models can also be viewed as a way to
+model variances and covariances, but modeling them through random effects,
+rather than directly.
 
 * __Conditional/marginal effect__ (in multilevel regression): In a
 multilevel model, a "marginal effect" is usually defined as the change in
@@ -136,7 +168,7 @@ as mean/variance relationships.
 
 ## Models, fitting procedures, and algorithms
 
-Another important distinction to make is between the various regression model
+It is important to distinguish between the various regression model
 structures (e.g. different model parameterizations), and different ways for
 fitting a regression model structure to data.  For example, the "linear
 mean structure" model is one prominent structural model for regression,
@@ -170,14 +202,14 @@ from the structural form of the model.
 ## Some specific regression analysis methods
 
 * __Least squares__: ordinary least squares (OLS) is the most basic type of
-curve fitting.  It is optimally used when the conditional mean function is
-linear in the covariates, and the conditional variance is constant.  Both of
-these restrictions can be worked around, however.  Nonlinearity of the mean
-function can be accommodated using basis functions, and heteroscedasticity can
-be accommodated using inverse variance weights (in which case were are doing
-"weighted least squares", or WLS).  Also, heteroscedasticity only impacts
-statistical efficiency, which isn't the main concern when fitting simple
-models to large datasets.
+curve fitting.  It is most effective when the conditional mean function is
+linear in the covariates, and the conditional variance is constant (i.e. we
+have "homoscedasticity").  Both of these restrictions can be worked around,
+however.  Nonlinearity of the mean function can be accommodated using basis
+functions, and heteroscedasticity can be accommodated using inverse variance
+weights (in which case were are doing "weighted least squares", or WLS).
+Also, heteroscedasticity only impacts statistical efficiency, which may not
+be a major concern when fitting simple models to large datasets.
 
 * __Generalized Linear Models (GLM)__: GLM's are an extension of linear
 models that introduce _link functions_ and _mean/variance relationships_.
@@ -233,9 +265,6 @@ in a multilevel GLM, the marginal and conditional mean structures differ
 * __Survival regression__ -- this is a large set of techniques used
    for handling censored data
 
-* __Quantile regression__ -- this refers to any method that linearly
-   relates a specified quantile (often the median) to the covariates
-
 * __Conditional regression__ -- this is a useful but narrowly applicable
 "trick" in which by conditioning on certain statistics, a multilevel model is
 essentially converted into a single-level model.  The most familiar forms of
@@ -245,10 +274,6 @@ using mixed effects or GEE), but by conditioning on the observed total of
 the outcome values within each group, the observations become conditionally
 independent, and can be rigorously fit using a single-level likelihood
 approach.
-
-* __Variance regression__ -- this is a class of approaches that parametrically
-model the variance along with the mean, e.g. log(variance) is modeled as a
-linear function of the covariates.
 
 * __Local regression__ -- this is a very flexible approach to capturing
 nonlinear regression relationships.  It is an example of a regression method
