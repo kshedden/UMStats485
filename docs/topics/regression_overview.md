@@ -112,12 +112,12 @@ a group.
 
 * __Marginal regression__: This is a form of regression analysis where the
 estimation target is the marginal regression function $E[y|x]$, even though
-the data may be clustered or otherwise dependent.  The marginal regression
-function remains an object of interest when the data are dependent, even
-though it may not fully capture the relationship between the independent
-and dependent variables.  Some methods for marginal regression also give
-insight into the marginal variance function ${\rm Var}[y|x]$ and marginal
-covariances ${\rm Cov}[y_1, y_2|x_1, x_2]$.
+the data may be clustered or otherwise dependent.  Some methods for marginal
+regression also give insight into the marginal variance function ${\rm
+Var}[y|x]$ and marginal covariances ${\rm Cov}[y_1, y_2|x_1, x_2]$.  If the
+data are dependent, a "complete" model should target the joint distribution
+$P(y_1, \ldots, y_n | x_1, \ldots, x_n)$.  A marginal model averages over
+most of the data, allowing us to focus on simpler "marginal" relationships.
 
 * __Multilevel regression__: This is an alternative term for "random effects
 modeling".  It emphasizes the fact that in many data sets, there are complex
@@ -151,33 +151,25 @@ with the other variables $x_j$ for $j\ne k$ held fixed.  When referring to
 this type of marginal effect, the marginal and conditional effects differ
 even in a linear model.
 
-* __Parametric/nonparametric regression__: This terminology is often used
-to refer to local fitting procedures that form an estimate $\hat{y}$ of
-$E[y|x]$ using weights $w_i$ that are decreasing functions of $d(x_i, x)$
-for some distance function $d$.  Thus, the points that are close to the target
-covariate point $x$ are mainly used to construct the estimate, and there is no
-explicit global form for the regression function.  In other contexts, the term
-"nonparametric" can have other meanings, for example, the property of being
-"distributionally robust" enjoyed by linear and generalized linear models.
-Many regression methods are defined in terms of moments not likelihoods and
-therefore are not distributionally parametric in the sense of requiring the
-data to follow a particular distribution, e.g. least squares works well if
-the data are not Gaussian, Poisson regression works well if the data are not
-Poisson, etc.  Instead, these procedures are based on moment conditions such
-as mean/variance relationships.
+* __Nonparametric regression__: There isn't always a bright line between
+"parametric" and "nonparametric" regression methods, but in general parametric
+methods are less "flexible" and may only work well if certain strong conditions
+on the population hold.  Nonparametric methods may work well in a broader
+class of population settings, but often with lower power and precision.
 
 ## Models, fitting procedures, and algorithms
 
 It is important to distinguish between the various regression model
 structures (e.g. different model parameterizations), and different ways for
-fitting a regression model structure to data.  For example, the "linear
-mean structure" model is one prominent structural model for regression,
-in which the conditional mean function $E[y|x]$ is expressed as a linear
-function of the predictors in $x$.  There are many "fitting procedures"
-that enable one to fit this linear model to data, including least squares,
-penalized least squares, and many variations of robust regression, maximum
-likelihood regression, and Bayesian regression.  However all of these fitting
-procedures are fitting the same mean structure model to the data.
+fitting a regression model structure to data.  For example, the "linear mean
+structure" model is one prominent structural model for regression, in which
+the conditional mean function $E[y|x]$ is expressed as a linear function of
+the predictors in $x$ (i.e. in terms of a linear predictor).  There are many
+"fitting procedures" (algorithms) that enable one to fit this linear model to
+data, including least squares, penalized least squares, and many variations
+of robust regression, maximum likelihood regression, and Bayesian regression.
+However all of these fitting procedures are fitting the same model structure
+to the data.
 
 As an example, least squares is a fitting procedure that can be used to fit a
 model to data.  The least squares fitting procedure has statistical properties
@@ -186,10 +178,10 @@ A different (e.g. Bayesian or penalized) procedure for fitting the same class
 of models will have its own, potentially different properties (e.g. it may
 be consistent in some settings where least squares is not and vice-versa).
 
-Algorithms are specific numerical procedures used to implement the fitting
-procedures discussed above.  For example, we may use iteratively reweighted
-least squares to fit a generalized linear model to a dataset.  In many cases,
-the algorithm exactly solves an explicit loss-function, and therefore does
+Algorithms are specific numerical procedures used to fit a model to data.
+For example, we may use iteratively reweighted least squares to fit a
+generalized linear model to a dataset.  In many cases, the algorithm exactly
+minimizes an explicit loss-function, and therefore the algorithm itself does
 not impact the statistical properties of the analysis (e.g. we can use the
 QR or SVD approaches to solving the linear least squares problem and always
 get the same result unless the model is degenerate). In a few settings,
@@ -290,7 +282,7 @@ linear models by allowing each covariate to be transformed in an arbitrary way.
 
 * __Dimension reduction regression__ -- this is a very unique and distinct
 class of regression approaches that posit a multi-index structure and an
-unknown link function.  Specifically, $E[y|x]$ is modeled as having the
+unknown link function.  Specifically, $E[y|x]$ may be modeled as having the
 form $g(b_1^\prime x, \ldots, b_k^\prime x)$, where the $b_j$ are vectors
 of regression coefficients, and $g$ is an unknown link function.  The focus
 is on estimating the regression "directions" $b_j$, not on the link function.
