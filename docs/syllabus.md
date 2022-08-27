@@ -6,7 +6,9 @@ Kerby Shedden (kshedden@umich.edu)
 
 ## GSIs
 
-* Alexander Kagan (amkagan@umich.edu) * Elishua Shumpert (elishuas@umich.edu)
+* Alexander Kagan (amkagan@umich.edu)
+
+* Elishua Shumpert (elishuas@umich.edu)
 
 ## Overview
 
