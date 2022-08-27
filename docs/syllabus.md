@@ -7,30 +7,48 @@ Kerby Shedden (kshedden@umich.edu)
 
 # GSIs
 
-Alexander Kagan (amkagan@umich.edu)
-Elishua Shumpert (elishuas@umich.edu)
+* Alexander Kagan (amkagan@umich.edu)
+* Elishua Shumpert (elishuas@umich.edu)
 
 # Overview
 
-This course is intended for advanced undergraduate Statistics majors
-who have already completed foundation courses in probability,
-theoretical statistics, and applied statistics.  The goals of the
-course are to provide students with the following:
+This is both an applied statistics and a technical communications
+course, and is intended for advanced undergraduate majors in
+Statistics who have already completed core courses in probability,
+theoretical statistics, and applied statistics (425, 426, 413 or
+equivalent).  This course satisfies the LSA Upper-level writing
+requirement (ULWR).
 
-* Experience conducting data analyses through case studies drawn from multiple domains.
+The goals of the course are as follows:
 
-* Multiple opportunities to write about statistical findings and
-receive feedback.  Some assignments will be revised and re-evaluated.
+* Provide experience conducting data analyses through case studies
+  drawn from multiple domains.
 
-* Exposure to new statistical methods and theoretical concepts.
+* Provide multiple opportunities to write about statistical findings
+and receive feedback.  Some assignments will be revised and
+re-evaluated.
 
-* Hands-on experience working with data and implementing analyses.
+* Provide exposure to new statistical methods and theoretical
+  concepts.
+
+* Provide hands-on experience working with data and implementing
+  analyses.
 
 # Format:
 
-The lecture time will be balanced between informal discussion,
-discussion of student work, and more formal lectures delivered by the
-instructor to introduce new areas and unfamiliar ideas.
+The lectures will be balanced between informal discussion, discussion
+of student work, and more formal lectures delivered by the instructor
+to introduce new areas and unfamiliar ideas.  Regular attendance and
+participation is expected.  This is an in-person seminar-style course
+and lectures will not be recorded or streamed.  The instructor and
+GSIs will hold office hours but there is no recitation or lab.
+
+# Course materials
+
+All course materials will be available through the course canvas site,
+with most content on this github site
+[github.com/kshedden/UMStats504].  There is no textbook for this
+course.
 
 # Coursework
 
@@ -45,72 +63,99 @@ analysis. One or two of the assignments may focus on design and
 planning of a study, or a methods review, rather than analysis of an
 existing dataset.
 
-Writing assignments will be submitted usingn Google Docs. To
-facilitate grading, you must title each document in the form “uniqname
-stats 485 assignment X”, where “uniqname” is your UM login id and X=1,
-2, ... is the assignment number.  For revisions, create a copy of the
-document and name it in the form "uniqname stats 485 assignment X.R".
-Share all your assignments with the instructor and both GSI's (but do
-not send an email notification when you share the document).  You
-should not edit any assignment after the due date, note that all edits
-are tracked in Google Docs. Instructors will provide feedback directly
-on your Google Doc.
+Each writing assignment will address a writing prompt provided by the
+instructor.  You will have significant latitude oin your approach, but
+the analyses are not completely open-ended -- you should address the
+issues raised in the writing prompt and in most cases you will be
+asked to use a specific approach in the analysis.
+
+Writing for this course is relatively short and focused.  Each
+assignment should resemble a memo as are often written by professional
+data analysts.  The text component of a report should generally be 2-3
+pages in length, with 3 pages being a hard limit.  You may provide a
+limited number of graphs and tables that do not count toward the page
+limit, but only include graphs and tables that directly contribute to
+your main claims.
+
+There are no exams in this course.
+
+# Using Google docs
+
+Writing assignments will be submitted using Google Docs. Please use
+your University of Michigan account when creating these files, and use
+default fonts and margins.  To facilitate grading, you must title each
+document in the form “uniqname stats 485 assignment X”, where
+“uniqname” is your UM login id and X=1, 2, ... is the assignment
+number.  For revisions, create a copy of the document and name it in
+the form "uniqname stats 485 assignment X.R".  Share all your
+assignments with the instructor and both GSI's (but please do not send
+us an email notification when you share the document).  You should not
+edit any assignment after the due date, note that all edits are
+tracked in Google Docs. Instructors will provide feedback directly on
+your Google Doc.
 
 # Case studies and datasets
 
-The case studies will represent a variety of areas of inquiry
-including human health, social and behavioral science, and natural
-science. We will spend approximately two weeks discussing the back-
-ground and relevant statistical issues associated with each case
-study. After this context is provided, you will be given a prompt and
-will have approxi- mately 10 days two prepare your report.
+The case studies will represent a variety of areas of inquiry in
+domains including human health, social and behavioral science, natural
+science, and industry/commerce. We will spend approximately three
+lectures discussing the back- ground and relevant statistical issues
+associated with each case study. After this context is provided, you
+will be given a writing prompt and will have approximately 10 days two
+prepare your report.
 
 # Computing
 
-Students should have gained facility in data manipulation and analysis
-in previous courses. Some model code will be provided, but students
-are expected to be resourceful in terms of data manipulation, writing
-and debugging code, and implementing algorithms. Code is not submitted
-or graded and you are free to use any computing environment and
-software that you like. Limited model code will be provided in R,
-Python, and Julia.  Collaboration and academic honesty: Each student
-must complete their own assignment, but you may discuss analysis
-strategies and coding issuses with other students at a high
-level. Plagiarism from other students or from any non-acknowledged
-source is a serious violation of academic integrity and will result at
-a minimum with a zero score on the assignment, and may also be
-referred to the LSA Honor Council.
+Students should be competent in data manipulation and data analysis
+based on skills learned in previous courses. In some cases model code
+will be provided, but students are expected to be resourceful in terms
+of data manipulation, writing and debugging code, and implementing
+algorithms. Code is not submitted or graded and you are free to use
+any computing environment and software that you like. Model code will
+be provided in R, Python, and/or Julia.
+
+# Collaboration and academic honesty
+
+Each student must complete their own analysis and writing, but you may
+discuss analysis strategies and coding issuses with other students at
+a high level. Each student should develop their own code to conduct
+the analysis in each project.  In the submitted writings, plagiarism
+from other students or from any non-acknowledged source is a serious
+violation of academic integrity and will result at minimum in a zero
+score on the assignment, and may also be referred to the LSA Honor
+Council.
 
 # Grading
 
-Your course grade will be an unweighted average of all submit- ted
+Your course grade will be an unweighted average of all submitted
 assignments. Each assignment will be scored on content (50 points) and
-communication (50 points). The content assessment will be based
-primar- ily on the appropriateness of the analysis, and whether the
-conclusions are supported by the evidence provided in the report. The
-communication score will focus on completeness (providing background,
-motivation, documenting the analysis, stating clear conclusions, and
-providing all relevant supporting results and evidence), as well as on
-factors such as clarity, precision, and appropriate use of
-terminology.
+communication (50 points), according to the following rubrik:
+
+* Content
+
+** Does the analysis provide insight related to the question at hand?
+
+** Is the analytic approach appropriate, are strengths and limitations
+of the approach adequately discussed?
+
+** Are the conclusions supported by the analysis and reported results?
+
+* Communication
+
+** Is the analysis goal clearly and explicitly stated and motivated?
+
+** Are analysis methods adequately documented?
+
+** Are the findings and conclusions precisely stated and interpreted?
+
+** Is statistical terminology used appropriately and defined where
+appropriate?
+
+** Is the writing well-organized, straightforward, and accessible to
+   the intended audience?
 
 
 
-
-
-hands-on
-experience using a variety of techniques from modern applied
-statistics. Most course material is presented through case studies involving data drawn from various
-fields.  Lectures will provide background about each case study along
-with discussion of relevant methodologies.  Students will then conduct
-independent data analyses and produce brief written
-reports.  Evaluation will be based on attaining insight from the data,
-effective communication of findings, and appropriate use of
-statistical methodology, as shown in the written reports.
-
-Participation in class discussions is an essential part of the class.
-Regular attendance and active participation is expected from all
-students.
 
 Some major themes of this course are:
 
@@ -137,37 +182,6 @@ Some major themes of this course are:
 * Building knowledge about several applied research areas where
   data-driven investigation plays a major role
 
-
-## Pre-requisites
-
-Students are expected to have mastered the essential foundations of
-statistics at the undergraduate and master's levels, and should posess
-a solid understanding of ideas
-such as sampling, variation, bias, and uncertainty.  Students should
-have substantial prior exposure to core statistical methods including
-regression and multivariate analysis.
-
-## Coursework
-
-Students will conduct independent analyses of datasets
-throughout the semester and write about their findings. Datasets, reading
-materials, and writing prompts will be provided by the instructor.
-
-There is no textbook or other materials to purchase for the course.
-
-## Grading
-
-Writing assignments will be due roughly every 7-10 days, and will be
-submitted online using Google docs.
-
-There are no exams for this class.
-
-Writing assignments will generally be short (around 2 pages).  See
-below for guidelines on what we are expecting in the writing assignments.
-
-The instructors or GSI will read and evaluate every assignment,
-providing individual feedback.  Assignments will be graded on a 100
-point scale.
 
 All assignments will count equally toward the final grade.  Since
 assignments are submitted electronically and are announced at least 7
@@ -239,16 +253,15 @@ on this a lot during the semester.
   that do not contribute to your main message.
 
 * Express your arguments in as plain and simple terms as is practical.
-  Do not write in a
-  way that requires the reader to re-read your writing multiple times
-  to understand your point.  Favor short sentences in the active voice
-  with one clause, and paragraphs that focus on one topic and do not
-  extend for more than half a page.
+  Do not write in a way that requires the reader to re-read your
+  writing multiple times to understand your point.  Favor short
+  sentences in the active voice with one clause, and paragraphs that
+  focus on one topic and do not extend for more than half a page.
 
 * Write for an audience that may include non-native English speakers.
-  Avoid colloquialisms and obscure cultural references.
+  Avoid colloquialisms and obscure cultural references or metaphors.
 
 * You are expected to be able to write in grammatically-correct
-  English, appropriate for graduate level coursework.  It is
-  understood that there are many non-native English speakers in the
-  course, and occasional minor grammatical issues will be overlooked.
+  English.  It is understood that there are many non-native English
+  speakers in the course, and occasional minor grammatical issues will
+  be overlooked.

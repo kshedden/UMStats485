@@ -1,4 +1,4 @@
 
 
-[syllabus.md](syllabus.md)
+[Syllabus](syllabus.md)
 
