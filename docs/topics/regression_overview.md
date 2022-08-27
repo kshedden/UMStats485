@@ -4,6 +4,8 @@
 
 Hello $y = \sqrt{x^2 + y^2}$
 
+Hello $x_1$
+
 Hello $b_1x_1 + \cdots + b_px_p$
 
 Regression analysis is arguably the most widely-used tool in applied
