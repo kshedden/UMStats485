@@ -1,14 +1,14 @@
-Statistics 485: Capstone Seminar ================================
+# Capstone Seminar in Statistics
 
-# Instructor
+## Instructor
 
 Kerby Shedden (kshedden@umich.edu)
 
-# GSIs
+## GSIs
 
 * Alexander Kagan (amkagan@umich.edu) * Elishua Shumpert (elishuas@umich.edu)
 
-# Overview
+## Overview
 
 This is both an applied statistics and a technical communications course,
 and is intended for advanced undergraduate majors in Statistics who have
@@ -30,7 +30,7 @@ The goals of the course are as follows:
 * Provide hands-on experience working with data and implementing
   analyses.
 
-# Format:
+## Format:
 
 The lectures will be balanced between informal discussion and more formal
 lectures delivered by the instructor to introduce new areas and unfamiliar
@@ -39,14 +39,14 @@ in-person seminar-style course and lectures will not be recorded or streamed.
 The instructor and GSIs will hold office hours but there is no recitation
 or lab.
 
-# Course materials
+## Course materials
 
 All course materials will be available through the course canvas site, with
 most code to be found on (here)[github.com/kshedden/UMStats504] and written
 materials to be found (here)[kshedden.github.io/UMStats504].  There is no
 textbook for this course.
 
-# Coursework
+## Coursework
 
 The coursework will entirely take the form of individual writing
 assignments. There will be approximately 8 writing assignments, one for each
@@ -72,7 +72,7 @@ directly contribute to your main claims.
 
 There are no exams in this course.
 
-# Using Google docs
+## Using Google docs
 
 Writing assignments will be submitted using Google Docs. Please use your
 University of Michigan user account when creating these files, and use default
@@ -86,7 +86,7 @@ You should not edit any assignment after the due date, note that all edits
 are tracked in Google Docs. Instructors will provide feedback directly on
 your Google Doc.
 
-# Case studies and datasets
+## Case studies and datasets
 
 The case studies will represent a variety of areas of inquiry in domains
 including human health, social and behavioral science, natural science, and
@@ -97,7 +97,7 @@ will have approximately 10 days two prepare your report.  Since you  will
 have advanced notice and 10 days to complete each assignment, extensions
 will be given only in extreme situations.
 
-# Computing
+## Computing
 
 Students should be competent in data manipulation and data analysis based on
 skills learned in previous courses. In some cases model code will be provided,
@@ -119,7 +119,7 @@ Some of the code used to produce the analyses discussed in the
 course lectures will be available on the course Github site
 [here](http://github.com/kshedden/UMStats504).
 
-# Collaboration and academic honesty
+## Collaboration and academic honesty
 
 A report written for this class should primarily reflect your own
 independently-developed ideas.  Each student must complete their own analysis
@@ -132,37 +132,41 @@ non-acknowledged source is a serious violation of academic integrity and
 will result at minimum in a zero score on the assignment, and may also be
 referred to the LSA Honor Council.
 
-# Grading
+## Grading
 
 Your course grade will be an unweighted average of scores received on all
 submitted assignments. Each assignment will be scored on content (50 points)
 and communication (50 points), according to the following rubric:
 
-* Content
+* Content (50 points)
 
-** Does the analysis provide insight related to the question at hand?
+    * [10 pts] Does the report have an informative title?
 
-** Is the analytic approach appropriate, are strengths and limitations of
-   the approach adequately discussed?
+    * [10 pts] Does the analysis provide insight related to the question at hand?
 
-** Are the conclusions stated explicitly and supported by the analysis and
-reported results?
+    * [10 pts] Is the analytic approach appropriate, are strengths and limitations of
+    the approach adequately discussed?
 
-* Communication
+    * [10 pts] Are the conclusions stated explicitly and supported by the analysis and
+    reported results?
 
-** Is the analysis goal clearly and explicitly stated and motivated?
+    * [10 pts] Does the report include one informative graph?
 
-** Are analysis methods adequately documented?
+* Communication (50 points)
 
-** Are the findings and conclusions precisely stated and interpreted?
+    * [10 pts] Is the analysis goal clearly and explicitly stated and motivated?
 
-** Is statistical terminology used appropriately and defined where appropriate?
+    * [10 pts] Are analysis methods adequately documented?
 
-** Is the writing well-organized, straightforward to read, and accessible to
-   the intended audience?
+    * [10 pts] Are the findings and conclusions precisely stated and interpreted?
+
+    * [10 pts] Is statistical terminology used appropriately and defined where appropriate?
+
+    * [10 pts] Is the writing well-organized, straightforward to read, and accessible to
+    the intended audience?
 
 
-Some major themes of this course are:
+## Some major themes of this course are:
 
 * Formulating meaningful and tractable questions based on
   research goals and consistent with available data
@@ -187,13 +191,12 @@ Some major themes of this course are:
 * Building knowledge about several applied research areas where
   data-driven investigation plays a major role
 
-
 All writing is to be done individually, and should primarily reflect
 each student's own ideas.  Students are welcome and encouraged to discuss
 statistical methods, coding strategies, and topics relating to the data and
 motivating questions for each assignment.
 
-# Expectations for student writing
+## Expectations for student writing
 
 This is both an applied statistics course and a technical communications
 course.  The coursework will consist of writing and data analysis.  Only the
