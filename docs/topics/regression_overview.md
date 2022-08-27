@@ -2,9 +2,9 @@
 
 ## Introduction
 
-Hello $y = \sqrt{x^2 + y^2}$
-
 Hello $x_1$
+
+Hello $y = \sqrt{x^2 + y^2}$
 
 Hello $b_1x_1 + \cdots + b_px_p$
 
@@ -23,15 +23,16 @@ a conditional distribution can be seen as a form of regression analysis.
 
 ## Major concepts
 
+* __Mean regression__: this term refers to any regression analysis where
+the population target is the conditional mean function $E[y | x]$; also
+known as "mean structure modeling".
+
 * __Single index models__: a single index model is any regression model that
 is expressed in terms of one "linear predictor" $b_1x_1 + \cdots + b_px_p$,
 where the $x_j$ are observed covariates (data) and the $b_j$ are unknown
 coefficients (parameters).  This means that all the information in $x$ that
 is related in any way to $y$ is contained in the given linear combination
 of the components of $x$.
-
-* __Mean regression__: this term refers to any regression analysis where
-the population target is the conditional mean function $E[y | x]$.
 
 * __Linear model__: This is a very broad term which, depending on the
 context, can mean any of the following: (i) some property of the conditional
