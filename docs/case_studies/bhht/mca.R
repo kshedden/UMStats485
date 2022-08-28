@@ -1,0 +1,33 @@
+library(dplyr)
+library(FactoMineR)
+library(readr)
+
+da = read_csv("cross-verified-database.csv.gz")
+da = rename(da, "occ"="level1_main_occ")
+da = rename(da, "reg"="un_region")
+da = rename(da, "sex"="gender")
+
+dx = da[, c("birth", "occ", "sex", "reg")]
+dx = dx[complete.cases(dx),]
+dx = dx[dx$birth >= 1500,]
+
+# Create a "century of birth" variable
+dx$bcen = round(dx$birth, -2)
+dx = dx[, c("bcen", "occ", "sex", "reg")]
+dx$bcen = as.factor(dx$bcen)
+
+# Remove small groups that are difficult to interpret
+# due to low precision or high confounding.
+dx = filter(dx, occ != "Other")
+dx = filter(dx, occ != "Missing")
+dx = filter(dx, sex != "Other")
+
+mm = MCA(dx, ncp=3, graph=FALSE)
+
+png("bhht_mca_12.png")
+plot(mm, axes=c(1, 2), choix="ind", label="var")
+dev.off()
+
+png("bhht_mca_13.png")
+plot(mm, axes=c(1, 3), choix="ind", label="var")
+dev.off()
