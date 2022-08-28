@@ -44,8 +44,8 @@ or lab.
 ## Course materials
 
 All course materials will be available through the course canvas site, with
-most code to be found on [here](github.com/kshedden/UMStats504) and written
-materials to be found [here](kshedden.github.io/UMStats504).  There is no
+most code to be found [here](https://github.com/kshedden/UMStats504) and written
+materials to be found [here](https://kshedden.github.io/UMStats504).  There is no
 textbook for this course.
 
 ## Coursework
