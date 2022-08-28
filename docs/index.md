@@ -1,4 +1,3 @@
-
 # Capstone seminar in statistics
 
 [Syllabus](/syllabus.md)
