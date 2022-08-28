@@ -45,7 +45,7 @@ or lab.
 
 All course materials will be available through
 the course canvas site, with most code to be found
-[here](https://github.com/kshedden/UMStats485/case_studies) and written
+[here](https://github.com/kshedden/UMStats485) and written
 materials to be found [here](https://kshedden.github.io/UMStats485).
 There is no textbook for this course.
 
@@ -70,7 +70,7 @@ use a specific approach in your analysis.
 Writing for this course is relatively short and focused.  The text component
 of a report should generally be 2-3 pages in length, with 3 pages being a
 hard limit.  You may provide a limited number of graphs and tables that do
-not count toward the page limit, but only include graphs and tables that
+not count toward the page limit, but you should only include graphs and tables that
 directly contribute to your main claims.
 
 There are no exams in this course.
@@ -132,7 +132,7 @@ their own code to conduct the analysis in each project.
 
 In the submitted writings, plagiarism from other students or from any
 non-acknowledged source is a serious violation of academic integrity and
-will result at minimum in a zero score on the assignment, and may also be
+will result at minimum in a score of zero on the assignment, and may also be
 referred to the LSA Honor Council.
 
 ## Grading
@@ -145,8 +145,8 @@ and communication (50 points), according to the following rubric:
 
     * [10 pts] Does the report have an informative title?
 
-    * [10 pts] Does the analysis provide insight related to the question
-    at hand?
+    * [10 pts] Is the report focused on a single question, and does
+    the analysis provide insight related to this question?
 
     * [10 pts] Is the analytic approach appropriate, are strengths and
     limitations of the approach adequately discussed?
@@ -161,7 +161,7 @@ and communication (50 points), according to the following rubric:
     * [10 pts] Is the analysis goal clearly and explicitly stated and
     motivated?
 
-    * [10 pts] Are analysis methods adequately documented?
+    * [10 pts] Are the analysis methods adequately documented?
 
     * [10 pts] Are the findings and conclusions precisely stated and
     interpreted?
@@ -197,11 +197,6 @@ and communication (50 points), according to the following rubric:
 
 * Building knowledge about several applied research areas where
   data-driven investigation plays a major role
-
-All writing is to be done individually, and should primarily reflect
-each student's own ideas.  Students are welcome and encouraged to discuss
-statistical methods, coding strategies, and topics relating to the data and
-motivating questions for each assignment.
 
 ## Expectations for student writing
 
