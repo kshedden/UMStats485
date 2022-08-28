@@ -43,10 +43,11 @@ or lab.
 
 ## Course materials
 
-All course materials will be available through the course canvas site, with
-most code to be found [here](https://github.com/kshedden/UMStats485) and written
-materials to be found [here](https://kshedden.github.io/UMStats485).  There is no
-textbook for this course.
+All course materials will be available through
+the course canvas site, with most code to be found
+[here](https://github.com/kshedden/UMStats485/case_studies) and written
+materials to be found [here](https://kshedden.github.io/UMStats485).
+There is no textbook for this course.
 
 ## Coursework
 
@@ -119,7 +120,7 @@ and libraries you choose.
 
 Some of the code used to produce the analyses discussed in the
 course lectures will be available on the course Github site
-[here](http://github.com/kshedden/UMStats504).
+[here](http://github.com/kshedden/UMStats485).
 
 ## Collaboration and academic honesty
 
@@ -144,28 +145,32 @@ and communication (50 points), according to the following rubric:
 
     * [10 pts] Does the report have an informative title?
 
-    * [10 pts] Does the analysis provide insight related to the question at hand?
+    * [10 pts] Does the analysis provide insight related to the question
+    at hand?
 
-    * [10 pts] Is the analytic approach appropriate, are strengths and limitations of
-    the approach adequately discussed?
+    * [10 pts] Is the analytic approach appropriate, are strengths and
+    limitations of the approach adequately discussed?
 
-    * [10 pts] Are the conclusions stated explicitly and supported by the analysis and
-    reported results?
+    * [10 pts] Are the conclusions stated explicitly and supported by the
+    analysis and reported results?
 
     * [10 pts] Does the report include one informative graph?
 
 * Communication (50 points)
 
-    * [10 pts] Is the analysis goal clearly and explicitly stated and motivated?
+    * [10 pts] Is the analysis goal clearly and explicitly stated and
+    motivated?
 
     * [10 pts] Are analysis methods adequately documented?
 
-    * [10 pts] Are the findings and conclusions precisely stated and interpreted?
+    * [10 pts] Are the findings and conclusions precisely stated and
+    interpreted?
 
-    * [10 pts] Is statistical terminology used appropriately and defined where appropriate?
+    * [10 pts] Is statistical terminology used appropriately and defined
+    where appropriate?
 
-    * [10 pts] Is the writing well-organized, straightforward to read, and accessible to
-    the intended audience?
+    * [10 pts] Is the writing well-organized, straightforward to read,
+    and accessible to the intended audience?
 
 
 ## Some major themes of this course are:
