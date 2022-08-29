@@ -2,13 +2,17 @@
 
 ## Instructor
 
-Kerby Shedden (kshedden@umich.edu)
+Kerby Shedden (kshedden@umich.edu, 277 West Hall)
+
+Office hours TBD
 
 ## GSIs
 
 * Alexander Kagan (amkagan@umich.edu)
 
 * Elishua Shumpert (elishuas@umich.edu)
+
+Office hourse TBD
 
 ## Overview
 
