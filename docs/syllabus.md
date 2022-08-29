@@ -53,10 +53,10 @@ There is no textbook for this course.
 
 The coursework will entirely take the form of individual writing
 assignments. There will be approximately 8 writing assignments, one for each
-case study. Three of these assignements will be revised and resubmitted,
+case study. Three of these assignments will be revised and resubmitted,
 so there will be approximately 11 graded writing submissions during the
-semester. Each writing assignment will be 2-3 pages in length and will take
-the form of a memo prepared by a professional data analyst, summarizing
+semester. Each writing assignment will be 2-3 pages in length and will
+resemble a memo prepared by a professional data analyst, summarizing
 methods and findings from a data analysis. One or two of the assignments
 may focus on design and planning of a study, or provide a methods review,
 rather than analysis of a dataset.
@@ -69,9 +69,9 @@ use a specific approach in your analysis.
 
 Writing for this course is relatively short and focused.  The text component
 of a report should generally be 2-3 pages in length, with 3 pages being a
-hard limit.  You may provide a limited number of graphs and tables that do
-not count toward the page limit, but you should only include graphs and tables that
-directly contribute to your main claims.
+hard limit.  You will generally be expected to include one graph in each report.
+Graphs and tables do not count toward the page limit, and you should only include
+graphs and tables that directly contribute to your main claims.
 
 There are no exams in this course.
 
@@ -96,8 +96,7 @@ including human health, social and behavioral science, natural science, and
 industry/commerce. We will spend approximately three lectures discussing
 the background and relevant statistical issues associated with each case
 study. After this context is provided, you will be given a writing prompt and
-will have approximately 10 days two prepare your report.  Since you  will
-have advanced notice and 10 days to complete each assignment, extensions
+will have approximately 10 days two prepare your report.  Extensions
 will be given only in extreme situations.
 
 ## Computing
@@ -124,7 +123,7 @@ course lectures will be available on the course Github site
 
 ## Collaboration and academic honesty
 
-A report written for this class should primarily reflect your own
+Every report that you write for this class should reflect your own
 independently-developed ideas.  Each student must complete their own analysis
 and writing, but you may discuss analysis strategies and coding issuses with
 other students at a high level. Each student should develop and maintain
@@ -145,8 +144,8 @@ and communication (50 points), according to the following rubric:
 
     * [10 pts] Does the report have an informative title?
 
-    * [10 pts] Is the report focused on a single question, and does
-    the analysis provide insight related to this question?
+    * [10 pts] Is the report focused on a single clearly-stated question,
+    and does the analysis provide insight related to this question?
 
     * [10 pts] Is the analytic approach appropriate, are strengths and
     limitations of the approach adequately discussed?
@@ -161,22 +160,21 @@ and communication (50 points), according to the following rubric:
     * [10 pts] Is the analysis goal clearly and explicitly stated and
     motivated?
 
-    * [10 pts] Are the analysis methods adequately documented?
-
-    * [10 pts] Are the findings and conclusions precisely stated and
-    interpreted?
+    * [10 pts] Is the writing well-organized, straightforward to read,
+    and accessible to the intended audience?
 
     * [10 pts] Is statistical terminology used appropriately and defined
     where appropriate?
 
-    * [10 pts] Is the writing well-organized, straightforward to read,
-    and accessible to the intended audience?
+    * [10 pts] Are all analysis methods adequately documented so that the
+    analyis can be reproduced?
 
+    * [10 pts] Are the findings and conclusions precisely stated?
 
 ## Some major themes of this course are:
 
 * Formulating meaningful and tractable questions based on
-  research goals and consistent with available data
+  research goals
 
 * Devising, documenting, and implementing analysis strategies
 
@@ -200,9 +198,6 @@ and communication (50 points), according to the following rubric:
 
 ## Expectations for student writing
 
-This is both an applied statistics course and a technical communications
-course.  The coursework will consist of writing and data analysis.  Only the
-writing will be graded (you will not submit any code for evaluation).
 All statisticians must frequently communicate and document their findings
 in written form.  Writing about your analytic plans and research findings,
 and writing reviews and critiques of other people's findings are excellent
@@ -211,7 +206,7 @@ weaknesses in your claims.
 
 For most of the writing assignments in this course, you should imagine that
 you are writing a memo or email to be read by collaborators or colleagues.
-Your "audience" consists of people familiar with the data and scientific
+Your audience consists of people familiar with the data and scientific
 (or industrial) context behind the data, and who are also knowledgeable
 about statistics at an undergraduate level or higher.
 
@@ -224,6 +219,11 @@ during the semester.
 
 * Organize your content so that your writing has a focused message,
   with each paragraph contributing distinctly to communicating this message.
+
+* Each report should focus on one primary question.
+
+* Motivate your analytic approaches in terms of fundamental ideas from
+  statistics.
 
 * Use simple, direct language.  Avoid convoluted expressions, hidden
   or needlessly subtle meanings, unusual vocabulary, and digressions that
