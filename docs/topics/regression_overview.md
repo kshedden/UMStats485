@@ -5,7 +5,7 @@
 Regression analysis is arguably the most widely-used tool in applied
 statistics, and has also inspired many important developments in statistical
 theory.  Here we discuss some concepts that can be used to understand
-several of the most wideky-used approaches to regression.  Then we review
+several of the most widely-used approaches to regression.  Then we review
 some specific regression methods along with their key properties.
 
 Before proceeding, note that regression itself is somewhat difficult to
@@ -29,7 +29,7 @@ of regression analysis focus on prediction.  In basic research we may use
 regression analysis to understand whether and how two quantities are related,
 even when there is no practical need to make predictions.  It is also often
 of interest to understand relationships between variables that are too
-weak to be useful for prediction.  This can give insight into "mechanisms"
+weak to be useful for prediction.  This can give insight into mechanisms
 relating the phenomena measured by $x$ and $y$.
 
 * __Mean regression__: this term refers to any regression analysis where the
@@ -39,7 +39,7 @@ population target is the conditional mean function $E[y | x]$; also known as
 * __Variance regression__: this is a class of approaches that model the
 conditional variance ${\rm var}[y|x]$ alone, or that model the conditional
 variance along with the conditional mean.  A common technique is to model
-the $\log {\rm var}[y|x]$ since a variance is always positive.
+$\log {\rm var}[y|x]$ since a variance is always positive.
 
 * __Quantile regression__: this refers to any method that models a conditional
 quantile in terms of covariates.  A common form of quantile reqression is
