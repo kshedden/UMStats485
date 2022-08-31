@@ -24,10 +24,12 @@ dx = filter(dx, sex != "Other")
 
 mm = MCA(dx, ncp=3, graph=FALSE)
 
+plt = plot(mm, axes=c(1, 2), invisible="ind")
 png("bhht_mca_12.png")
-plot(mm, axes=c(1, 2), choix="ind", label="var")
+print(plt)
 dev.off()
 
+plt = plot(mm, axes=c(1, 3), invisible="ind")
 png("bhht_mca_13.png")
-plot(mm, axes=c(1, 3), choix="ind", label="var")
+print(plt)
 dev.off()
