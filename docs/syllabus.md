@@ -4,15 +4,15 @@
 
 Kerby Shedden (kshedden@umich.edu, 277 West Hall)
 
-Office hours TBD
+Office hours: Monday 3:30-4:30, Thursday 1:30-2:45; see Canvas announcements for exceptions.
 
 ## GSIs
 
-* Alexander Kagan (amkagan@umich.edu)
+* Alexander Kagan (amkagan@umich.edu) Office hours Tuesday 12-1, Wednesday 3-5.
 
 * Elishua Shumpert (elishuas@umich.edu)
 
-Office hourse TBD
+GSI office hours are held in Angell Hall G219.
 
 ## Overview
 
