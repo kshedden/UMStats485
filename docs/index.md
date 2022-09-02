@@ -10,5 +10,5 @@
 
 [Regression overview](/topics/regression_overview.md)
 
-[Factor analysis overview](/topics/factor_overview.md)
+[Factor analysis overview](https://kshedden.github.io/UMStats485/topics/factor_overview.html)
 
