@@ -14,7 +14,7 @@ from scipy.interpolate import interp1d
 # Load the dataset.  Use the latin-1 encoding since there is some non-UTF
 # data in the file.  Add "nrows=100000" when developing to reduce the run
 # time (but use the complete data to get final results).
-df = pd.read_csv("cross-verified-database.csv.gz", encoding="latin-1", nrows=100000)
+df = pd.read_csv("cross-verified-database.csv.gz", encoding="latin-1")#, nrows=100000)
 
 # Create a lifespan variable (years of life).
 df.loc[:, "lifespan"] = df.loc[:, "death"] - df.loc[:, "birth"]

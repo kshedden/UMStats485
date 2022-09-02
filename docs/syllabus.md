@@ -8,9 +8,9 @@ Office hours: Monday 3:30-4:30, Thursday 1:30-2:45; see Canvas announcements for
 
 ## GSIs
 
-* Alexander Kagan (amkagan@umich.edu) Office hours Tuesday 12-1, Wednesday 3-5.
+* Alexander Kagan (amkagan@umich.edu); office hours Tuesday 12-1, Wednesday 3-5.
 
-* Elishua Shumpert (elishuas@umich.edu)
+* Elishua Shumpert (elishuas@umich.edu); office hours Thursday 4-5, Friday 1-3.
 
 GSI office hours are held in Angell Hall G219.
 
