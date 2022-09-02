@@ -1,8 +1,8 @@
 # Factor-type analyses and embeddings
 
 A large class of powerful statistical methods considers data in which
-many "objects" are measured with respect to multiple variables.  These
-analyses aim to simultaneously understand the relationships among the
+many "objects" are measured with respect to multiple variables.  At a high level, these
+analyses usually aim to simultaneously understand the relationships among the
 objects and the relationships among the variables.
 
 For example, we may have a sample of people (the "objects") with each
@@ -22,7 +22,7 @@ dimension.
 
 Embeddings can be used for exploratory analysis, especially in
 visualization, but can also be used to construct features for
-prediction, or are used in formal statistical inference, e.g.\ in
+prediction, or are used in formal statistical inference, e.g. in
 hypothesis testing.
 
 An embedding approach is linear if $Z = BX$ for a fixed but
@@ -39,14 +39,14 @@ among the variables.
 ## Singular Value Decoposition
 
 Many embedding methods make use of a matrix factorization known as the
-{\em Singular Value Decomposition} (SVD).  The SVD is defined for any
+*Singular Value Decomposition* (SVD).  The SVD is defined for any
 $n\times p$ matrix $X$.  In most cases we want $n \ge p$, and if $n<p$
 we would take the SVD of $X^T$ instead of $X$.  When $n\ge p$, we
-decompose $X = USV^T$, where $U$ is $n\times p$, $S$ is $p\times p$,
+decompose $X$ as $X = USV^T$, where $U$ is $n\times p$, $S$ is $p\times p$,
 and $V$ is $p\times p$.  The matrices $U$ and $V$ are orthogonal so
 that $U^TU = I_p$, $V^TV = I_p$, and $S$ is diagonal with $S_{11} \ge
-S_{22} \ge \cdots S_{pp}$.  The values on the diagonal of $S$ are the
-{\em singular values} of $S$, and the SVD is unique except when there
+S_{22} \ge \cdots \ge S_{pp}$.  The values on the diagonal of $S$ are the
+*singular values* of $S$, and the SVD is unique except when there
 are ties among the singular values.
 
 One use of the SVD is to obtain a low rank approximation to a matrix
@@ -57,7 +57,7 @@ $k\times k$ block of $S$, and $V$ is the $p\times k$ matrix consisting
 of the leading $k$ columns of $V$.  In this case, the matrix
 $\tilde{X} \equiv \tilde{U}\tilde{S}\tilde{V}^T$ is a rank-k matrix
 (it has $k$ non-zero singular values).  Among all rank-k matrices,
-$\tilde{X}$ is the closest matrix to $X$ in the {\em Frobenius norm},
+$\tilde{X}$ is the closest matrix to $X$ in the *Frobenius norm*,
 which is defined as
 
 $$
@@ -73,7 +73,7 @@ $$
 ## Principal Components Analysis
 
 Suppose that $X$ is a $p$-dimensional random vector with mean $0$ and
-covariance matrix $\Sigma (our focus here is not the mean, so if $X$
+covariance matrix $\Sigma$ (our focus here is not the mean, so if $X$
 does not have mean zero we can replace it with $X-\mu$, where
 $\mu=EX$).  Principal Components Analysis (PCA) seeks a linear
 embedding of $X$ into a lower dimensional space of dimension $q<p$.
