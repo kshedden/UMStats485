@@ -107,7 +107,7 @@ orthogonal matrix and $\Lambda$ is a diagonal matrix with
 $\Lambda_{11} \ge \Lambda_{22} \ge \cdots \ge \Lambda_{pp} > 0$.  The
 columns of $B$ are orthogonal in both the Euclidean metric, and in the
 metric of $\Sigma$, that is, $B^TB = I_p$ and $B^T\Sigma B = I_p$.  As
-a result, the scores $Q \eqiuv B^TX$ are uncorrelated, ${\rm cov}(Q) =
+a result, the scores $Q \equiv B^TX$ are uncorrelated, ${\rm cov}(Q) =
 I_q$.
 
 Next we consider how PCA can be carried out with a sample of data,
@@ -212,12 +212,16 @@ $$
 
 Focusing on the row embedding in $F$,
 
-\begin{eqnarray*}
-\|F_{i,:} - F_{j,:}\|^2 &=& \|r_i^{-1/2}U_{i,:}S - r_j^{-1/2}U_{j,:}S\|^2\\
-  &=& \|r_i^{-1}(P_{i,:} - r_ic^T)W_c^{-1/2} - r_j^{-1}(P_{j,:} - r_jc^T)W_c^{-1/2}\|^2\\
-  &=& \|r_i^{-1}P_{i,:}W_c^{-1/2} - r_j^{-1}P_{j,:}W_c^{-1/2}\|^2\\
-  &=& (P_{i,:}/r_i - P_{j,:}/r_j)^TW_c^{-1}(P_{i,:}/r_i - P_{j,:}/r_j).
-\end{eqnarray*}
+$$
+\|F_{i,:} - F_{j,:}\|^2 =
+\|r_i^{-1/2}U_{i,:}S - r_j^{-1/2}U_{j,:}S\|^2 =
+\|r_i^{-1}(P_{i,:} - r_ic^T)W_c^{-1/2} - r_j^{-1}(P_{j,:} - r_jc^T)W_c^{-1/2}\|^2
+$$
+
+$$
+\|r_i^{-1}P_{i,:}W_c^{-1/2} - r_j^{-1}P_{j,:}W_c^{-1/2}\|^2 =
+(P_{i,:}/r_i - P_{j,:}/r_j)^TW_c^{-1}(P_{i,:}/r_i - P_{j,:}/r_j).
+$$
 
 Since $W_c = {\rm diag}(\hat{\mu}$, where $\hat{\mu}$ is an estimate
 of $\mu$, it follows that $\|F_{i:} - F_{j:}\|$ is an estimate of the
