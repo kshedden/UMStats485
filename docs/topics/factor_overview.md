@@ -1,14 +1,15 @@
 # Factor-type analyses and embeddings
 
 A large class of powerful statistical methods considers data in which
-many "objects" are measured with respect to multiple variables.  At a high level, these
-analyses usually aim to simultaneously understand the relationships among the
-objects and the relationships among the variables.
+many "objects" are measured with respect to multiple variables.  At a
+high level, these analyses usually aim to simultaneously understand
+the relationships among the objects and the relationships among the
+variables.
 
 For example, we may have a sample of people (the "objects") with each
-person measured in terms of their height, weight, age, sex, and so on.
-In this example, two people are "similar" if they have similar values
-on most or all of the variables, and two variables are "similar" if
+person measured in terms of their height, weight, age, and sex.  In
+this example, two people are "similar" if they have similar values on
+most or all of the variables, and two variables are "similar" if
 knowing the value of just one of the variables for a particular object
 allows one to predict the value of the other variable.
 
@@ -17,11 +18,11 @@ allows one to predict the value of the other variable.
 Embedding algorithms take input data vectors $X$ and transform them
 into output data vectors $Z$.  Many embedding algorithms take the form
 of a "dimension reduction", so that $q \equiv {\rm dim}(Z) < {\rm
-dim}(X) \equiv p$.  However some embeddings actually increase the
-dimension.
+dim}(X) \equiv p$.  However some embeddings preserve or even increase
+the dimension.
 
 Embeddings can be used for exploratory analysis, especially in
-visualization, but can also be used to construct features for
+visualization, and can also be used to construct features for
 prediction, or are used in formal statistical inference, e.g. in
 hypothesis testing.
 
@@ -31,10 +32,10 @@ are simpler to devise and characterize than nonlinear embeddings.
 Many modern embedding algorithms are nonlinear, exploiting the
 potential to better capture complex structure.
 
-Some embedding algorithms embed the objects while other embedding
-algorithms embed both the objects and the variables.  Embedding
-the variables provides a means to interpret the relationships
-among the variables.
+Some embedding algorithms embed only the objects while other embedding
+algorithms embed both the objects and the variables.  Embedding the
+variables provides a means to interpret the relationships among the
+variables.
 
 ## Singular Value Decoposition
 
@@ -42,12 +43,12 @@ Many embedding methods make use of a matrix factorization known as the
 *Singular Value Decomposition* (SVD).  The SVD is defined for any
 $n\times p$ matrix $X$.  In most cases we want $n \ge p$, and if $n<p$
 we would take the SVD of $X^T$ instead of $X$.  When $n\ge p$, we
-decompose $X$ as $X = USV^T$, where $U$ is $n\times p$, $S$ is $p\times p$,
-and $V$ is $p\times p$.  The matrices $U$ and $V$ are orthogonal so
-that $U^TU = I_p$, $V^TV = I_p$, and $S$ is diagonal with $S_{11} \ge
-S_{22} \ge \cdots \ge S_{pp}$.  The values on the diagonal of $S$ are the
-*singular values* of $S$, and the SVD is unique except when there
-are ties among the singular values.
+decompose $X$ as $X = USV^T$, where $U$ is $n\times p$, $S$ is
+$p\times p$, and $V$ is $p\times p$.  The matrices $U$ and $V$ are
+orthogonal so that $U^TU = I_p$, $V^TV = I_p$, and $S$ is diagonal
+with $S_{11} \ge S_{22} \ge \cdots \ge S_{pp}$.  The values on the
+diagonal of $S$ are the *singular values* of $S$, and the SVD is
+unique except when there are ties among the singular values.
 
 One use of the SVD is to obtain a low rank approximation to a matrix
 $X$.  Suppose we truncate the SVD using only the first $k$ components,
@@ -61,7 +62,7 @@ $\tilde{X}$ is the closest matrix to $X$ in the *Frobenius norm*,
 which is defined as
 
 $$
-{\rm Frob}(X) = \|X\|_F \equiv \sum_{ij}X_{ij}^2 = {\rm trace}(X^\prime X).
+{\rm Frob}(X)^2 = \|X\|_F^2 \equiv \sum_{ij}X_{ij}^2 = {\rm trace}(X^\prime X).
 $$
 
 Thus we have
@@ -77,57 +78,50 @@ covariance matrix $\Sigma$ (our focus here is not the mean, so if $X$
 does not have mean zero we can replace it with $X-\mu$, where
 $\mu=EX$).  Principal Components Analysis (PCA) seeks a linear
 embedding of $X$ into a lower dimensional space of dimension $q<p$.
-The standard PCA approach gives us a matrix $B$ of loadings, which can
-be used to produce a matrix $Q$ of scores.  Given a $n\times p$ matrix
-of data whose rows are iid copies of $X$, The key relationship is that
-$Q = Z^cB$, where $Z^c$ is a column-centered version of $Z$, $B$ is a
-$p\times p$ matrix of loadings, and $Q$ is a $n\times p$ matrix of
-scores.
+The standard PCA approach gives us an orthogonal matrix $B$ of
+loadings, which can be used to produce a matrix $Q$ of scores.
 
 PCA can be viewed in terms of linear compression and decompression of
-the variables.  Let
+the variables in $X$.  Let
 
 $$
-Z^c \rightarrow Z^cB_{:,1:q} = Q_{:,1:q}
+X \rightarrow B_{:,1:q}^TX \equiv Q(X)
 $$
 
 denote the compression that reduces the data from $p$ dimensions to
 $q$ dimensions.  We can now decompress the data as follows:
 
 $$
-Q_{:,1:q} \rightarrow Q_{:,1:q}B_{:,1:q}^T = Z^cB_{:,1:q}B_{:,1:q}^T.
+Q \rightarrow B_{:,1:q}Q \equiv \hat{X}.
 $$
 
 This represents a two-step process of first reducing the dimension,
 then predicting the original data using the reduced data.  Among all
 possible loading matrices $B$, the PCA loading matrix looses the least
-information.
+information in that it minimizes the expected value of $\|X -
+\hat{X}\|$.
 
-In the standard version of PCA, the loadings $Q$ are the eigenvectors
-of $\hat{\Sigma}$, an estimate of $\Sigma$.  Note that the columns of
-$Q$ are orthogonal in both the Euclidean metric, and in the metric of
-$\hat{\Sigma}$, that is, $Q^TQ = I_p$ and $Q^T\hat{\Sigma} Q = I_p$.
-As a result, the scores are uncorrelated, $Q^\prime Q / n = I_p$.
+The loading matrix $B$ used in PCA is the eigenvectors of $\Sigma$.
+Specifically, we can write $\Sigma = B\Lambda B^T$, where $B$ is an
+orthogonal matrix and $\Lambda$ is a diagonal matrix with
+$\Lambda_{11} \ge \Lambda_{22} \ge \cdots \ge \Lambda_{pp} > 0$.  The
+columns of $B$ are orthogonal in both the Euclidean metric, and in the
+metric of $\Sigma$, that is, $B^TB = I_p$ and $B^T\Sigma B = I_p$.  As
+a result, the scores $Q \eqiuv B^TX$ are uncorrelated, ${\rm cov}(Q) =
+I_q$.
 
-Intepreting the results of PCA involves both the loadings and the
-scores.  The scores provide an embedding of the objects (the rows of
-$Z$).  By truncating this embedding to a small number of dimensions,
-it becomes easier to plot and interpret them.  For this reason it is
-important to use an embedding that puts the most possible information
-in the leading components of the embedding.  Also, it is important to
-consider the loadings in order to understand how the original
-variables determine the embedding.
+Next we consider how PCA can be carried out with a sample of data,
+rather than in a population.  Given a $n\times p$ matrix of data $Z$
+whose rows are iid copies of the random vector $X$, we can estimate
+the covariance matrix $\Sigma$ as $\hat{\Sigma} = Z^TZ/n$. Letting $B$
+denote the eigenvectors of $\hat{\Sigma}$, the scores have the form $Q
+= Z^cB$, where $Z^c$ is a column-centered version of $Z$.
 
-This embedding has the property that the leading $q$ components of the
-embedding contain the most information about the variation in $Z$
-compared to any other $q$-dimensional linear summary.  That is, if we
-reconstruct the data from the leading $q$ scores we obtain a $n\times
-q$ matrix $\tilde{Q}$ and a $p\times q$ matrix $\tilde{B}$ that give
-us the reconstruction
-
-$$
-Z^{(q)} = \tilde{Q}\tilde{B}^T.
-$$
+As noted above, the leading columns of $Q$ contain the greatest
+fraction of information about $Z$.  Thus, visualizations
+(e.g. scatterplots) of the first two columns of $Z$ best reflect the
+relationships among the rows of $Z$ (compared to any other scatterplot
+formed from linear scores).
 
 ## Correspondence Analysis
 
@@ -166,17 +160,17 @@ distance.  Let $P \equiv X/N$, where $N = \sum_{ij} X_{ij}$.  The goal
 is to transform $P$ into {\em row scores} $F$ and {\em column scores}
 $G$, where $F$ is an $n\times p$ array and $G$ is a $p\times p$ array.
 
-Let $P_{i:}$, $F_{i:}{}$, and $G_{i:}$ denote row $i$ of the arrays
+Let $P_{i,:}$, $F_{i,:}$, and $G_{i,:}$ denote row $i$ of the arrays
 $P$, $F$, and $G$ respectively, and let $r \equiv P1_p$ (the row sums
 of $P$) and let $c = P^\prime 1_n$ (the column sums of $P$).
 
 Our goals are as follows:
 
-* For any $1 \le i, j \le n$, the Euclidean distance from $F_{i:} to
-F_{j:}$ is equal to the chi-square distance from $P_{i:}/r_i$ to
-$P_{j:}/r_j$.  Also, for any $1 \le i,j \le p$ the Euclidean distance
-from $G_{i:}$ to $G_{j:}$ is equal to the chi-square distance from
-$P_{:i}/c_i$ to $P_{:j}/c_j$.
+* For any $1 \le i, j \le n$, the Euclidean distance from $F_{i,:}$ to
+$F_{j:}$ is equal to the chi-square distance from $P_{i,:}/r_i$ to
+$P_{j,:}/r_j$.  Also, for any $1 \le i,j \le p$ the Euclidean distance
+from $G_{i,:}$ to $G_{j,:}$ is equal to the chi-square distance from
+$P_{:,i}/c_i$ to $P_{:,j}/c_j$.
 
 * The columns of $F$ and $G$ are ordered in terms of importance.
 Specifically, if we select $1 \le q \le p$ and let $\tilde{F}$,
@@ -207,24 +201,23 @@ above.
 First, note that since $V$ is orthogonal
 
 $$
-\|F_{i:} - F_{j:}\| = \|V(F_{i:} - F_{j:})\|
+\|F_{i,:} - F_{j,:}\| = \|V(F_{i,:} - F_{j,:})\|
 $$
 
 and
 
 $$
-\|G_{i:} - G_{j:}\| = \|V(G_{i:} - G_{j:})\|.
+\|G_{i,:} - G_{j,:}\| = \|V(G_{i,:} - G_{j,:})\|.
 $$
 
 Focusing on the row embedding in $F$,
 
 \begin{eqnarray*}
-\|F_{i:} - F_{j:}\|^2 &=& \|r_i^{-1/2}U_{i:}S - r_j^{-1/2}U_{j:}S\|^2\\
-  &=& \|r_i^{-1}(P_{i:} - r_ic^T)W_c^{-1/2} - r_j^{-1}(P_{j:} - r_jc^T)W_c^{-1/2}\|^2\\
-  &=& \|r_i^{-1}P_{i:}W_c^{-1/2} - r_j^{-1}P_{j:}W_c^{-1/2}\|^2\\
-  &=& (P_{i:}/r_i - P_{j:}/r_j)^TW_c^{-1}(P_{i:}/r_i - P_{j:}/r_j).
+\|F_{i,:} - F_{j,:}\|^2 &=& \|r_i^{-1/2}U_{i,:}S - r_j^{-1/2}U_{j,:}S\|^2\\
+  &=& \|r_i^{-1}(P_{i,:} - r_ic^T)W_c^{-1/2} - r_j^{-1}(P_{j,:} - r_jc^T)W_c^{-1/2}\|^2\\
+  &=& \|r_i^{-1}P_{i,:}W_c^{-1/2} - r_j^{-1}P_{j,:}W_c^{-1/2}\|^2\\
+  &=& (P_{i,:}/r_i - P_{j,:}/r_j)^TW_c^{-1}(P_{i,:}/r_i - P_{j,:}/r_j).
 \end{eqnarray*}
-
 
 Since $W_c = {\rm diag}(\hat{\mu}$, where $\hat{\mu}$ is an estimate
 of $\mu$, it follows that $\|F_{i:} - F_{j:}\|$ is an estimate of the
