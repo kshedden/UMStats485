@@ -135,7 +135,7 @@ interpretation.
 
 Let $X \in {\cal R}^p$ be a random vector with mean $\mu$ and
 covariance matrix $\Sigma$.  In some cases, it is reasonable to view
-$\mu$ and $\Sigma$ as unrelated (i.e.\ knowing $\mu$ places no
+$\mu$ and $\Sigma$ as unrelated (i.e. knowing $\mu$ places no
 constraints on $\Sigma$, and vice-versa).  On the other hand, in many
 settings it is plausible that $\mu$ and $\Sigma$ are related in that
 $\Sigma_{ii} \propto \mu_i$.  Specifically in a Poisson distribution
@@ -162,7 +162,7 @@ $G$, where $F$ is an $n\times p$ array and $G$ is a $p\times p$ array.
 
 Let $P_{i,:}$, $F_{i,:}$, and $G_{i,:}$ denote row $i$ of the arrays
 $P$, $F$, and $G$ respectively, and let $r \equiv P1_p$ (the row sums
-of $P$) and let $c = P^\prime 1_n$ (the column sums of $P$).
+of $P$) and let $c = P^T 1_n$ (the column sums of $P$).
 
 Our goals are as follows:
 
@@ -175,9 +175,9 @@ $P_{:,i}/c_i$ to $P_{:,j}/c_j$.
 * The columns of $F$ and $G$ are ordered in terms of importance.
 Specifically, if we select $1 \le q \le p$ and let $\tilde{F}$,
 $\tilde{G}$ denote $F$ and $G$ retaining only columns 1 through q,
-then the Euclidean distance from $\tilde{F}_i$ to $\tilde{F}_j$ is
-approximately equal to the chi-square distance between $P_i$ and
-$P_j$.  Note that if $q=p$ then the approximation becomes exact, but
+then the Euclidean distance from $\tilde{F}_{i,:}$ to $\tilde{F}_{j,:}$ is
+approximately equal to the chi-square distance between $P_{i,:}$ and
+$P_{j,:}$.  Note that if $q=p$ then the approximation becomes exact, but
 for $q<p$ the approximation is inexact.
 
 ### Derivation of the algorithm
@@ -215,7 +215,7 @@ Focusing on the row embedding in $F$,
 $$
 \|F_{i,:} - F_{j,:}\|^2 =
 \|r_i^{-1/2}U_{i,:}S - r_j^{-1/2}U_{j,:}S\|^2 =
-\|r_i^{-1}(P_{i,:} - r_ic^T)W_c^{-1/2} - r_j^{-1}(P_{j,:} - r_jc^T)W_c^{-1/2}\|^2
+\|r_i^{-1}(P_{i,:} - r_ic^T)W_c^{-1/2} - r_j^{-1}(P_{j,:} - r_jc^T)W_c^{-1/2}\|^2 =
 $$
 
 $$
@@ -224,5 +224,5 @@ $$
 $$
 
 Since $W_c = {\rm diag}(\hat{\mu}$, where $\hat{\mu}$ is an estimate
-of $\mu$, it follows that $\|F_{i:} - F_{j:}\|$ is an estimate of the
-chi-square distance between $P_{i:}/r_i$ and $P_{j:}/r_j$.
+of $\mu$, it follows that $\|F_{i,:} - F_{j,:}\|$ is an estimate of the
+chi-square distance between $P_{i,:}/r_i$ and $P_{j,:}/r_j$.
