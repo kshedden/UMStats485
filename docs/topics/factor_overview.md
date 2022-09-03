@@ -33,7 +33,9 @@ Many modern embedding algorithms are nonlinear, exploiting the
 potential to better capture complex structure.
 
 Some embedding algorithms embed only the objects while other embedding
-algorithms embed both the objects and the variables.  Embedding the
+algorithms embed both the objects and the variables.  Embedding the objects
+provides a reduced feature representation for each object that can
+be passed on to additional analysis procedures, or interpreted directly.  Embedding the
 variables provides a means to interpret the relationships among the
 variables.
 
@@ -83,7 +85,7 @@ The standard PCA approach gives us an orthogonal matrix $B$ of
 
 For a single vector $X$, the scores are obtained via the mapping
 $Q(X) = B^TX$.  For a data matrix $Z$ whose rows are independent
-and identically distributed (IID) copies of the random vector $X$
+and identically distributed (IID) copies of the random vector $X$,
 the scores can be obtained via the mapping $Q = ZB$,
 where each row of $Q$ contains the scores for the corresponding row of $Z$.
 
@@ -95,7 +97,8 @@ X \rightarrow B_{:,1:q}^TX \equiv Q(X)
 $$
 
 denote the compression that reduces the data from $p$ dimensions to
-$q$ dimensions.  We can now decompress the data as follows:
+$q$ dimensions, where $B_{:,1:q}$ is the $p\times q$ matrix consisting
+of the leading $q$ columns of $B$.  We can now decompress the data as follows:
 
 $$
 Q \rightarrow B_{:,1:q}Q \equiv \hat{X}.
@@ -103,28 +106,29 @@ $$
 
 This represents a two-step process of first reducing the dimension,
 then predicting the original data using the reduced data.  Among all
-possible loading matrices $B$, the PCA loading matrix looses the least
-information in that it minimizes the expected value of $\|X -
-\hat{X}\|$.
+possible loading matrices $B$, the PCA loading matrix loses the least
+information in that it minimizes the expected value of $\|X - \hat{X}\|$.
 
 The loading matrix $B$ used in PCA is the eigenvector matrix of $\Sigma$.
 Specifically, we can write $\Sigma = B\Lambda B^T$, where $B$ is an
 orthogonal matrix and $\Lambda$ is a diagonal matrix with
-$\Lambda_{11} \ge \Lambda_{22} \ge \cdots \ge \Lambda_{pp} > 0$.  The
-columns of $B$ are orthogonal in both the Euclidean metric, and in the
+$\Lambda_{11} \ge \Lambda_{22} \ge \cdots \ge \Lambda_{pp} > 0$.  This
+is the spectral decomposition of $\Sigma$.  The
+columns of $B$ are orthogonal in both the Euclidean metric and in the
 metric of $\Sigma$, that is, $B^TB = I_p$ and $B^T\Sigma B = I_p$.  As
 a result, the scores $Q \equiv B^TX$ are uncorrelated, ${\rm cov}(Q) =
 I_q$.
 
 Next we consider how PCA can be carried out with a sample of data,
 rather than in a population.  Given a $n\times p$ matrix of data $Z$
-whose rows are iid copies of the random vector $X$, we can estimate
+whose rows are iid copies of the random vector $X$ (assumed to have mean $0$),
+we can estimate
 the covariance matrix $\Sigma$ as $\hat{\Sigma} = Z^TZ/n$. Letting $B$
 denote the eigenvectors of $\hat{\Sigma}$, the scores have the form $Q
 = Z^cB$, where $Z^c$ is a column-centered version of $Z$.
 
-As noted above, the leading columns of $Q$ contain the greatest
-fraction of information about $Z$.  Thus, visualizations
+Since the eigenvalues $\Lambda_{ii}$ are non-increasing, the leading columns of $Q$ contain
+the greatest fraction of information about $Z$.  Thus, visualizations
 (e.g. scatterplots) of the first two columns of $Z$ best reflect the
 relationships among the rows of $Z$ (compared to any other scatterplot
 formed from linear scores).
@@ -132,19 +136,19 @@ formed from linear scores).
 ## Correspondence Analysis
 
 Correspondence analysis is an embedding approach that aims to
-represent {\em chi-square distances} in the data space as Euclidean
+represent *chi-square distances* in the data space as Euclidean
 distances for visualization.  The motivation for doing this is that in
 many settings chi-square distances may be the best approach for
 summarizing the information in the data, while Euclidean distances are
 arguably the best approach for producing visualizations for human
 interpretation.
 
-Let $X \in {\cal R}^p$ be a random vector with mean $\mu$ and
+Let $X \in {\cal R}^p$ be a random vector with mean $\mu \ge 0$ and
 covariance matrix $\Sigma$.  In some cases, it is reasonable to view
 $\mu$ and $\Sigma$ as unrelated (i.e. knowing $\mu$ places no
 constraints on $\Sigma$, and vice-versa).  On the other hand, in many
 settings it is plausible that $\mu$ and $\Sigma$ are related in that
-$\Sigma_{ii} \propto \mu_i$.  Specifically in a Poisson distribution
+${\rm diag}(\Sigma) \propto \mu$.  Specifically in a Poisson distribution
 $\Sigma_{ii} = \mu_i$, but in a broader class of settings we may have
 over-dispersion or under-dispersion, meaning that $\Sigma_{ii} =
 c\cdot \mu_i$, where $c>1$ or $c<1$ for over and under-dispersion,
@@ -155,7 +159,10 @@ reasonable to compare vectors using chi-square distances.
 Specifically the chi-square distance from $X$ to the mean is
 $(X-\mu)^T{\rm diag}(\mu)^{-1}(X-\mu)$, and the chi-square distance
 between two random vectors $X$ and $Y$ having the same mean $\mu$ is
-$(X-Y)^T{\rm diag}(\mu)^{-1}(X-Y)$.
+$(X-Y)^T{\rm diag}(\mu)^{-1}(X-Y)$.  If $\Sigma$ is a diagonal matrix,
+the chi-square distance is also the *Mahalanobis distance*, which is
+arguably the proper way to measure distances among vectors whose
+components have differing variances.
 
 Suppose we have $n$ observations on $p$ variables, and the data are
 represented in an $n\times p$ matrix $X$ whose rows are the cases
@@ -163,20 +170,27 @@ represented in an $n\times p$ matrix $X$ whose rows are the cases
 can be applied when each $X_{ij} \ge 0$, and where it makes sense to
 compare any two rows or any two columns of $X$ using chi-square
 distance.  Let $P \equiv X/N$, where $N = \sum_{ij} X_{ij}$.  The goal
-is to transform $P$ into {\em row scores} $F$ and {\em column scores}
+is to transform $P$ into *row scores* $F$ and *column scores*
 $G$, where $F$ is an $n\times p$ array and $G$ is a $p\times p$ array.
 
 Let $P_{i,:}$, $F_{i,:}$, and $G_{i,:}$ denote row $i$ of the arrays
-$P$, $F$, and $G$ respectively, and let $r \equiv P1_p$ (the row sums
-of $P$) and let $c = P^T 1_n$ (the column sums of $P$).
+$P$, $F$, and $G$ respectively, and let $r \equiv P\cdot 1_p$ (the row sums
+of $P$) and let $c = P^T\cdot 1_n$ (the column sums of $P$).
+
+Let $\tilde{P}^r \equiv {\rm diag}(r)^{-1}P$ denote the
+*row profiles* of $P$, which are simply the rows of $P$ (or of $X$) normalized by
+their sum.  Analogously, let $\tilde{P}^c \equiv P{\rm diag}(x)^{-1}$ denote the
+*column profiles of $P$ (or of $X$).
 
 Our goals are as follows:
 
 * For any $1 \le i, j \le n$, the Euclidean distance from $F_{i,:}$ to
-$F_{j:}$ is equal to the chi-square distance from $P_{i,:}/r_i$ to
-$P_{j,:}/r_j$.  Also, for any $1 \le i,j \le p$ the Euclidean distance
-from $G_{i,:}$ to $G_{j,:}$ is equal to the chi-square distance from
-$P_{:,i}/c_i$ to $P_{:,j}/c_j$.
+$F_{j:}$ is equal to the chi-square distance from $\tilde{P}^r_{i,:} = P_{i,:}/r_i$ to
+$\tilde{P}^r_{j,:} = P_{j,:}/r_j$.  Also, for any $1 \le i,j \le p$ the Euclidean distance
+from $G_{:,i}$ to $G_{:,j}$ is equal to the chi-square distance from
+$\tilde{P}^c_{:,i} = P_{:,i}/c_i$ to $\tilde{P}^c_{:,j} = P_{:,j}/c_j$.  Thus, $F$ provides an embedding of
+the rows of $\tilde{P}^r$ and $G$ provides an embedding of the columns of
+$\tilde{P}^c$.
 
 * The columns of $F$ and $G$ are ordered in terms of importance.
 Specifically, if we select $1 \le q \le p$ and let $\tilde{F}$,
