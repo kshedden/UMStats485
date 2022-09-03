@@ -101,9 +101,7 @@ $q$ dimensions, where $B_{:,1:q}$ is the $p\times q$ matrix consisting
 of the leading $q$ columns of $B$.  We can now decompress the data as
 follows:
 
-$$
-Q \rightarrow B_{:,1:q}Q \equiv \hat{X}.
-$$
+$$ Q \rightarrow B_{:,1:q}Q \equiv \hat{X}.  $$
 
 This represents a two-step process of first reducing the dimension,
 then predicting the original data using the reduced data.  Among all
@@ -178,28 +176,27 @@ Let $P_{i,:}$, $F_{i,:}$, and $G_{i,:}$ denote row $i$ of the arrays
 $P$, $F$, and $G$ respectively, and let $r \equiv P\cdot 1_p$ (the row sums
 of $P$) and let $c = P^T\cdot 1_n$ (the column sums of $P$).
 
-Let $\tilde{P}^r \equiv {\rm diag}(r)^{-1}P$ denote the *row profiles*
-of $P$, which are simply the rows of $P$ (or of $X$) normalized by
-their sum.  Analogously, let $\tilde{P}^c \equiv P{\rm diag}(x)^{-1}$
-denote the *column profiles of $P$ (or of $X$).
+Let $\tilde{P}^r \equiv {\rm diag}(r)^{-1}\cdot P$ denote the *row
+profiles* of $P$, which are simply the rows of $P$ (or of $X$)
+normalized by their sum.  Analogously, let $\tilde{P}^c \equiv P\cdot
+{\rm diag}(x)^{-1}$ denote the *column profiles* of $P$ (or of $X$).
 
 Our goals are as follows:
 
 * For any $1 \le i, j \le n$, the Euclidean distance from $F_{i,:}$ to
-$F_{j:}$ is equal to the chi-square distance from $\tilde{P}^r_{i,:} =
-P_{i,:}/r_i$ to $\tilde{P}^r_{j,:} = P_{j,:}/r_j$.  Also, for any $1
-\le i,j \le p$ the Euclidean distance from $G_{:,i}$ to $G_{:,j}$ is
-equal to the chi-square distance from $\tilde{P}^c_{:,i} =
-P_{:,i}/c_i$ to $\tilde{P}^c_{:,j} = P_{:,j}/c_j$.  Thus, $F$ provides
-an embedding of the rows of $\tilde{P}^r$ and $G$ provides an
+$F_{j:}$ is equal to the chi-square distance from $\tilde{P}^r_{i,:}$
+to $\tilde{P}^r_{j,:}$.  Also, for any $1 \le i,j \le p$ the Euclidean
+distance from $G_{:,i}$ to $G_{:,j}$ is equal to the chi-square
+distance from $\tilde{P}^c_{:,i}$ to $\tilde{P}^c_{:,j}$.  Thus, $F$
+provides an embedding of the rows of $\tilde{P}^r$ and $G$ provides an
 embedding of the columns of $\tilde{P}^c$.
 
 * The columns of $F$ and $G$ are ordered in terms of importance.
 Specifically, if we select $1 \le q \le p$ then the Euclidean distance
-from $F_{i,1:q}$ to $F_{j,1:q}$ is approximately equal to the chi-square distance
-from $P_{i,:}$ to $P_{j,:}$.  Note that if $q=p$ then the
-approximation becomes exact, but for $q<p$ the approximation is
-inexact.
+from $F_{i,1:q}$ to $F_{j,1:q}$ is approximately equal to the
+chi-square distance from $P_{i,:}$ to $P_{j,:}$.  Note that if $q=p$
+then the approximation becomes exact, but for $q<p$ the approximation
+is inexact.
 
 ### Derivation of the algorithm
 
@@ -212,7 +209,7 @@ We begin by taking the singular value decomposition of a standardized
 version of $P$:
 
 $$
-W_r^{-1/2}(P - rc^T)W_c^{-1/2} = USV^T
+W_r^{-1/2}(P - rc^T)W_c^{-1/2} = USV^T.
 $$
 
 Now let $F = W_r^{-1/2}US$ and $G = W_c^{-1/2}VS$.  We now show that
@@ -239,27 +236,31 @@ $$
 $$
 
 Since $W_c = {\rm diag}(\hat{\mu})$, where $\hat{\mu}$ is an estimate
-of $\mu$, it follows that $\|F_{i,:} - F_{j,:}\|$ is an estimate of
-the chi-square distance between $P_{i,:}/r_i$ and $P_{j,:}/r_j$.
-Thus, the rows of $F$ embed the rows of $\tilde{P}^r$ as desired.  An
-analogous argument shows that the rows of $G$ embed the variables (the
-columns of $\tilde{P}^c$).
+of $\mu$, it follows that $\|F_{i,:} - F_{j,:} \|$ is an estimate of
+the chi-square distance between $\tilde{P}^r_{i,:}$ and
+$\tilde{P}^r_{j,:}$.  Thus, the rows of $F$ embed the rows of
+$\tilde{P}^r$ as desired.  An analogous argument shows that the rows
+of $G$ embed the variables (the columns of $\tilde{P}^c$).
 
 ### Correspondence analysis and Multiple Correspondence analysis for nominal data
 
-One common application of correspondence analysis (CA) arises when analyzing
-datasets in which all variables are nominal.  First, suppose we have a single
-nominal variable and code it using an *indicator matrix*.  That is, we define
-$X$ to be a matrix whose values are entirely $0$ and $1$, such that $X_{ij}=1$
-if and only if the value of the nominal variable for case $i$ is equal to level
-$j$.  Correspondence analysis as defined above can be used to analyze this
-indicator matrix, revealing how the objects and categories are related.
+One common application of correspondence analysis (CA) arises when
+analyzing datasets in which all variables are nominal.  First, suppose
+we have a single nominal variable and code it using an *indicator
+matrix*.  That is, we define $X$ to be a matrix whose values are
+entirely $0$ and $1$, such that $X_{ij}=1$ if and only if the value of
+the nominal variable for case $i$ is equal to level $j$.
+Correspondence analysis as defined above can be used to analyze this
+indicator matrix, revealing how the objects and categories are
+related.
 
-A more interesting extension of CA is *Multiple Correspondence Analysis*, in
-which we have several nominal variables.  In this case, we recode each nominal
-variable with its own indicator matrix, and then concatenate these matrices
-horizontally.  If there are $p_j$ levels for variable $j$, and we set $p = \sum_j p_j$,
-then the concatenated indicator matrix is $n\times p$.  We then apply CA to
-this concatenated indicator matrix, yielding insights into the relationships
-among the objects, the relationships between different levels of a single variable,
-and relationships among levels of different variables.
+A more interesting extension of CA is *Multiple Correspondence
+Analysis*, in which we have several nominal variables.  In this case,
+we recode each nominal variable with its own indicator matrix, and
+then concatenate these matrices horizontally.  If there are $p_j$
+levels for variable $j$, and we set $p = \sum_j p_j$, then the
+concatenated indicator matrix is $n\times p$.  We then apply CA to
+this concatenated indicator matrix, yielding insights into the
+relationships among the objects, the relationships between different
+levels of a single variable, and relationships among levels of
+different variables.
