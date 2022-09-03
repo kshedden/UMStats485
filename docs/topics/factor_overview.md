@@ -13,6 +13,9 @@ most or all of the variables, and two variables are "similar" if
 knowing the value of just one of the variables for a particular object
 allows one to predict the value of the other variable.
 
+For another, more extensive treatment of the topics in this document,
+see [here](https://pca4ds.github.io).
+
 ## Embedding
 
 Embedding algorithms take input data vectors $X$ and transform them
