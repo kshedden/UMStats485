@@ -22,8 +22,8 @@ dim}(X) \equiv p$.  However some embeddings preserve or even increase
 the dimension.
 
 Embeddings can be used for exploratory analysis, especially in
-visualization, and can also be used to construct features for
-prediction, or are used in formal statistical inference, e.g. in
+visualizations, and can also be used to construct features for
+prediction, as well as being used in formal statistical inference, e.g. in
 hypothesis testing.
 
 An embedding approach is linear if $Z = BX$ for a fixed but
@@ -56,8 +56,8 @@ so that $\tilde{U}$ is the $n\times k$ matrix consisting of the
 leading (left-most) $k$ columns of $U$, $\tilde{S}$ is the upper-left
 $k\times k$ block of $S$, and $V$ is the $p\times k$ matrix consisting
 of the leading $k$ columns of $V$.  In this case, the matrix
-$\tilde{X} \equiv \tilde{U}\tilde{S}\tilde{V}^T$ is a rank-k matrix
-(it has $k$ non-zero singular values).  Among all rank-k matrices,
+$\tilde{X} \equiv \tilde{U}\tilde{S}\tilde{V}^T$ is a rank $k$ matrix
+(it has $k$ non-zero singular values).  Among all rank $k$ matrices,
 $\tilde{X}$ is the closest matrix to $X$ in the *Frobenius norm*,
 which is defined as
 
@@ -79,7 +79,13 @@ does not have mean zero we can replace it with $X-\mu$, where
 $\mu=EX$).  Principal Components Analysis (PCA) seeks a linear
 embedding of $X$ into a lower dimensional space of dimension $q<p$.
 The standard PCA approach gives us an orthogonal matrix $B$ of
-loadings, which can be used to produce a matrix $Q$ of scores.
+*loadings*, which can be used to produce *scores* denoted $Q$.
+
+For a single vector $X$, the scores are obtained via the mapping
+$Q(X) = B^TX$.  For a data matrix $Z$ whose rows are independent
+and identically distributed (IID) copies of the random vector $X$
+the scores can be obtained via the mapping $Q = ZB$,
+where each row of $Q$ contains the scores for the corresponding row of $Z$.
 
 PCA can be viewed in terms of linear compression and decompression of
 the variables in $X$.  Let
@@ -101,7 +107,7 @@ possible loading matrices $B$, the PCA loading matrix looses the least
 information in that it minimizes the expected value of $\|X -
 \hat{X}\|$.
 
-The loading matrix $B$ used in PCA is the eigenvectors of $\Sigma$.
+The loading matrix $B$ used in PCA is the eigenvector matrix of $\Sigma$.
 Specifically, we can write $\Sigma = B\Lambda B^T$, where $B$ is an
 orthogonal matrix and $\Lambda$ is a diagonal matrix with
 $\Lambda_{11} \ge \Lambda_{22} \ge \cdots \ge \Lambda_{pp} > 0$.  The
