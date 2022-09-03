@@ -244,3 +244,22 @@ the chi-square distance between $P_{i,:}/r_i$ and $P_{j,:}/r_j$.
 Thus, the rows of $F$ embed the rows of $\tilde{P}^r$ as desired.  An
 analogous argument shows that the rows of $G$ embed the variables (the
 columns of $\tilde{P}^c$).
+
+### Correspondence analysis and Multiple Correspondence analysis for nominal data
+
+One common application of correspondence analysis (CA) arises when analyzing
+datasets in which all variables are nominal.  First, suppose we have a single
+nominal variable and code it using an *indicator matrix*.  That is, we define
+$X$ to be a matrix whose values are entirely $0$ and $1$, such that $X_{ij}=1$
+if and only if the value of the nominal variable for case $i$ is equal to level
+$j$.  Correspondence analysis as defined above can be used to analyze this
+indicator matrix, revealing how the objects and categories are related.
+
+A more interesting extension of CA is *Multiple Correspondence Analysis*, in
+which we have several nominal variables.  In this case, we recode each nominal
+variable with its own indicator matrix, and then concatenate these matrices
+horizontally.  If there are $p_j$ levels for variable $j$, and we set $p = \sum_j p_j$,
+then the concatenated indicator matrix is $n\times p$.  We then apply CA to
+this concatenated indicator matrix, yielding insights into the relationships
+among the objects, the relationships between different levels of a single variable,
+and relationships among levels of different variables.
