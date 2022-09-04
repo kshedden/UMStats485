@@ -283,12 +283,13 @@ In most applications of MCA, $W_r = n^{-1}I_n$, so a single element of
 this matrix has the simpler form
 
 $$
-[GG^T]_{ij} = n(P_{:,i} - r)^T(P_{:,j} - r).
+[GG^T]_{ij} = n(\tilde{P}^r_{:,i} - r)^T(\tilde{P}^r_{:,j} - r).
 $$
 
-The dot product between two vectors is equal to the product of their
+This result shows that the magnitude of row $i$ of $G$ is
+equal to $\sqrt{n}$ times the magnitude of $\tilde{P}^r_{:,i} - r$.
+In addition, the dot product between two vectors is equal to the product of their
 magnitudes times the cosine of the angle between them.  Therefore,
-$[GG^T]_{ij}$ is large when rows $i$ and $j$ of $G$ are large in
-magnitude, and when the angle between these rows is also large.  This
-in turn implies that the corresponding columns of $\sqrt{n}(P -
-r1_p^T)$ are large in magnitude and exhibit large angles.
+the angle between rows $i$ and $j$ of $G$ is equal to the angle between
+$\tilde{P}^r_{:,i} - r$ and $\tilde{P}^r_{:,j} - r$.
+
