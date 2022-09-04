@@ -12,11 +12,11 @@ da = rename(da, "occ"="level1_main_occ")
 da = rename(da, "reg"="un_region")
 da = rename(da, "sex"="gender")
 
-# There are too few people with other gender to estimate
+# There are too few people with "Other" gender to estimate
 # the conditional mean lifespans.
 da = filter(da, sex %in% c("Female", "Male"))
 
-# Focus on the last 500 year.
+# Focus on the last 500 years.
 da = filter(da, birth >= 1500)
 
 # People born after 1920 may still be alive, which leads to censoring.
@@ -27,6 +27,8 @@ dx = dx[complete.cases(dx),]
 
 # Generate a plot of the estimated conditional mean lifespan given
 # year of birth, for data stratified according to the variable in 'va'.
+# We estimate the conditional mean on a grid of years spanning the range
+# of the observed birth years.
 cmplot = function(va) {
     bb = seq(1500, 1920, length.out=100)
     rr = dx %>% group_by(!!sym(va)) %>% group_modify(~ {
@@ -42,7 +44,7 @@ plt1 = cmplot("sex")
 plt2 = cmplot("reg")
 plt3 = cmplot("occ")
 
-pdf("lifespan_r.pdf")
+pdf("lifespan_r_lowess.pdf")
 print(plt1)
 print(plt2)
 print(plt3)

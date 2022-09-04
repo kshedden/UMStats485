@@ -242,8 +242,7 @@ Since $W_c = {\rm diag}(\hat{\mu})$, where $\hat{\mu}$ is an estimate
 of $\mu$, it follows that $\|F_{i,:} - F_{j,:} \|$ is an estimate of
 the chi-square distance between $\tilde{P}^r_{i,:}$ and
 $\tilde{P}^r_{j,:}$.  Thus, the rows of $F$ embed the rows of
-$\tilde{P}^r$ as desired.  An analogous argument shows that the rows
-of $G$ embed the variables (the columns of $\tilde{P}^c$).
+$\tilde{P}^r$ as desired.
 
 ### Correspondence analysis and Multiple Correspondence analysis for nominal data
 
@@ -274,10 +273,10 @@ scatterplot.  The main interest is in learning about how a category of
 one variable relates to a category of another (different) variable.
 The matrix $GG^T$ contains inner products of every category score
 relative to every other category score, and has the following
-relationship to the data in $\tilde{P}:
+relationship to the data in $\tilde{P}$:
 
 $$
-GG^T = W_c^{-1/2}VSSV^TW_c^{-1/2} = W_c^{-1}(\tilde{P}^r-rc^T)W_r^{-1}(\tilde{P}^r - rc^T)W_c^{-1}.
+GG^T = W_c^{-1/2}VSSV^TW_c^{-1/2} = W_c^{-1}(\tilde{P}^r-rc^T)^TW_r^{-1}(\tilde{P}^r - rc^T)W_c^{-1}.
 $$
 
 In most applications of MCA, $W_r = n^{-1}I_n$, so a single element of

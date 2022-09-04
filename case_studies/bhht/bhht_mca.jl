@@ -20,15 +20,45 @@ dx = filter(r->r.sex != "Other", dx)
 
 dx[!, :birth] = Float64.(dx[:, :birth])
 
-# Era of birth, round to the nearest 50 years
+# Era of birth, round birth year to the nearest 50 years
 dx[:, :era] = round.(2*dx[:, :birth]; digits=-2)./2
 dx = select(dx, Not(:birth))
 dx[!, :era] = [@sprintf("%4d", x) for x in dx[:, :era]]
 
 m = MCA(dx, 3)
+
+# Demonstrate that people with similar object scores tend to have
+# similar values on the analysis variables.
+ii = sortperm(m.C.F[:, 1])
+for _ in 1:10
+    jj = sample(1:length(ii)-1)
+    println("Similar pair:")
+    println(dx[[ii[jj], ii[jj+1]], :])
+    println("")
+end
+
+# Demonstrate that people with different object scores tend to have
+# similar values on the analysis variables.
+for _ in 1:10
+    jj = sample(1:1000)
+    jj = [jj, length(ii) - jj]
+    println("Dissimilar pair:")
+    println(dx[ii[jj], :])
+    println("")
+end
+
+# Plot the category scores
 p = variable_plot(m; x=1, y=2, text=false, ordered=["era"])
 p.savefig("bhht_mca_12.pdf")
 p = variable_plot(m; x=1, y=3, text=false, ordered=["era"])
 p.savefig("bhht_mca_13.pdf")
 p = variable_plot(m; x=2, y=3, text=false, ordered=["era"])
 p.savefig("bhht_mca_23.pdf")
+
+# Add an articial variable that is independent of all other
+# variables, to demonstrate that MCA places such variables
+# at the origin.
+dx[:, :junk] = sample(["A", "B", "C"], size(dx, 1))
+m = MCA(dx, 3)
+p = variable_plot(m; x=1, y=2, text=false, ordered=["era"])
+p.savefig("bhht_mca_12_junk.pdf")
