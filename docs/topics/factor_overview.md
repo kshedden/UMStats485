@@ -151,20 +151,20 @@ $\mu$ and $\Sigma$ as unrelated (i.e. knowing $\mu$ places no
 constraints on $\Sigma$, and vice-versa).  On the other hand, in many
 settings it is plausible that $\mu$ and $\Sigma$ are related in that
 ${\rm diag}(\Sigma) \propto \mu$.  Specifically in a Poisson
-distribution $\Sigma_{ii} = \mu_i$, but in a broader class of settings
-we may have over-dispersion or under-dispersion, meaning that
+distribution ${\rm diag}(\Sigma) = \mu$, but in a broader class of
+settings we may have over-dispersion or under-dispersion, meaning that
 $\Sigma_{ii} = c\cdot \mu_i$, where $c>1$ or $c<1$ for over and
 under-dispersion, respectively.
 
 In any setting where the variance is proportional to the mean, it is
 reasonable to compare vectors using chi-square distances.
-Specifically the chi-square distance from $X$ to the mean is
-$(X-\mu)^T{\rm diag}(\mu)^{-1}(X-\mu)$, and the chi-square distance
-between two random vectors $X$ and $Y$ having the same mean $\mu$ is
-$(X-Y)^T{\rm diag}(\mu)^{-1}(X-Y)$.  If $\Sigma$ is a diagonal matrix,
-the chi-square distance is also the *Mahalanobis distance*, which is
-arguably the proper way to measure distances among vectors whose
-components have differing variances.
+Specifically the (squared) chi-square distance from $X$ to the mean is
+$(X-\mu)^T{\rm diag}(\mu)^{-1}(X-\mu)$, and the squared chi-square
+distance between two random vectors $X$ and $Y$ having the same mean
+$\mu$ is $(X-Y)^T{\rm diag}(\mu)^{-1}(X-Y)$.  If $\Sigma$ is a
+diagonal matrix, the chi-square distance is also the *Mahalanobis
+distance*, which is arguably the proper way to measure distances among
+vectors whose components have differing variances.
 
 Suppose we have $n$ observations on $p$ variables, and the data are
 represented in an $n\times p$ matrix $X$ whose rows are the cases
@@ -176,23 +176,22 @@ is to transform $P$ into *row scores* $F$ and *column scores* $G$,
 where $F$ is an $n\times p$ array and $G$ is a $p\times p$ array.
 
 Let $P_{i,:}$, $F_{i,:}$, and $G_{i,:}$ denote row $i$ of the arrays
-$P$, $F$, and $G$ respectively, and let $r \equiv P\cdot 1_p$ (the row sums
-of $P$) and let $c = P^T\cdot 1_n$ (the column sums of $P$).
+$P$, $F$, and $G$ respectively, and let $r \equiv P\cdot 1_p$ (the row
+sums of $P$) and let $c = P^T\cdot 1_n$ (the column sums of $P$).
 
-Let $\tilde{P}^r \equiv {\rm diag}(r)^{-1}\cdot P$ denote the *row
-profiles* of $P$, which are simply the rows of $P$ (or of $X$)
-normalized by their sum.  Analogously, let $\tilde{P}^c \equiv P\cdot
-{\rm diag}(x)^{-1}$ denote the *column profiles* of $P$ (or of $X$).
+Let $P^r \equiv {\rm diag}(r)^{-1}\cdot P$ denote the *row profiles*
+of $P$, which are simply the rows of $P$ (or of $X$) normalized by
+their sum.  Analogously, let $P^c \equiv P\cdot {\rm diag}(x)^{-1}$
+denote the *column profiles* of $P$ (or of $X$).
 
 Our goals are as follows:
 
 * For any $1 \le i, j \le n$, the Euclidean distance from $F_{i,:}$ to
-$F_{j:}$ is equal to the chi-square distance from $\tilde{P}^r_{i,:}$
-to $\tilde{P}^r_{j,:}$.  Also, for any $1 \le i,j \le p$ the Euclidean
-distance from $G_{:,i}$ to $G_{:,j}$ is equal to the chi-square
-distance from $\tilde{P}^c_{:,i}$ to $\tilde{P}^c_{:,j}$.  Thus, $F$
-provides an embedding of the rows of $\tilde{P}^r$ and $G$ provides an
-embedding of the columns of $\tilde{P}^c$.
+$F_{j:}$ is equal to the chi-square distance from $P^r_{i,:}$ to
+$P^r_{j,:}$.  Also, for any $1 \le i,j \le p$ the Euclidean distance
+from $G_{:,i}$ to $G_{:,j}$ is equal to the chi-square distance from
+$P^c_{:,i}$ to $P^c_{:,j}$.  Thus, $F$ provides an embedding of the
+rows of $P^r$ and $G$ provides an embedding of the columns of $P^c$.
 
 * The columns of $F$ and $G$ are ordered in terms of importance.
 Specifically, if we select $1 \le q \le p$ then the Euclidean distance
@@ -240,9 +239,9 @@ $$
 
 Since $W_c = {\rm diag}(\hat{\mu})$, where $\hat{\mu}$ is an estimate
 of $\mu$, it follows that $\|F_{i,:} - F_{j,:} \|$ is an estimate of
-the chi-square distance between $\tilde{P}^r_{i,:}$ and
-$\tilde{P}^r_{j,:}$.  Thus, the rows of $F$ embed the rows of
-$\tilde{P}^r$ as desired.
+the chi-square distance between $P^r_{i,:}$ and
+$P^r_{j,:}$.  Thus, the rows of $F$ embed the rows of
+$P^r$ as desired.
 
 ### Correspondence analysis and Multiple Correspondence analysis for nominal data
 
@@ -273,23 +272,22 @@ scatterplot.  The main interest is in learning about how a category of
 one variable relates to a category of another (different) variable.
 The matrix $GG^T$ contains inner products of every category score
 relative to every other category score, and has the following
-relationship to the data in $\tilde{P}$:
+relationship to the data in $P$:
 
 $$
-GG^T = W_c^{-1/2}VSSV^TW_c^{-1/2} = W_c^{-1}(\tilde{P}^r-rc^T)^TW_r^{-1}(\tilde{P}^r - rc^T)W_c^{-1}.
+GG^T = W_c^{-1/2}VSSV^TW_c^{-1/2} = W_c^{-1}(P - rc^T)^TW_r^{-1}(P - rc^T)W_c^{-1}.
 $$
 
 In most applications of MCA, $W_r = n^{-1}I_n$, so a single element of
 this matrix has the simpler form
 
 $$
-[GG^T]_{ij} = n(\tilde{P}^r_{:,i} - r)^T(\tilde{P}^r_{:,j} - r).
+[GG^T]_{ij} = n(P_{:,i} - r)^T(P^r_{:,j} - r).
 $$
 
 This result shows that the magnitude of row $i$ of $G$ is
-equal to $\sqrt{n}$ times the magnitude of $\tilde{P}^r_{:,i} - r$.
+equal to $\sqrt{n}$ times the magnitude of $P^r_{:,i} - r$.
 In addition, the dot product between two vectors is equal to the product of their
 magnitudes times the cosine of the angle between them.  Therefore,
 the angle between rows $i$ and $j$ of $G$ is equal to the angle between
-$\tilde{P}^r_{:,i} - r$ and $\tilde{P}^r_{:,j} - r$.
-
+$P^r_{:,i} - r$ and $P^r_{:,j} - r$.
