@@ -257,13 +257,39 @@ Correspondence analysis as defined above can be used to analyze this
 indicator matrix, revealing how the objects and categories are
 related.
 
-A more interesting extension of CA is *Multiple Correspondence
-Analysis*, in which we have several nominal variables.  In this case,
-we recode each nominal variable with its own indicator matrix, and
-then concatenate these matrices horizontally.  If there are $p_j$
-levels for variable $j$, and we set $p = \sum_j p_j$, then the
-concatenated indicator matrix is $n\times p$.  We then apply CA to
-this concatenated indicator matrix, yielding insights into the
-relationships among the objects, the relationships between different
-levels of a single variable, and relationships among levels of
-different variables.
+An important extension of CA is *Multiple Correspondence Analysis*, in
+which we have several nominal variables.  In this case, we recode each
+nominal variable with its own indicator matrix, and then concatenate
+these matrices horizontally.  If there are $p_j$ levels for variable
+$j$, and we set $p = \sum_j p_j$, then the concatenated indicator
+matrix is $n\times p$.  We then apply CA to this concatenated
+indicator matrix, yielding insights into the relationships among the
+objects, the relationships between different levels of a single
+variable, and relationships among levels of different variables.
+
+Suppose we are mainly interested in the relationships among the
+variables, and we use the scatterplot of variable scores to address
+this.  Every category of every variable will have a point in this
+scatterplot.  The main interest is in learning about how a category of
+one variable relates to a category of another (different) variable.
+The matrix $GG^T$ contains inner products of every category score
+relative to every other category score, and has the following
+relationship to the data in $\tilde{P}:
+
+$$
+GG^T = W_c^{-1/2}VSSV^TW_c^{-1/2} = W_c^{-1}(\tilde{P}^r-rc^T)W_r^{-1}(\tilde{P}^r - rc^T)W_c^{-1}.
+$$
+
+In most applications of MCA, $W_r = n^{-1}I_n$, so a single element of
+this matrix has the simpler form
+
+$$
+[GG^T]_{ij} = n(P_{:,i} - r)^T(P_{:,j} - r).
+$$
+
+The dot product between two vectors is equal to the product of their
+magnitudes times the cosine of the angle between them.  Therefore,
+$[GG^T]_{ij}$ is large when rows $i$ and $j$ of $G$ are large in
+magnitude, and when the angle between these rows is also large.  This
+in turn implies that the corresponding columns of $\sqrt{n}(P -
+r1_p^T)$ are large in magnitude and exhibit large angles.
