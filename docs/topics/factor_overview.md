@@ -181,15 +181,15 @@ sums of $P$) and let $c = P^T\cdot 1_n$ (the column sums of $P$).
 
 Let $P^r \equiv {\rm diag}(r)^{-1}\cdot P$ denote the *row profiles*
 of $P$, which are simply the rows of $P$ (or of $X$) normalized by
-their sum.  Analogously, let $P^c \equiv P\cdot {\rm diag}(x)^{-1}$
+their sum.  Analogously, let $P^c \equiv P\cdot {\rm diag}(c)^{-1}$
 denote the *column profiles* of $P$ (or of $X$).
 
 Our goals are as follows:
 
 * For any $1 \le i, j \le n$, the Euclidean distance from $F_{i,:}$ to
-$F_{j:}$ is equal to the chi-square distance from $P^r_{i,:}$ to
+$F_{j,:}$ is equal to the chi-square distance from $P^r_{i,:}$ to
 $P^r_{j,:}$.  Also, for any $1 \le i,j \le p$ the Euclidean distance
-from $G_{:,i}$ to $G_{:,j}$ is equal to the chi-square distance from
+from $G_{i,:}$ to $G_{j,:}$ is equal to the chi-square distance from
 $P^c_{:,i}$ to $P^c_{:,j}$.  Thus, $F$ provides an embedding of the
 rows of $P^r$ and $G$ provides an embedding of the columns of $P^c$.
 
@@ -221,7 +221,7 @@ above.
 First, note that since $V$ is orthogonal
 
 $$
-\|F_{i,:} - F_{j,:}\| = \|W_r^{-1/2}(F_{i,:} - F_{j,:})V^T\|.
+\|F_{i,:} - F_{j,:}\| = \|(F_{i,:} - F_{j,:})V^T\|.
 $$
 
 Therefore,
@@ -241,7 +241,8 @@ Since $W_c = {\rm diag}(\hat{\mu})$, where $\hat{\mu}$ is an estimate
 of $\mu$, it follows that $\|F_{i,:} - F_{j,:} \|$ is an estimate of
 the chi-square distance between $P^r_{i,:}$ and
 $P^r_{j,:}$.  Thus, the rows of $F$ embed the rows of
-$P^r$ as desired.
+$P^r$ as desired.  Applying the same argument to $X^T$ shows that the columns
+of $G$ embed the columns of $P^c$.
 
 ### Correspondence analysis and Multiple Correspondence analysis for nominal data
 
@@ -270,6 +271,11 @@ variables, and we use the scatterplot of variable scores to address
 this.  Every category of every variable will have a point in this
 scatterplot.  The main interest is in learning about how a category of
 one variable relates to a category of another (different) variable.
+As noted above, the distances between these points can be interpreted
+in terms of chi-square distances, but it is also informative to consider
+the magnitudes of, and angles among the vectors from the origin to
+each point defined by the category scores.
+
 The matrix $GG^T$ contains inner products of every category score
 relative to every other category score, and has the following
 relationship to the data in $P$:
@@ -282,12 +288,16 @@ In most applications of MCA, $W_r = n^{-1}I_n$, so a single element of
 this matrix has the simpler form
 
 $$
-[GG^T]_{ij} = n(P_{:,i} - r)^T(P^r_{:,j} - r).
+[GG^T]_{ij} = n(P^c_{:,i} - r)^T(P^c_{:,j} - r).
 $$
 
-This result shows that the magnitude of row $i$ of $G$ is
-equal to $\sqrt{n}$ times the magnitude of $P^r_{:,i} - r$.
-In addition, the dot product between two vectors is equal to the product of their
+Note that $P^c_{:,i} - r$ has average value zero, and can be interpreted
+as a vector of deviations (residuals) of each variable from the row-mean within individuals.
+The dot product between two such vectors is a type of covariance (up to a scale factor)
+that captures whether two indicators tend to co-occur within observations.
+
+Note also that the dot product between any two vectors is
+equal to the product of their
 magnitudes times the cosine of the angle between them.  Therefore,
-the angle between rows $i$ and $j$ of $G$ is equal to the angle between
-$P^r_{:,i} - r$ and $P^r_{:,j} - r$.
+due to this identity, the angle between rows $i$ and $j$ of $G$ is equal to the angle between
+$P^c_{:,i} - r$ and $P^c_{:,j} - r$.
