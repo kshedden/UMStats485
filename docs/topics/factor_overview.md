@@ -202,13 +202,21 @@ is inexact.
 
 ### Derivation of the algorithm
 
-Suppose that $X$ is a $n\times p$ array whose rows are an independent
-and identically distributed (iid) sample from a population with mean
-$\mu \in {\cal R}^p$.  Let $W_r = {\rm diag}(r)\in {\cal R}^{n\times
-n}$ and $W_c = {\rm diag}(c) \in {\cal R}^{p\times p}$.
+Let $W_r = {\rm diag}(r)\in {\cal R}^{n\times n}$ and
+$W_c = {\rm diag}(c) \in {\cal R}^{p\times p}$.
+The array $P - rc^T$ is a doubly-centered array of residuals,
+in that $1_n^T(P - rc^T) = 0_p$, and $(P - rc^T)1_p = 0_n$.
+We can further standardize these residuals by scaling the rows
+and columns by their respective standard deviations (taking the
+variance to be proportional to the mean).  This gives us the
+doubly-standardized array of residuals
 
-We begin by taking the singular value decomposition of a standardized
-version of $P$:
+$$
+W_r^{-1/2}(P - rc^T)W_c^{-1/2}.
+$$
+
+We next take the singular value decomposition of these doubly-standardized
+residuals:
 
 $$
 W_r^{-1/2}(P - rc^T)W_c^{-1/2} = USV^T.
@@ -275,6 +283,8 @@ As noted above, the distances between these points can be interpreted
 in terms of chi-square distances, but it is also informative to consider
 the magnitudes of, and angles among the vectors from the origin to
 each point defined by the category scores.
+
+### Angles and magnitudes of category scores
 
 The matrix $GG^T$ contains inner products of every category score
 relative to every other category score, and has the following
