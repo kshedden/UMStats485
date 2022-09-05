@@ -1,5 +1,5 @@
 using LinearAlgebra, StatsBase, UnicodePlots, Printf
-using DataFrames, PyPlot
+using StatsBase, DataFrames, PyPlot
 
 #==
 Basic implementation of Multiple Correspondence Analysis
@@ -38,11 +38,14 @@ end
 
 function CA(X, d)
 
+    # Convert to proportions
     X = X ./ sum(X)
 
-    # Center the data matrix to create residuals
+    # Calculate row and column means
     r = sum(X, dims = 2)[:]
     c = sum(X, dims = 1)[:]
+
+    # Center the data matrix to create residuals
     R = X - r * c'
 
     # Standardize the data matrix to create standardized residuals
@@ -68,12 +71,14 @@ struct MCA
     # Variable names
     vnames::Vector{String}
 
-    # Map values to integer codes
+    # Map values to integer positions
     rd::Vector{Dict}
 
-    # Map integer codes to values
+    # Map integer positions to values
     dr::Vector{Dict}
 
+    # Split the variable scores into separate arrays for
+    # each variable.
     Gv::Vector
 
     # Eigenvalues
@@ -89,7 +94,7 @@ function xsplit(G, rd)
     Js = cumsum(K)
     Js = vcat(1, 1 .+ Js)
     Gv = Vector{Matrix{eltype(G)}}()
-    for j = 1:length(K)
+    for j in eachindex(K)
         g = G[Js[j]:Js[j+1]-1, :]
         push!(Gv, g)
     end
@@ -118,23 +123,19 @@ function MCA(Z, d)
     vnames = if typeof(Z) <: DataFrame
         names(Z)
     else
+        # Default variable names if we don't have a dataframe
         ["v$(j)" for j in 1:size(Z, 2)]
     end
-
-    # Number of nominal variables
-    kk = size(Z, 2)
 
     # Get the indicator matrix
     X, rd, dr = make_indicators(Z)
 
     C = CA(X, d)
 
-    X ./= sum(X)
-
     # Split the variable scores into separate arrays for each variable.
     Gv = xsplit(C.G, rd)
 
-    una, ben, gra = get_eigs(C.I, kk, size(X, 2))
+    una, ben, gra = get_eigs(C.I, size(Z, 2), size(X, 2))
 
     return MCA(C, vnames, rd, dr, Gv, una, ben, gra)
 end

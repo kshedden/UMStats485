@@ -1,4 +1,4 @@
-# Factor-type analyses and embeddings
+# Factor analyses and embeddings
 
 A large class of powerful statistical methods considers data in which
 many "objects" are measured with respect to multiple variables.  At a
@@ -175,14 +175,15 @@ distance.  Let $P \equiv X/N$, where $N = \sum_{ij} X_{ij}$.  The goal
 is to transform $P$ into *row scores* $F$ and *column scores* $G$,
 where $F$ is an $n\times p$ array and $G$ is a $p\times p$ array.
 
-Let $P_{i,:}$, $F_{i,:}$, and $G_{i,:}$ denote row $i$ of the arrays
-$P$, $F$, and $G$ respectively, and let $r \equiv P\cdot 1_p$ (the row
-sums of $P$) and let $c = P^T\cdot 1_n$ (the column sums of $P$).
-
-Let $P^r \equiv {\rm diag}(r)^{-1}\cdot P$ denote the *row profiles*
-of $P$, which are simply the rows of $P$ (or of $X$) normalized by
-their sum.  Analogously, let $P^c \equiv P\cdot {\rm diag}(c)^{-1}$
-denote the *column profiles* of $P$ (or of $X$).
+We introduce the following notation: let $P_{i,:}$, $F_{i,:}$, and
+$G_{i,:}$ denote row $i$ of the arrays $P$, $F$, and $G$ respectively,
+let $r \equiv P\cdot 1_p$ (the row sums of $P$) and $c = P^T\cdot 1_n$
+(the column sums of $P$), and let $W_r = {\rm diag}(r)\in {\cal
+R}^{n\times n}$ and $W_c = {\rm diag}(c) \in {\cal R}^{p\times p}$.
+Then let $P^r \equiv W_r^{-1}\cdot P$ denote the *row profiles* of
+$P$, which are simply the rows of $P$ (or of $X$) normalized by their
+sum.  Analogously, let $P^c \equiv P\cdot W_c^{-1}$ denote the *column
+profiles* of $P$ (or of $X$).
 
 Our goals are as follows:
 
@@ -202,8 +203,6 @@ is inexact.
 
 ### Derivation of the algorithm
 
-Let $W_r = {\rm diag}(r)\in {\cal R}^{n\times n}$ and
-$W_c = {\rm diag}(c) \in {\cal R}^{p\times p}$.
 The array $P - rc^T$ is a doubly-centered array of residuals,
 in that $1_n^T(P - rc^T) = 0_p$, and $(P - rc^T)1_p = 0_n$.
 We can further standardize these residuals by scaling the rows

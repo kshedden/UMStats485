@@ -59,6 +59,26 @@ p.savefig("bhht_mca_23.pdf")
 # variables, to demonstrate that MCA places such variables
 # at the origin.
 dx[:, :junk] = sample(["A", "B", "C"], size(dx, 1))
-m = MCA(dx, 3)
-p = variable_plot(m; x=1, y=2, text=false, ordered=["era"])
+m2 = MCA(dx, 3)
+p = variable_plot(m2; x=1, y=2, text=false, ordered=["era"])
 p.savefig("bhht_mca_12_junk.pdf")
+dx = select(dx, Not(:junk))
+
+# Try to show how well we are separating the objects.
+F = m2.C.F
+for k in 1:size(dx, 2)
+
+    vn = m2.vnames[k]
+    z = []
+    u = unique(dx[:, k])
+    sort!(u)
+    for v in u
+        ii = findall(dx[:, k] .== v)
+        push!(z, F[ii, 1])
+    end
+
+    PyPlot.clf()
+    PyPlot.title(vn)
+    PyPlot.boxplot(z, labels=u)
+    PyPlot.savefig("obj_scores_$(vn).pdf")
+end
