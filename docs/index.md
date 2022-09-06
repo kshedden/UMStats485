@@ -4,6 +4,8 @@
 
 [Writing assigments](/writing_assignments.md)
 
+[Writing assigments](https://kshedden.github.io/UMStats485/writing_assignments.html)
+
 [Github site](https://github.com/kshedden/UMStats485)
 
 [Notes](https://docs.google.com/document/d/1YNkhY-8QPo4TeKFppmHDIgpCQ9qoJ20qg3LXMxSlGGQ/edit?usp=sharing)
