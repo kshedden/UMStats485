@@ -2,6 +2,8 @@
 
 [Syllabus](syllabus.md)
 
+ss
+
 [Writing assignments](writing_assignments.html)
 
 [Github site](https://github.com/kshedden/UMStats485)
