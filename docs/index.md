@@ -2,7 +2,7 @@
 
 [Syllabus](syllabus.md)
 
-[Writing assignments](writing_assignments.html)
+[Writing assignments](writing_assignments2.html)
 
 [Github site](https://github.com/kshedden/UMStats485)
 
