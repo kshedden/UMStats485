@@ -1,6 +1,6 @@
 # Capstone seminar in statistics
 
-[Syllabus](/syllabus.md)
+[Syllabus](syllabus.md)
 
 [Writing assignments](writing_assignments.md)
 
