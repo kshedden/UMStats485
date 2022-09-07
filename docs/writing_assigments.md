@@ -1,4 +1,3 @@
-
 # Writing assignments
 
 See the syllabus and "writing tips" document for guidance on how to prepare
