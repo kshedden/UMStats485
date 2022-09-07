@@ -309,7 +309,7 @@ $$
 [GG^T]_{ij} = n(P^c_{:,i} - r)^T(P^c_{:,j} - r).
 $$
 
-Note that $\bar{P^c}_{:,i} = 1/n$ for each $i$, and $r \equiv 1/n$,
+Note that $\bar{P}^c_{:,i} = 1/n$ for each $i$, and $r \equiv 1/n$,
 therefore, $P^c_{:,i} - r$ has average value zero and can be
 interpreted as a vector of deviations (residuals) of each variable
 from its mean.  The dot product between two such vectors is a type of
