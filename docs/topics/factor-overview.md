@@ -279,15 +279,24 @@ this.  Every category of every variable will have a point in this
 scatterplot.  The main interest is in learning about how a category of
 one variable relates to a category of another (different) variable.
 As noted above, the distances between these points can be interpreted
-in terms of chi-square distances, but it is also informative to consider
-the magnitudes of, and angles among the vectors from the origin to
-each point defined by the category scores.
+in terms of chi-square distances, but it is also informative to
+consider the magnitudes of, and angles among the vectors from the
+origin to each point defined by the category scores.
 
 ### Angles and magnitudes of category scores
 
-The matrix $GG^T$ contains inner products of every category score
-relative to every other category score, and has the following
-relationship to the data in $P$:
+Above we discussed how the Euclidean distances between the rows of $G$
+correspond to the chi-square distances between the columns of
+$\tilde{P}^c$.  Another insight into the geometry of MCA can be
+obtained my considering the angles among the category scores (or
+specifically, the angles between the vectors from the origin to each
+embedded category).  The angle between two vectors is the dot product
+between the vectors, divided by the product of the norms of the
+vectors.  Therefore, to understand the angles among the embedded
+categories, we should consider the Gram matrix $GG^T$ containing inner
+products of every category score with every other category score.
+
+The matrix $GG^T$ has the following relationship to the data in $P$:
 
 $$
 GG^T = W_c^{-1/2}VSSV^TW_c^{-1/2} = W_c^{-1}(P - rc^T)^TW_r^{-1}(P - rc^T)W_c^{-1}.
@@ -300,13 +309,9 @@ $$
 [GG^T]_{ij} = n(P^c_{:,i} - r)^T(P^c_{:,j} - r).
 $$
 
-Note that $P^c_{:,i} - r$ has average value zero, and can be interpreted
-as a vector of deviations (residuals) of each variable from the row-mean within individuals.
-The dot product between two such vectors is a type of covariance (up to a scale factor)
-that captures whether two indicators tend to co-occur within observations.
-
-Note also that the dot product between any two vectors is
-equal to the product of their
-magnitudes times the cosine of the angle between them.  Therefore,
-due to this identity, the angle between rows $i$ and $j$ of $G$ is equal to the angle between
-$P^c_{:,i} - r$ and $P^c_{:,j} - r$.
+Note that $\bar{P^c}_{:,i} = 1/n$ for each $i$, and $r \equiv 1/n$,
+therefore, $P^c_{:,i} - r$ has average value zero and can be
+interpreted as a vector of deviations (residuals) of each variable
+from its mean.  The dot product between two such vectors is a type of
+covariance (up to a scale factor) that captures whether two indicators
+tend to co-occur within observations.
