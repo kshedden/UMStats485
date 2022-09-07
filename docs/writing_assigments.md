@@ -14,4 +14,3 @@ on their reported characteristics.  For this first assignment, you can
 borrow generously from the findings and code discussed in class, but please
 aim to report at least one novel finding.
 
-s
