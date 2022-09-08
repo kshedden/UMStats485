@@ -174,31 +174,31 @@ To see this, suppose that we have a non-stochastic relationship
 $\log(y) = \beta_0 + \beta_1 \log(x)$, and let $x_1 = x(1 +q)$, so
 that $x_1$ is $100\times q$ percent different from $x$.  Then
 
-$
+$$
 \log(y_1) = \beta_0 +\beta_1 \log(x_1) = \beta_0 +\beta_1\log(x) +\beta_1\log(1+q),
-$
+$$
 
 and so
 
-$
+$$
 \log(y_1) - \log(y) = \beta_1\log(1+q).
-$
+$$
 
 By linearization, $\log(y_1) - \log(y) = \log(1 + (y_1-y)/y) \approx
 (y_1 - y)/y$, and $\log(1+q) \approx q$.  Therefore we have $(y_1 -
 y)/y \approx q\beta_1$.  If the relationship is non-stochastic, as in
 a regression model, then the we would start with
 
-$
+$$
 E[\log(y) | x] = \beta_0 +\beta_1\log(x),
-$
+$$
 
 and using the first order approximation $E[\log(y) |x] \approx \log
 E[y|x]$, the analogous result
 
-$
+$$
 (E[\log(y) |x_1] - E[\log(y)|x])/E[\log(y)|x] \approx q\beta
-$
+$$
 
 is obtained.
 
@@ -253,15 +253,15 @@ response variable (possibly after a transformation) is expressed
 additively in terms of the covariates.  A linear mean structure is
 additive, since
 
-$
+$$
 E[y] = \beta_0 + \beta_1x_1 + \cdots + \beta_px_p.
-$
+$$
 
 A more general additive model is:
 
-$
+$$
 E[y] = g_1(x_1) + \cdots + g_p(x_p),
-$
+$$
 
 where the $g_j$ are functions.  Models of the form given above can be
 estimated using a framework called "GAM" (Generalized Additive
@@ -281,9 +281,9 @@ covariates.  There are many ways that an interaction can arise, but in
 practice we often model an interaction by taking a product of two
 variables.  For example, we may have the mean structure
 
-$
+$$
 E[y] = \beta_1x_1 + \beta_2x_2 + \beta_3x_1x_2.
-$
+$$
 
 In this model, the parameters $\beta_1$ and $\beta_2$ are the *main
 effects* of $x_1$ and $x_2$, respectively.  If we observe $x_1$ to
@@ -369,9 +369,9 @@ covariates are not centered.  For example, suppose that $y$ is blood
 pressure, $x_1$ is body mass index (BMI), and $x_2$ equals 1 for
 females and 0 for males.  We then fit the working model
 
-$
+$$
 E[y] = \beta_0 + \beta_1x_1 + \beta_2x_2 + \beta_3x_1x_2.
-$
+$$
 
 In this case, if we do not center the covariates, then the main effect
 $\beta_2$ would mathematically represent the expected difference in
@@ -390,33 +390,33 @@ coding for $x_2$ becomes $x_2=1-\bar{f}$ for females, and
 $x_2=-\bar{f}$ for males.  The regression equation for females can be
 rearranged to
 
-$
+$$
 E[y] = \beta_0 + (1-\bar{f})\beta_2 + (\beta_1 + \beta_3(1-\bar{f}))x_1
-$
+$$
 
 and similarly for males we get
 
-$
+$$
 E[y] = \beta_0 - \bar{f}\beta_2 + (\beta_1 - \beta_3\bar{f})x_1
-$
+$$
 
 The weighted averages of the BMI slopes for females and males are
 
-$
+$$
 \bar{f} (\beta_1 + \beta_3(1-\bar{f})) + (1 - \bar{f})(\beta_1 - \beta_3\bar{f}) = \beta_3.
-$
+$$
 
 Another important thing to note is that the interpretation of the
 interaction coefficient itself is completely unrelated to how the
 variables are centered.  As shown below, regardless of how we center
 $x_1$ and $x_2$, $\beta_3$ is always the coefficient of $x_1x_2$.
 
-$
+$$
 \begin{array}{ccl} E[y] &=& \beta_1(x_1-c_1) + \beta_2(x_2-c_2) +
 \beta_3(x_1-c_1)(x_2-c_2)\\ &=& \beta_3c_1c_2 -\beta_1c_1 - \beta_2c_2
 + (\beta_1 - c_2\beta_3)x_1 + (\beta_2-c_1\beta_3)x_2 + \beta_3x_1x_2.
 \end{array}
-$
+$$
 
 Another debate that comes up when working with interactions is whether
 it is necessary to include all nested "lower order terms" when
