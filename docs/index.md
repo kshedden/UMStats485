@@ -12,4 +12,6 @@
 
 [Regression overview](topics/regression-overview.md)
 
+[Regression analysis](topics/regression-extras.md)
+
 [Factor analysis overview](topics/factor-overview.html)
