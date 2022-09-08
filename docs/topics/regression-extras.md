@@ -193,8 +193,13 @@ $$
 E[\log(y) | x] = \beta_0 +\beta_1\log(x),
 $$
 
-and using the first order approximation $E[\log(y) |x] \approx \log
-E[y|x]$, the analogous result
+and using the first order approximation
+
+$$
+E[\log(y) |x] \approx \log E[y|x],
+$$
+
+the analogous result
 
 $$
 (E[\log(y) |x_1] - E[\log(y)|x])/E[\log(y)|x] \approx q\beta
