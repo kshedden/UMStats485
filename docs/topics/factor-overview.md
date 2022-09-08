@@ -156,6 +156,8 @@ settings we may have over-dispersion or under-dispersion, meaning that
 $\Sigma_{ii} = c\cdot \mu_i$, where $c>1$ or $c<1$ for over and
 under-dispersion, respectively.
 
+### Mean/variance relationships
+
 In any setting where the variance is proportional to the mean, it is
 reasonable to compare vectors using chi-square distances.
 Specifically the (squared) chi-square distance from $X$ to the mean is
@@ -174,6 +176,8 @@ compare any two rows or any two columns of $X$ using chi-square
 distance.  Let $P \equiv X/N$, where $N = \sum_{ij} X_{ij}$.  The goal
 is to transform $P$ into *row scores* $F$ and *column scores* $G$,
 where $F$ is an $n\times p$ array and $G$ is a $p\times p$ array.
+
+### Goals of MCA
 
 We introduce the following notation: let $P_{i,:}$, $F_{i,:}$, and
 $G_{i,:}$ denote row $i$ of the arrays $P$, $F$, and $G$ respectively,
@@ -246,10 +250,10 @@ $$
 
 Since $W_c = {\rm diag}(\hat{\mu})$, where $\hat{\mu}$ is an estimate
 of $\mu$, it follows that $\|F_{i,:} - F_{j,:} \|$ is an estimate of
-the chi-square distance between $P^r_{i,:}$ and
-$P^r_{j,:}$.  Thus, the rows of $F$ embed the rows of
-$P^r$ as desired.  Applying the same argument to $X^T$ shows that the columns
-of $G$ embed the columns of $P^c$.
+the chi-square distance between $P^r_{i,:}$ and $P^r_{j,:}$.  Thus,
+the rows of $F$ embed the rows of $P^r$ as desired.  Applying the same
+argument to $X^T$ shows that the rows of $G$ embed the columns of
+$P^c$.
 
 ### Correspondence analysis and Multiple Correspondence analysis for nominal data
 
@@ -286,15 +290,15 @@ origin to each point defined by the category scores.
 ### Angles and magnitudes of category scores
 
 Above we discussed how the Euclidean distances between the rows of $G$
-correspond to the chi-square distances between the columns of
-$\tilde{P}^c$.  Another insight into the geometry of MCA can be
-obtained my considering the angles among the category scores (or
-specifically, the angles between the vectors from the origin to each
-embedded category).  The angle between two vectors is the dot product
-between the vectors, divided by the product of the norms of the
-vectors.  Therefore, to understand the angles among the embedded
-categories, we should consider the Gram matrix $GG^T$ containing inner
-products of every category score with every other category score.
+correspond to the chi-square distances between the columns of $P^c$.
+Another insight into the geometry of MCA can be obtained my
+considering the angles among the category scores (or specifically, the
+angles between the vectors from the origin to each embedded category
+point).  The angle between two vectors is the dot product between the
+vectors, divided by the product of the norms of the vectors.
+Therefore, to understand the angles among the embedded categories, we
+should consider the Gram matrix $GG^T$ containing inner products of
+every category score with every other category score.
 
 The matrix $GG^T$ has the following relationship to the data in $P$:
 
