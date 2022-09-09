@@ -16,4 +16,4 @@
 
 [Factor analysis overview](topics/factor-overview.md)
 
-[Generalized Linear Models(topics/glm.md)]
+[Generalized Linear Models](topics/glm.md)
