@@ -1,7 +1,7 @@
 # US Natality Data
 
 To access the birth count data, visit
-[wonder.cdc.gov/natality-current.html](wonder.cdc.gov/natality-current.html).  You will need to click "I
+[https://wonder.cdc.gov/natality-current.html](https://wonder.cdc.gov/natality-current.html).  You will need to click "I
 agree" at the bottom of the page to accept the terms of usage.  This
 will take you to the page where you can download the data.
 
