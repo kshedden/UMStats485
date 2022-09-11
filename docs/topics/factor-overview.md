@@ -123,17 +123,29 @@ scores $Q \equiv B^TX$ are uncorrelated, ${\rm cov}(Q) = I_q$.
 
 Next we consider how PCA can be carried out with a sample of data,
 rather than in a population.  Given a $n\times p$ matrix of data $Z$
-whose rows are iid copies of the random vector $X$ (assumed to have
-mean $0$), we can estimate the covariance matrix $\Sigma$ as
-$\hat{\Sigma} = Z^TZ/n$. Letting $B$ denote the eigenvectors of
-$\hat{\Sigma}$, the scores have the form $Q = Z^cB$, where $Z^c$ is a
-column-centered version of $Z$.
+whose rows are iid copies of the random vector $X$, we can estimate
+the covariance matrix $\Sigma$ by column centering $Z$ to produce $Z_c
+\equiv X - 1_n\bar{X}^T$, where $\bar{X} \in {\cal R}^p$ is the vector
+of column-wise means of $X$, Then set $\hat{\Sigma} =
+Z_c^TZ_c/n$. Letting $B$ denote the eigenvectors of $\hat{\Sigma}$,
+the scores have the form $Q = Z_cB$.
 
 Since the eigenvalues $\Lambda_{ii}$ are non-increasing, the leading
 columns of $Q$ contain the greatest fraction of information about $Z$.
 Thus, visualizations (e.g. scatterplots) of the first two columns of
 $Z$ best reflect the relationships among the rows of $Z$ (compared to
 any other scatterplot formed from linear scores).
+
+PCA can also be carried out using the SVD of the column-centered data
+matrix $Z_c$.  Write $Z_c = USV^T$ as discussed above and note that
+
+$$
+\hat{\Sigma} = Z_c^T/Z_c/n = VS^2V^T/n.
+$$
+
+Thus, $\hat{\Sigma}V = VS^2/n$, so $V$ contains the eigenvectors of
+$\hat{\Sigma}$ and the corresponding eigenvalues are in ${\rm
+diag}(S^2)/n$.
 
 ## Correspondence Analysis
 

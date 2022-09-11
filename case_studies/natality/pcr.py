@@ -32,6 +32,10 @@ demog -= demog.mean(0)
 u, s, vt = np.linalg.svd(demog)
 v = vt.T
 
+# Convert the coefficients back to the original coordinates
+def convert_coef(c, npc):
+    return np.dot(v[:, 0:npc], c/s[0:npc])
+
 # The proportion of explained variance.
 pve = s**2
 pve /= sum(pve)
@@ -60,6 +64,14 @@ r0 = m0.fit(scale="X2")
 m1 = sm.GEE.from_formula(fml, groups="FIPS", family=sm.families.Poisson(), data=da)
 r1 = m1.fit(scale="X2")
 
+# Restructure the coefficients so that the age bands are
+# in the columns.
+def restructure(c):
+    ii = pd.MultiIndex.from_tuples(na)
+    c = pd.Series(c, index=ii)
+    c = c.unstack()
+    return c
+
 # This function fits a Poisson GLM to the data using 'npc' principal components
 # as explanatory variables.
 def fitmodel(npc):
@@ -69,13 +81,12 @@ def fitmodel(npc):
     r = m.fit(scale="X2")
 
     # Convert the coefficients back to the original coordinates
-    c = np.dot(v[:, 0:npc], r.params[1:]/s[0:npc])
+    c = convert_coef(r.params[1:], npc)
 
     # Restructure the coefficients so that the age bands are
     # in the columns.
-    ii = pd.MultiIndex.from_tuples(na)
-    c = pd.Series(c, index=ii)
-    c = c.unstack()
+    c = restructure(c)
+
     return c, m, r
 
 # Plot styling information

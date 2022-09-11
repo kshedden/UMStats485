@@ -3,7 +3,7 @@ library(ggplot2)
 
 source("prep.R")
 
-# Calcuate the mean and variance within each county to
+# Calculate the mean and variance within each county to
 # assess the mean/variance relationship.
 mv = group_by(births, FIPS) %>% summarize(births_mean=mean(Births), births_sd=sd(Births))
 mv = mutate(mv, log_births_mean=log(births_mean), log_births_sd=log(births_sd))

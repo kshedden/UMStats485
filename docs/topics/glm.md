@@ -2,11 +2,11 @@
 
 Generalized Linear Models (GLMs) are a type of single-index regression
 model that substantially extends the range of analyses that can be
-meaningfully carried out compared to using linear models.
+meaningfully carried out compared to using conventional linear models.
 
 A single-index model expresses the conditional mean function
-$E[Y|X=x]$ through a single linear predictor (a linear function of the
-covariates):
+$E[Y|X=x]$ through a single *linear predictor*, which is a linear
+function of the covariates having the form:
 
 $$
 \beta_0 + \beta_1x_1 + \cdots + \beta_p x_p.
@@ -20,7 +20,7 @@ E[Y|X=x] = \beta_0 + \beta_1x_1 + \cdots + \beta_p x_p.
 $$
 
 A GLM relates the conditional mean to the linear predictor via a link
-function $g$:
+function $g: {\cal R}\rightarrow {\cal R}$:
 
 $$
 g(E[Y|X=x]) = \beta_0 + \beta_1x_1 + \cdots + \beta_p x_p.
@@ -73,17 +73,18 @@ $$
 {\rm Var}[Y|X=x] = \phi \cdot V(E[Y|X=x]),
 $$
 
-where $V(\cdot): {\cal R}\rightarrow R^+$ is a given function.  The
+where $V(\cdot): {\cal R}\rightarrow R^+$ is a given function and
+$\phi \ge 0$ is a *scale parameter*.  In words, the
 variance is expressed through a "mean/variance relationship", i.e.
 the variance can only depend on the covariates through the mean that
-they imply.  In other words, the variance is a function of the mean,
-up to a multiplicative "scale parameter" $\phi \ge 0$.
+they imply.
 
 __GLM's and parametric probability models:__ Many basic GLM's are
 equivalent to using maximum likelihood analysis to fit a parametric
-probability model to the data.  However there is an alternative
+probability model to the data.  There is an alternative
 "quasi-likelihood" approach to understanding GLMs that does not
-emphasize likelihoods or probability models.
+emphasize likelihoods or probability models; we discuss this further
+below.
 
 Some examples of GLM's that are equivalent to parametric probability
 models are:
@@ -94,14 +95,15 @@ identity function, and the variance function is constant, $V(\mu) =
 1$.  The scale parameter $\phi$ is identical to the usual "error
 variance" $\sigma^2$ in a linear model.  This is equivalent to using
 maximum likelihood estimation to fit the model in which $P(Y|X=x) =
-N(\beta_0 +\beta_1x_1 +\cdots \beta_px_p, \sigma^2)$.
+N(\beta_0 +\beta_1x_1 +\cdots \beta_px_p, \sigma^2)$, where $N(\mu, \sigma^2)$
+is the normal distribution with mean $\mu$ and variance $\sigma^2$.
 
 * _Poisson log-linear model_: In the canonical Poisson GLM,
 $\log(E[Y|X=x])$ is equal to the linear predictor, which means that
 $g$ is the logarithm function.  The variance function is the identity
-function $V(\mu) = \mu$.  The scale parameter is fixed at 1.  This is
+function $V(\mu) = \mu$.  The scale parameter is fixed at $\phi=1$.  This is
 equivalent to using maximum likelihood estimation to fit the model in
-which $P(Y|X=x)$ is a Poisson PMF with mean $\exp(\beta_0 + \beta_1x_1
+which $P(Y|X=x)$ is parameterized as a Poisson PMF with mean $\exp(\beta_0 + \beta_1x_1
 +\cdots+ \beta_px_p)$.
 
 When viewed in terms of parameterized probability distributions, a GLM
@@ -133,7 +135,7 @@ non-negative response variables.  The main GLM family that is used
 with data that can take on both positive and negative values is the
 Gaussian family.
 
-All of the GLM's discussed here most commonly use the logarithm as the
+Other than the Gaussian/linear model, all of the GLM's discussed here most commonly use the logarithm as the
 link function, so the mean structure model is $E[Y|X=x] =
 \exp(\beta^\prime x)$, although alternative link functions are
 possible, giving rise to different mean structures.
