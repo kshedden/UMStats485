@@ -1,12 +1,23 @@
+# Examine factors associated with birth count variation among US
+# counties using Principal Components Regression and Poisson GLM/GEE.
+
 library(geepack)
 library(ggplot2)
 
 source("prep.R")
 
+# Write all plots to this file.
+pdf("pcr_r.pdf")
+
 # Calculate the mean and variance within each county to
 # assess the mean/variance relationship.
-mv = group_by(births, FIPS) %>% summarize(births_mean=mean(Births), births_sd=sd(Births))
-mv = mutate(mv, log_births_mean=log(births_mean), log_births_sd=log(births_sd))
+mv = group_by(births, FIPS) %>% summarize(births_mean=mean(Births), births_var=var(Births))
+mv = mutate(mv, log_births_mean=log(births_mean), log_births_var=log(births_var))
+
+# Plot the variance against the mean on the log/log scale to assess the mean/variance
+# relationship.
+plt = ggplot(mv, aes(x=log_births_mean, y=log_births_var)) + geom_point()
+print(plt)
 
 # Replace missing demographic values with 0.
 demog = mutate(demog, across(where(anyNA), ~ replace_na(., 0)))
@@ -88,7 +99,6 @@ fitmodel = function(npc) {
 # Fit models with these numbers of PCs.
 pcs = c(5, 10, 20, 30, 40, 50, 60, 70, 80, 90, 100)
 
-pdf("pcr_r.pdf")
 for (npc in pcs) {
 
     cf = fitmodel(npc)

@@ -1,3 +1,6 @@
+# Examine factors associated with birth count variation among US
+# counties using Principal Components Regression and Poisson GLM/GEE.
+
 import pandas as pd
 import numpy as np
 from prep import births, demog, pop, na, age_groups, rucc
@@ -47,9 +50,9 @@ for k in range(100):
 
 # Create a dataframe for modeling.  Merge the birth data with
 # population and RUCC data.
-da = pd.merge(births, demog_f, on="FIPS")
-da = pd.merge(da, pop, on="FIPS")
-da = pd.merge(da, rucc, on="FIPS")
+da = pd.merge(births, demog_f, on="FIPS", how="left")
+da = pd.merge(da, pop, on="FIPS", how="left")
+da = pd.merge(da, rucc, on="FIPS", how="left")
 da["logPop"] = np.log(da["Population"])
 
 # Include this number of factors in all subsequent models

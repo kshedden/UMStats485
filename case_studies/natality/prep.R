@@ -1,3 +1,5 @@
+# Prepare the birth count and other related data for analysis.
+
 library(readr)
 library(dplyr)
 library(tidyr)
