@@ -10,8 +10,8 @@ include("prep.jl")
 mv = combine(groupby(births, :FIPS), :Births => mean, :Births => var)
 scatterplot(log.(mv[:, :Births_var]), log.(mv[:, :Births_mean]))
 
-# Demographic data, replace missing values with 0 and transform
-# with square root to stabilize the variance.
+# Process the demographic data, -- replace missing values with 0
+# and transform with square root to stabilize the variance.
 for c in names(demog)
     if c != "FIPS"
         demog[:, c] = replace(demog[:, c], missing => 0)
@@ -41,7 +41,7 @@ da = leftjoin(da, rucc, on = :FIPS)
 da[:, :logPop] = log.(da[:, :Population])
 da = da[completecases(da), :]
 
-# Include this number of factors in all subsequent models
+# Include this number of factors in subsequent models
 npc = 20
 
 # GLM, not appropriate since we have repeated measures on counties
@@ -71,6 +71,9 @@ function fitmodel(npc)
     fml = term(:Births) ~ sum([term(@sprintf("pc%02d", j)) for j = 1:npc])
     m = gee(fml, da, da[:, :FIPS], Poisson(), offset = Float64.(da[:, :logPop]))
 
+    # We need this for score-testing
+    m0 = gee(fml, da, da[:, :FIPS], Poisson(), offset = Float64.(da[:, :logPop]); dofit=false)
+
     # Convert the coefficients back to the original coordinates
     c = convert_coef(coef(m)[2:end], npc)
 
@@ -78,7 +81,7 @@ function fitmodel(npc)
     # in the columns.
     c = restructure(c)
 
-    return c, m
+    return c, m, m0
 end
 
 # Fit models with these numbers of PCs.
@@ -86,8 +89,13 @@ pcs = [5, 10, 20, 30, 40, 50, 60, 70, 80, 90, 100]
 
 models = []
 for npc in pcs
+    c, m, m0 = fitmodel(npc)
+    push!(models, (m, m0))
+end
 
-    c, m = fitmodel(npc)
-    push!(models, m)
-
+for i in 2:length(models)
+    smaller = models[i-1][1]
+    bigger = models[i][2]
+    st = scoretest(smaler, bigger)
+    println(st)
 end

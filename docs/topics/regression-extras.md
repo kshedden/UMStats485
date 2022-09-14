@@ -10,7 +10,7 @@ the response variable $y$ to a linear predictor $x^\prime \beta$,
 formed from the covariates $x \in {\cal R}^p$ using coefficients
 $\beta \in {\cal R}^p$.  Examples include the linear mean structure
 model $E[y|x] = x^\prime\beta$ and the single index model with link
-function $g$, $E[y] = g^{-1}(x^\prime\beta)$.
+function $g$, $E[y|x] = g^{-1}(x^\prime\beta)$.
 
 The linear mean structure model is linear in two senses -- the
 conditional mean of $y$ given $x$ is linear in $x$ for fixed $\beta$,
@@ -38,13 +38,13 @@ to be non-linear in the covariates.
 Including powers of covariates (like $x^2$) as regressors is now seen
 as a somewhat problematic approach, but it may be the earliest example
 of a general technique utilizing "basis functions".  A family of basis
-functions is a collection of functions $g_1, g_2, \ldots$ from ${\cal
-R}\rightarrow {\cal R}$ such that we can include $g_1(x), g_2(x),
-\ldots$ as covariates in a model, in place of $x$.  This allows the
+functions is a collection of functions $g_1, g_2, \ldots$, each from ${\cal
+R}\rightarrow {\cal R}$, such that we can include $g_1(x), g_2(x),
+\ldots$ as covariates in a model in place of $x$.  This allows the
 fitted mean function to take on any form that can be represented as a
 linear combination $\beta_1 g_1(x) + \beta_2 g_2(x) + \cdots$.  Using
 a large collection of basis functions allows a wide range of
-non-linear forms to be represented in this way.  Basis functions thus
+non-linear forms to be represented.  Basis functions thus
 allow non-linear mean structures to be fit to data using linear
 estimation techniques.
 
@@ -115,8 +115,8 @@ applicable justification to use when applying transformations in a
 broad range of settings.
 
 In regression analysis, transformations can be applied to the
-dependent variable ($y$), to one or more of the independent variables
-($x_j$), or to both the independent and dependent variables
+dependent variable $y$, to one or more of the independent variables
+$x_j$, or to both the independent and dependent variables
 simultaneously.  One reason for transforming the data is to induce it
 to fit into a pre-existing regression framework.  For example,
 ordinary least squares (OLS) is most efficient when the conditional
