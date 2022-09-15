@@ -71,12 +71,40 @@ cmplot = function(va, dx, se=F) {
     return(plt)
 }
 
+cmdiff = function(dx) {
+    rr = cmest("sex", dx)
+    s = cmest_boot("sex", dx)
+    n = dim(rr)[1]
+
+    stopifnot(rr$sex[1] == "Female")
+    stopifnot(rr$sex[n/2+1] == "Male")
+
+    # Female - male mean lifespan
+    d = rr$lifespan[1:(n/2)] - rr$lifespan[(n/2+1):n]
+
+    # Standard error of d
+    s = sqrt(s[1:(n/2)]^2 + s[(n/2+1):n]^2)
+
+    # Confidence band
+    lcb = d - 2*s
+    ucb = d + 2*s
+
+    r2 = data.frame(birth=rr$birth[1:(n/2)], d=d, lcb=lcb, ucb=ucb)
+    plt = ggplot(data=r2, aes(x=birth, y=d))
+    plt = plt + geom_line()
+    plt = plt + geom_ribbon(aes(ymin=lcb, ymax=ucb), alpha=0.3, linetype=0)
+
+    return(plt)
+}
+
 plt1 = cmplot("sex", dx, T)
 plt2 = cmplot("reg", dx)
 plt3 = cmplot("occ", dx)
+plt4 = cmdiff(dx)
 
 pdf("lifespan_r_lowess.pdf")
 print(plt1)
 print(plt2)
 print(plt3)
+print(plt4)
 dev.off()
