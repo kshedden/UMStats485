@@ -71,8 +71,8 @@ cmplot = function(va, dx, se=F) {
     return(plt)
 }
 
-# Generate a plot displaying the difference of the conditional mean lifespan
-# for females relative to males (females - males), using the data in 'dx'.
+# Estimate the difference of conditional means between sexes (female - male)
+# for lifespan given year of birth, using the data in 'dx'.
 cmdiff = function(dx) {
     rr = cmest("sex", dx)
     s = cmest_boot("sex", dx)
@@ -92,10 +92,16 @@ cmdiff = function(dx) {
     ucb = d + 2*s
 
     r2 = data.frame(birth=rr$birth[1:(n/2)], d=d, lcb=lcb, ucb=ucb)
-    plt = ggplot(data=r2, aes(x=birth, y=d))
+    return(r2)
+}
+
+# Generate a plot displaying the difference of the conditional mean lifespan
+# for females relative to males (females - males), using the data in 'dx'.
+cmdiff_plot = function(dx) {
+    rr = cmdiff(dx)
+    plt = ggplot(data=rr, aes(x=birth, y=d))
     plt = plt + geom_line()
     plt = plt + geom_ribbon(aes(ymin=lcb, ymax=ucb), alpha=0.3, linetype=0)
-
     return(plt)
 }
 
