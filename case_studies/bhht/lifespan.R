@@ -78,6 +78,8 @@ cmdiff = function(dx) {
     s = cmest_boot("sex", dx)
     n = dim(rr)[1]
 
+    # This function only works for dataframes with m rows of
+    # female data and m rows of male data.
     stopifnot(rr$sex[1] == "Female")
     stopifnot(rr$sex[n/2+1] == "Male")
 
@@ -108,7 +110,7 @@ cmdiff_plot = function(dx) {
 plt1 = cmplot("sex", dx, T)
 plt2 = cmplot("reg", dx)
 plt3 = cmplot("occ", dx)
-plt4 = cmdiff(dx)
+plt4 = cmdiff_plot(dx)
 
 pdf("lifespan_r_lowess.pdf")
 print(plt1)
