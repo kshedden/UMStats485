@@ -71,6 +71,8 @@ cmplot = function(va, dx, se=F) {
     return(plt)
 }
 
+# Generate a plot displaying the difference of the conditional mean lifespan
+# for females relative to males (females - males), using the data in 'dx'.
 cmdiff = function(dx) {
     rr = cmest("sex", dx)
     s = cmest_boot("sex", dx)
