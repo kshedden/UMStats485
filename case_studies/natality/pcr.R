@@ -19,10 +19,30 @@ mv = mutate(mv, log_births_mean=log(births_mean), log_births_var=log(births_var)
 plt = ggplot(mv, aes(x=log_births_mean, y=log_births_var)) + geom_point()
 print(plt)
 
-# Replace missing demographic values with 0.
+# Merge the birth data with population and RUCC data
+da = merge(births, pop, on="FIPS", how="left")
+da = merge(da, rucc, on="FIPS", how="left")
+da = mutate(da, logPop = log(da$Population))
+
+# Basic GLM looking at births in terms of population and urbanicity.
+# This model does not account for correlations between repeated
+# observations on the same county.
+r0 = glm(Births ~ logPop + RUCC_2013, quasipoisson(), da)
+
+# GEE accounts for the correlated data
+r1 = geeglm(Births ~ logPop + RUCC_2013, data=da, id=FIPS, family=poisson())
+
+# GEE accounts for the correlated data
+r2 = geeglm(Births ~ RUCC_2013, data=da, id=FIPS, family=poisson(), offset=logPop)
+
+# Next we prepare to fit a Poisson model using principal components regression (PCR).
+# The principal components (PC's) will be based on demographic characteristics of
+# each county.
+
+# First replace missing demographic values with 0.
 demog = mutate(demog, across(where(anyNA), ~ replace_na(., 0)))
 
-# Use square root to variance stabilize the counts.
+# Use a square root transformation to variance-stabilize the counts.
 demog[,2:dim(demog)[2]] = sqrt(demog[,2:dim(demog)[2]])
 
 # Get factors from the demographic data
@@ -30,7 +50,7 @@ va = colnames(demog)[2:dim(demog)[2]]
 demog = mutate_at(demog, va, scale, scale=FALSE)
 sv = svd(demog[,2:dim(demog)[2]])
 
-# The proportion of explained variance.
+# The proportion of variance explained by each factor.
 pve = sv$d^2
 pve = pve / sum(pve)
 
@@ -40,13 +60,10 @@ for (k in 1:100) {
     demog_f[,sprintf("pc%d", k)] = sv$u[, k]
 }
 
-# Merge the birth data with population and RUCC data
-da = merge(births, demog_f, on="FIPS", how="left")
-da = merge(da, pop, on="FIPS", how="left")
-da = merge(da, rucc, on="FIPS", how="left")
-da = mutate(da, logPop = log(da$Population))
+# Merge the birth data with demographic data
+da = merge(da, demog_f, on="FIPS", how="left")
 
-# Include this number of factors in all subsequent models
+# Include this number of factors in the next few models
 npc = 20
 
 # GLM, not appropriate since we have repeated measures on counties
@@ -54,10 +71,10 @@ fml = paste("pc", seq(npc), sep="")
 fml = paste(fml, collapse=" + ")
 fml = sprintf("Births ~ logPop + RUCC_2013 + %s", fml)
 fml = as.formula(fml)
-r0 = glm(fml, quasipoisson(), da)
+r2 = glm(fml, quasipoisson(), da)
 
 # GEE accounts for the correlated data
-r1 = geeglm(fml, data=da, id=FIPS, family=poisson())
+r3 = geeglm(fml, data=da, id=FIPS, family=poisson())
 
 # This function fits a Poisson GLM to the data using 'npc' principal components
 # as explanatory variables.
@@ -105,6 +122,7 @@ for (npc in pcs) {
 
     plt = ggplot(cf, aes(x=Age, y=coef, group=interaction(Race, Origin, Sex), color=Race, lty=Sex, shape=Origin))
     plt = plt + geom_line() + geom_point() + ggtitle(sprintf("%d factors", npc))
+    plt = plt + ggtitle(sprintf("Cumulative PVE=%.4f", sum(pve[1:npc])))
     print(plt) # prints to the pdf
 }
 
