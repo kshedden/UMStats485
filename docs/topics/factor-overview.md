@@ -195,6 +195,15 @@ while the coefficients $\hat{\beta}$ align with the principal
 component scores.  Both determine the same fitted values and
 linear predictor.
 
+PCR can be very effective, but may or may not peform well
+depending on the circumstances.  Effectively, instead
+of allowing the coefficients $\gamma$ to take on any
+value in ${\cal R}^p$, we are constraining $\gamma$
+to lie in the columnspace of $(VS^{-1})_{:,1:q}$. PCR
+works well if the projections of $X$ that explain the
+most variation in $X$ also explain the most variation
+in $Y$.  This is often, but not always the case.
+
 ## Correspondence Analysis
 
 Correspondence analysis is an embedding approach that aims to
