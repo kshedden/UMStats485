@@ -147,6 +147,54 @@ Thus, $\hat{\Sigma}V = VS^2/n$, so $V$ contains the eigenvectors of
 $\hat{\Sigma}$ and the corresponding eigenvalues are in ${\rm
 diag}(S^2)/n$.
 
+### Principal Components Regression
+
+Principal Components Analysis is a method for multivariate data analysis
+that can be used to understand relationships in multivariate data when
+there is no single variable that can be seen as the "response" relative
+to the other variables.  PCA can also be used to create variables
+("features") for use in a regression analysis.  This is called "Principal
+Components Regression" (PCR).  The motivation for PCR is that if we
+have a large number of covariates and do not wish to explicitly
+include all the variables in a regression model, we can use PCA to
+reduce the variables to a smaller set of scores that capture most
+of the variation in the original variables, and then use the
+reduced variables (scores) as covariates in our regression.
+
+More formally, suppose that $X \in {\cal R}^{n\times p}$ is our
+regression design matrix, for a regression with $n$ observations
+(cases) and $p$ covariates.  The response variable for this
+regression is a vector $Y \in {\cal R}^n$, but this is not used
+in the first few steps of PCR.  First, the mean should be subtracted
+from each column of $X$, and we write $X = USV^T$ using the SVD.
+Next we truncate this representation so that $\tilde{U} \in {\cal R}^{n\times q}$,
+contains the first $q$ columns of $U$.  As discussed above, these
+are the most important columns of $U$ for explaining the variation
+in $X$.
+
+We use $\tilde{U}$ instead of $X$ in our regression, obtaining a
+linear predictor $\tilde{U}\hat{\beta}$, where $\hat{\beta}$
+are coefficients obtained using some regression procedure,
+e.g. least squares or a GLM.  To relate the coefficients
+$\hat{\beta}$ back to the original covariates, note that
+$U = XVS^{-1}$, and $\tilde{U} = X(VS^{-1})_{:,1:q}$.
+Therefore
+
+$$
+\tilde{U}\hat{\beta} = X(VS^{-1})_{:,1:q}\hat{\beta},
+$$
+
+and we can define
+
+$$
+\hat{\gamma} = (VS^{-1})_{:,1:q}\hat{\beta}.
+$$
+
+The coefficients $\hat{\gamma}$ align with the original covariates,
+while the coefficients $\hat{\beta}$ align with the principal
+component scores.  Both determine the same fitted values and
+linear predictor.
+
 ## Correspondence Analysis
 
 Correspondence analysis is an embedding approach that aims to
