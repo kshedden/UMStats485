@@ -172,9 +172,9 @@ contains the first $q$ columns of $U$.  As discussed above, these
 are the most important columns of $U$ for explaining the variation
 in $X$.
 
-We use $\tilde{U}$ instead of $X$ in our regression, obtaining a
+We use $\tilde{U}$ instead of $X$ as covariates in our regression, obtaining a
 linear predictor $\tilde{U}\hat{\beta}$, where $\hat{\beta}$
-are coefficients obtained using some regression procedure,
+are coefficients obtained using a regression procedure,
 e.g. least squares or a GLM.  To relate the coefficients
 $\hat{\beta}$ back to the original covariates, note that
 $U = XVS^{-1}$, and $\tilde{U} = X(VS^{-1})_{:,1:q}$.

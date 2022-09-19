@@ -8,6 +8,12 @@ import statsmodels.api as sm
 import matplotlib.pyplot as plt
 from matplotlib.backends.backend_pdf import PdfPages
 
+# Create a dataframe for modeling.  Merge the birth data with
+# population and RUCC data.
+da = pd.merge(births, pop, on="FIPS", how="left")
+da = pd.merge(da, rucc, on="FIPS", how="left")
+da["logPop"] = np.log(da["Population"])
+
 pdf = PdfPages("pcr_py.pdf")
 
 # Calcuate the mean and variance within each county to
@@ -24,6 +30,20 @@ plt.plot(lmv.iloc[:, 0], lmv.iloc[:, 1], "o", alpha=0.2, rasterized=True)
 plt.xlabel("Log mean", size=16)
 plt.ylabel("Log variance", size=16)
 pdf.savefig()
+
+# GLM, not appropriate since we have repeated measures on counties
+fml = "Births ~ logPop + RUCC_2013"
+m0 = sm.GLM.from_formula(fml, family=sm.families.Poisson(), data=da)
+r0 = m0.fit(scale="X2")
+
+# GEE accounts for the correlated data
+m1 = sm.GEE.from_formula(fml, groups="FIPS", family=sm.families.Poisson(), data=da)
+r1 = m1.fit(scale="X2")
+
+# Use log population as an offset instead of a covariate
+m2 = sm.GEE.from_formula("Births ~ RUCC_2013", groups="FIPS", offset="logPop",
+                         family=sm.families.Poisson(), data=da)
+r2 = m2.fit(scale="X2")
 
 # Demographic data, replace missing values with 0 and transform
 # with square root to stabilize the variance.
@@ -48,24 +68,24 @@ demog_f = pd.DataFrame({"FIPS": demog.index})
 for k in range(100):
     demog_f["pc%02d" % k] = u[:, k]
 
-# Create a dataframe for modeling.  Merge the birth data with
-# population and RUCC data.
-da = pd.merge(births, demog_f, on="FIPS", how="left")
-da = pd.merge(da, pop, on="FIPS", how="left")
-da = pd.merge(da, rucc, on="FIPS", how="left")
-da["logPop"] = np.log(da["Population"])
+# Merge demographic information into the births data
+da = pd.merge(da, demog_f, on="FIPS", how="left")
 
 # Include this number of factors in all subsequent models
 npc = 20
 
 # GLM, not appropriate since we have repeated measures on counties
 fml = "Births ~ logPop + RUCC_2013 + " + " + ".join(["pc%02d" % j for j in range(npc)])
-m0 = sm.GLM.from_formula(fml, family=sm.families.Poisson(), data=da)
-r0 = m0.fit(scale="X2")
+m3 = sm.GLM.from_formula(fml, family=sm.families.Poisson(), data=da)
+r3 = m3.fit(scale="X2")
 
 # GEE accounts for the correlated data
-m1 = sm.GEE.from_formula(fml, groups="FIPS", family=sm.families.Poisson(), data=da)
-r1 = m1.fit(scale="X2")
+m4 = sm.GEE.from_formula(fml, groups="FIPS", family=sm.families.Poisson(), data=da)
+r4 = m4.fit(scale="X2")
+
+# Use log population as an offset instead of a covarate
+m5 = sm.GEE.from_formula(fml, groups="FIPS", offset="logPop", family=sm.families.Poisson(), data=da)
+r5 = m5.fit(scale="X2")
 
 # Restructure the coefficients so that the age bands are
 # in the columns.
