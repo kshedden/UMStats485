@@ -35,8 +35,22 @@ dx = dx.loc[~dx.level1_main_occ.isin(["Missing", "Other"]), :]
 # Matplotlib/PyPlot or Seaborn if you want bitmapped graphs.
 fig = plotille.Figure()
 
+# Plot the conditional dispersion for loess compared
+# to a linear model.
+dd = dx.sort_values(by="birth")
+m0 = sm.OLS.from_formula("lifespan ~ birth", data=dd).fit()
+ares0 = np.abs(m0.resid.values)
+m1 = sm.nonparametric.lowess(dd.lifespan, dd.birth)
+ares1 = np.abs(dd.lifespan - m1[:, 1])
+ma0 = sm.nonparametric.lowess(ares0, dd.birth)
+fig.plot(ma0[:, 0], ma0[:, 1], label="Linear")
+ma1 = sm.nonparametric.lowess(ares1, dd.birth)
+fig.plot(ma1[:, 0], ma1[:, 1], label="LOESS")
+print(fig.show(legend=True))
+
 # Estimate the conditional mean lifespan given year of birth for
 # females and males.
+fig = plotille.Figure()
 for (la, dd) in dx.groupby("gender"):
     print("%s %d" % (la, dd.shape[0]))
     dd = dd.sort_values(by="birth")
