@@ -20,5 +20,5 @@ build on the class discussions focusing on demographic characteristics
 associated with higher or lower birth counts in a county.  You should
 primarily make use of Poisson regression and factor methods as discussed
 in class, but your analysis should address a question that is considerably
-deeper than we had time to develop.
+deeper than we had time to develop during the discussions in lectures.
 
