@@ -14,3 +14,11 @@ on their reported characteristics.  For this first assignment, you can
 borrow generously from the findings and code discussed in class, but please
 aim to report at least one novel finding.
 
+* (October 3rd) Write a memo documenting a specific research question
+that can be addressed using the US natality data.  Your question should
+build on the class discussions focusing on demographic characteristics
+associated with higher or lower birth counts in a county.  You should
+primarily make use of Poisson regression and factor methods as discussed
+in class, but your analysis should address a question that is considerably
+deeper than we had time to develop.
+
