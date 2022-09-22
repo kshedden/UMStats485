@@ -9,7 +9,8 @@ library(readxl)
 pa = "/home/kshedden/data/Teaching/natality"
 
 # Subset the demographics file to 2016.  This only needs to
-# be run once.
+# be run once.  Change the next line to read 'if (TRUE)' to
+# run this section of code.
 if (FALSE) {
     f = sprintf("%s/us.1990_2020.19ages.txt.gz", pa)
     g = sprintf("%s/2016ages.txt.gz", pa)
@@ -30,6 +31,9 @@ if (FALSE) {
 # Create a long form version of the births
 dl = list()
 for (y in 2016:2020) {
+
+    # If you did not gzip the data files, then remove the
+    # .gz below.
     fn = sprintf("%s/%4d.txt.gz", pa, y)
     ct = cols(Births=col_double())
     da = read_tsv(fn, col_types=ct, show_col_types=F)

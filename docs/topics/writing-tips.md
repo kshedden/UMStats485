@@ -196,6 +196,17 @@ and only
   fitting models to data.  It is usually not appropriate to write "least
   squares models", since it confuses these two distinct ideas.
 
+* The term "estimation" is used in statistics to refer to the setting where
+  we sample data from a population and use the sample to estimate population
+  parameters.  Because the sample is random, the estimate is random, and we
+  use probability to evaluate the performance of the estimator.  The term
+  "approximation" is used in mathematics to refer to a calculated value that
+  is close to some other value, like using 3.14 as an approximation to Pi.
+  The error in an approximation is usually deterministic (not random).  Some
+  statistical methods involve approximation (in addition to estimation), but
+  it is usually much more correct to describe the result of a statistical
+  procedure as being an estimate not an approximation.
+
 ## Causality
 
 * Causality is a fundamental issue in most statistical analysis.  In
