@@ -17,8 +17,6 @@ mv = mutate(mv, log_births_mean=log(births_mean), log_births_var=log(births_var)
 # Plot the variance against the mean on the log/log scale to assess the mean/variance
 # relationship.
 plt = ggplot(mv, aes(x=log_births_mean, y=log_births_var)) + geom_point()
-print(plt)
-dev.off()
 
 # Merge the birth data with population and RUCC data
 da = merge(births, pop, on="FIPS", how="left")
@@ -30,12 +28,13 @@ da = mutate(da, logPop = log(da$Population))
 # observations on the same county.
 r0 = glm(Births ~ logPop + RUCC_2013, quasipoisson(), da)
 
-# GEE accounts for the correlated data
+# GEE accounts for the correlated data, no need to use quasipoisson here
+# since GEE is already robust to this form of heteroscedasticity.
 r1 = geeglm(Births ~ logPop + RUCC_2013, data=da, id=FIPS, family=poisson())
 
-# GEE accounts for the correlated data
+# GEE with log population as an offset instead of being a covariate.
 r2 = geeglm(Births ~ RUCC_2013, data=da, id=FIPS, family=poisson(), offset=logPop)
-stop()
+
 # Next we prepare to fit a Poisson model using principal components regression (PCR).
 # The principal components (PC's) will be based on demographic characteristics of
 # each county.

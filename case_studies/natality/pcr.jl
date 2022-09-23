@@ -5,10 +5,27 @@ using GLM, GEE, Statistics, UnicodePlots, LinearAlgebra, Printf
 
 include("prep.jl")
 
+da = leftjoin(births, pop, on = :FIPS)
+da = leftjoin(da, rucc, on = :FIPS)
+da[:, :logPop] = log.(da[:, :Population])
+da = da[completecases(da), :]
+
 # Calcuate the mean and variance within each county to
 # assess the mean/variance relationship.
 mv = combine(groupby(births, :FIPS), :Births => mean, :Births => var)
 scatterplot(log.(mv[:, :Births_var]), log.(mv[:, :Births_mean]))
+
+# GLM, not appropriate since we have repeated measures on counties
+fml = @formula(Births ~ logPop + RUCC_2013)
+m0 = glm(fml, da, Poisson())
+
+# GLM with log population as offset instead of covariate
+fml = @formula(Births ~ RUCC_2013)
+m1 = glm(fml, da, Poisson(), offset=da[:, :logPop])
+
+# Use GEE to account for repeated measures on counties
+m2 = gee(fml, da, da[:, :FIPS], Poisson(), offset=da[:, :logPop])
+error("")
 
 # Process the demographic data, -- replace missing values with 0
 # and transform with square root to stabilize the variance.
@@ -28,27 +45,21 @@ pve = s .^ 2
 pve ./= sum(pve)
 
 # Put the demographic factors into a dataframe
+# and merge into the dataframe for modeling.
 demog_f = DataFrame(:FIPS => demog[:, :FIPS])
 for k = 1:100
     demog_f[:, @sprintf("pc%02d", k)] = u[:, k]
 end
-
-# Create a dataframe for modeling.  Merge the birth data with
-# population and RUCC data.
-da = leftjoin(births, demog_f, on = :FIPS)
-da = leftjoin(da, pop, on = :FIPS)
-da = leftjoin(da, rucc, on = :FIPS)
-da[:, :logPop] = log.(da[:, :Population])
-da = da[completecases(da), :]
-
-# Include this number of factors in subsequent models
-npc = 20
+da = leftjoin(da, demog_f, on = :FIPS)
 
 # GLM, not appropriate since we have repeated measures on counties
 fml =
     term(:Births) ~
         term(:logPop) + term(:RUCC_2013) + sum([term(@sprintf("pc%02d", j)) for j = 1:npc])
 m0 = glm(fml, da, Poisson())
+
+# Include this number of factors in subsequent models
+npc = 20
 
 # Convert the coefficients back to the original coordinates
 function convert_coef(c, npc)
