@@ -17,3 +17,6 @@ are curious the following two links may be informative:
 https://www.frontiersin.org/articles/10.3389/fmars.2020.00700/full
 
 https://argo.ucsd.edu/science/argo-and-climate-change
+
+To obtain the data run one of the "get_data" scripts, then run
+one of the "prep" scripts.

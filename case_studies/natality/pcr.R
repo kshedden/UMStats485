@@ -18,6 +18,10 @@ mv = mutate(mv, log_births_mean=log(births_mean), log_births_var=log(births_var)
 # relationship.
 plt = ggplot(mv, aes(x=log_births_mean, y=log_births_var)) + geom_point()
 
+# Use a linear model to assess the mean variance relationsip within the
+# family of relationships representable as Var[E[Y|X]] = a*E[Y|X]^b.
+mmv = lm(log_births_var ~ log_births_mean, data=mv)
+
 # Merge the birth data with population and RUCC data
 da = merge(births, pop, on="FIPS", how="left")
 da = merge(da, rucc, on="FIPS", how="left")
