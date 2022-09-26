@@ -39,6 +39,9 @@ r1 = geeglm(Births ~ logPop + RUCC_2013, data=da, id=FIPS, family=poisson())
 # GEE with log population as an offset instead of being a covariate.
 r2 = geeglm(Births ~ RUCC_2013, data=da, id=FIPS, family=poisson(), offset=logPop)
 
+# GEE with log population as an offset instead of being a covariate.
+r3 = geeglm(Births ~ RUCC_2013, data=da, id=FIPS, family=Gamma(link="log"), offset=logPop)
+
 # Next we prepare to fit a Poisson model using principal components regression (PCR).
 # The principal components (PC's) will be based on demographic characteristics of
 # each county.
@@ -75,10 +78,10 @@ fml = paste("pc", seq(npc), sep="")
 fml = paste(fml, collapse=" + ")
 fml = sprintf("Births ~ logPop + RUCC_2013 + %s", fml)
 fml = as.formula(fml)
-r2 = glm(fml, quasipoisson(), da)
+r4 = glm(fml, quasipoisson(), da)
 
 # GEE accounts for the correlated data
-r3 = geeglm(fml, data=da, id=FIPS, family=poisson())
+r5 = geeglm(fml, data=da, id=FIPS, family=poisson())
 
 # This function fits a Poisson GLM to the data using 'npc' principal components
 # as explanatory variables.
@@ -126,7 +129,7 @@ for (npc in pcs) {
 
     plt = ggplot(cf, aes(x=Age, y=coef, group=interaction(Race, Origin, Sex), color=Race, lty=Sex, shape=Origin))
     plt = plt + geom_line() + geom_point() + ggtitle(sprintf("%d factors", npc))
-    plt = plt + ggtitle(sprintf("Cumulative PVE=%.4f", sum(pve[1:npc])))
+    plt = plt + ggtitle(sprintf("%d PCs, cumulative PVE=%.4f", npc, sum(pve[1:npc])))
     print(plt) # prints to the pdf
 }
 

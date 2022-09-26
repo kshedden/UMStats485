@@ -21,12 +21,15 @@ pdf = PdfPages("pcr_py.pdf")
 mv = births.groupby("FIPS")["Births"].agg([np.mean, np.var])
 lmv = np.log(mv)
 
+mr = sm.OLS.from_formula("var ~ mean", lmv).fit()
+print(mr.summary())
+
 # Plot the log variance against the log mean.  If variance = phi*mean,
 # then log(variance) = log(phi) + log(mean), i.e. the slope is 1 and
 # the intercept is log(phi).
 plt.clf()
 plt.grid(True)
-plt.plot(lmv.iloc[:, 0], lmv.iloc[:, 1], "o", alpha=0.2, rasterized=True)
+plt.plot(lmv["mean"], lmv["var"], "o", alpha=0.2, rasterized=True)
 plt.xlabel("Log mean", size=16)
 plt.ylabel("Log variance", size=16)
 pdf.savefig()
@@ -44,6 +47,11 @@ r1 = m1.fit(scale="X2")
 m2 = sm.GEE.from_formula("Births ~ RUCC_2013", groups="FIPS", offset="logPop",
                          family=sm.families.Poisson(), data=da)
 r2 = m2.fit(scale="X2")
+
+# Use Gamma family to better match the mean/variance relationship.
+m3 = sm.GEE.from_formula("Births ~ RUCC_2013", groups="FIPS", offset="logPop",
+                         family=sm.families.Gamma(link=sm.families.links.log), data=da)
+r3 = m3.fit(scale="X2")
 
 # Demographic data, replace missing values with 0 and transform
 # with square root to stabilize the variance.
@@ -76,16 +84,16 @@ npc = 20
 
 # GLM, not appropriate since we have repeated measures on counties
 fml = "Births ~ logPop + RUCC_2013 + " + " + ".join(["pc%02d" % j for j in range(npc)])
-m3 = sm.GLM.from_formula(fml, family=sm.families.Poisson(), data=da)
-r3 = m3.fit(scale="X2")
-
-# GEE accounts for the correlated data
-m4 = sm.GEE.from_formula(fml, groups="FIPS", family=sm.families.Poisson(), data=da)
+m4 = sm.GLM.from_formula(fml, family=sm.families.Poisson(), data=da)
 r4 = m4.fit(scale="X2")
 
-# Use log population as an offset instead of a covarate
-m5 = sm.GEE.from_formula(fml, groups="FIPS", offset="logPop", family=sm.families.Poisson(), data=da)
+# GEE accounts for the correlated data
+m5 = sm.GEE.from_formula(fml, groups="FIPS", family=sm.families.Poisson(), data=da)
 r5 = m5.fit(scale="X2")
+
+# Use log population as an offset instead of a covarate
+m6 = sm.GEE.from_formula(fml, groups="FIPS", offset="logPop", family=sm.families.Poisson(), data=da)
+r6 = m6.fit(scale="X2")
 
 # Restructure the coefficients so that the age bands are
 # in the columns.

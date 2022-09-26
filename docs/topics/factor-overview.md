@@ -152,11 +152,11 @@ diag}(S^2)/n$.
 Principal Components Analysis is a method for multivariate data analysis
 that can be used to understand relationships in multivariate data when
 there is no single variable that can be seen as the "response" relative
-to the other variables.  PCA can also be used to create variables
-("features") for use in a regression analysis.  This is called "Principal
-Components Regression" (PCR).  The motivation for PCR is that if we
+to the other variables.  PCA can also be used to create covariates
+for use in a regression analysis.  This method is called "Principal
+Components Regression" (PCR).  The motivation behind PCR is that if we
 have a large number of covariates and do not wish to explicitly
-include all the variables in a regression model, we can use PCA to
+include all of them in a regression model, we can use PCA to
 reduce the variables to a smaller set of scores that capture most
 of the variation in the original variables, and then use the
 reduced variables (scores) as covariates in our regression.
@@ -196,7 +196,7 @@ component scores.  Both determine the same fitted values and
 linear predictor.
 
 PCR can be very effective, but may or may not peform well
-depending on the circumstances.  Effectively, instead
+depending on the circumstances.  In PCR, instead
 of allowing the coefficients $\gamma$ to take on any
 value in ${\cal R}^p$, we are constraining $\gamma$
 to lie in the columnspace of $(VS^{-1})_{:,1:q}$. PCR
