@@ -80,8 +80,17 @@ fml = sprintf("Births ~ logPop + RUCC_2013 + %s", fml)
 fml = as.formula(fml)
 r4 = glm(fml, quasipoisson(), da)
 
-# GEE accounts for the correlated data
-r5 = geeglm(fml, data=da, id=FIPS, family=poisson())
+# GEE accounts for the correlated data, use logPop as offset
+fml = paste("pc", seq(npc), sep="")
+fml = paste(fml, collapse=" + ")
+fml = sprintf("Births ~ %s", fml)
+fml = as.formula(fml)
+r5 = geeglm(fml, data=da, id=FIPS, offset=da$logPop, family=poisson())
+
+# Get the fitted values on the log scale, without including the offset.
+# These values can be used to compare two counties as if they had the
+# same population.
+adjfit = model.matrix(r5) %*% coef(r5)
 
 # This function fits a Poisson GLM to the data using 'npc' principal components
 # as explanatory variables.
