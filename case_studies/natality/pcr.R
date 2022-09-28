@@ -89,7 +89,8 @@ r5 = geeglm(fml, data=da, id=FIPS, offset=da$logPop, family=poisson())
 
 # Get the fitted values on the log scale, without including the offset.
 # These values can be used to compare two counties as if they had the
-# same population.
+# same population.  Note that the results depend on the number of PCs
+# (npc).
 adjfit = model.matrix(r5) %*% coef(r5)
 
 # This function fits a Poisson GLM to the data using 'npc' principal components
