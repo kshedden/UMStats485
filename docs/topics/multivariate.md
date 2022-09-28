@@ -146,5 +146,6 @@ to minimize the distance from any observation to its closest representative
 point.  Inspecting the representative points may provide a quick
 means to understand the high probability regions of the distribution.
 
-A recently developed algorithm constructs *support points*
-[https://arxiv.org/abs/1609.01811](Mak et al.).
+A recently developed algorithm constructs
+[support points](https://arxiv.org/abs/1609.01811) that are an
+effective form of quanization.
