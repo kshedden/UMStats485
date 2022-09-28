@@ -6,15 +6,20 @@ multivariate methods such as PCA, CCA, etc.
 
 ## Functional data
 
-A particular type of multivariate data is so-called *functional data*,
+A particular type of multivariate data is known as *functional data*,
 in which we observe vectors $v$ that arise from evaluating
 a function on a grid of points, i.e. $v_i = f_i(t_i)$ for
-a grid $t_1 < t_2 < \cdots$.  If the functions $f_i$ are smooth,
+a grid $t_1 < t_2 < \cdots$.  If the functions $f_i$ are smooth
 then the elements of each $v_i$ will reflect this smoothness.
-Functional data analysis is often referred to as the domain
-of analyzing functions as data.  However in practice we never
+*Functional Data Analysis* (FDA) encompasses many methods for
+analyzing functions as data.  In practice we never
 actually observe a function in its entirety, and instead only
-observe a function evaluated on a finite set of points.
+observe a function evaluated on a finite set of points.  Thus
+the data we work with in FDA are finite dimensional vectors,
+and thus have the same form as other types
+of quantitative multivariate data.  But since the data are
+considered to arise by evaluating smooth functions, different
+methods have been developed to take advantage of this property.
 
 ## Data Depth
 
@@ -47,7 +52,8 @@ $$
 
 What we are doing here is searching for a line passing through $z$
 that places the greatest fraction of the $x_i$ on one side of the
-line.  If no such line exists then point $z$ is as deep as possible
+line.  If $z$ falls at the geometric center of a collection of
+symmetrically distributed points, then $z$ is as deep as possible
 and will have halfspace depth approximately equal to 1/2.  At the
 other extreme there is a line passing through $z$ such that all of
 the $x_i$ are on the same side of this line.  In this case the point
@@ -130,12 +136,15 @@ many different ways to be near the periphery of a collection of points.
 ## Quantization
 
 A quantization algoithm aims to represent a multivariate distribution
-through a relatively small finite number of representative points.
+through a relatively small number of representative points.
 This can be a useful exploratory technique if the distribution being
-studied has a complex form that is not well captured through factors
+studied has a complex form that is not well captured through additive factors
 (as in PCA).  The goal of almost any quantization algorithm is to
 find a collection of representative points $\{x_i\}$ that are optimal
 in some sense - for example we may wish to optimize the $x_i$ so as
 to minimize the distance from any observation to its closest representative
 point.  Inspecting the representative points may provide a quick
 means to understand the high probability regions of the distribution.
+
+A recently developed algorithm constructs *support points*
+[https://arxiv.org/abs/1609.01811](Mak et al.).
