@@ -17,3 +17,5 @@
 [Factor analysis overview](topics/factor-overview.md)
 
 [Generalized Linear Models](topics/glm.md)
+
+[Multivariate methods](topics/multivariate.md)
