@@ -51,7 +51,7 @@ The spatial depth has a simple definition that is relatively easy to
 compute in high dimensions:
 
 $$
-D_S(z; \{x_i\}) = 1 - \|{\rm Avg}\{(x_i-z)/\|x_i-z\|}\|
+D_S(z; \{x_i\}) = 1 - \|{\rm Avg}\{(x_i-z)/\|x_i-z\|\}\|
 $$
 
 Note that $(x_i-z)/\|x_i-z\|$ is a unit vector pointing in the
