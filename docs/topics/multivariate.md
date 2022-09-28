@@ -51,7 +51,7 @@ The spatial depth has a simple definition that is relatively easy to
 compute in high dimensions:
 
 $$
-D_S(z; \{x_i\}) = 1 - \|{\rm Avg}\{(x_i-z)/\|x_i-z\|\}\|
+D_S(z; \{x_i\}) = 1 - \|{\rm Avg}_i\{(x_i-z)/\|x_i-z\|\}\|
 $$
 
 Note that $(x_i-z)/\|x_i-z\|$ is a unit vector pointing in the
@@ -67,33 +67,38 @@ small magnitude.
 The $L_2$ depth also has a simple definition and is easy to compute:
 
 $$
-D_{L_2}(z; \{x_i\}) = 1 / (1 + {\rm Avg}\{\|z-x_i\|\}).
+D_{L_2}(z; \{x_i\}) = 1 / (1 + {\rm Avg}_i\{\|x_i-z\|\}).
 $$
 
 ### Properties of a good depth function
 
 Analysis based on depths does not directly rely on probability models,
 making it quite distinct from many other methods of statistical data
-analysis.  Several researchers have attempted to define the geometric
-properties that a depth function should exhibit.  Four basic such
-properties are
+analysis.  For statistical methods based on probability there are
+standard properties such as unbiasedness, consistency, accuracy, and
+efficiency that are used to quantify the performance of the approach.
+Although it is possible to place depth in a probabilistic framework so
+that these notions can be applied, several researchers have attempted
+to define the geometric properties that a depth function should
+exhibit that do not depend on any probability framework.  Four basic
+such properties are
 
 * *Affine invariance* -- If the data are transformed by the affine
 orthogonal mapping $x\longrightarrow c + Qx$, where $c\in {\cal R}^d$
-is a fixed vector and $Q$ is an orthogonal matrix, then the depths
-do not change.
+is a fixed vector and $Q$ is an orthogonal matrix, then the depths do
+not change.
 
 * *Maximality at the center* -- If the data are symmetric around zero,
 i.e. if $-x$ is in the dataset whenever $x$ is in the dataset, then
 the vector $0_d$ achieves the maximum depth.
 
-* *Monotonicity relative to the deepest point* -- If $x^*$ is the deepest
-point and we consider any unit vector $u$, then we evaluate the depth
-at $x^* + \lambda u$ for $\lambda \in {\cal R}^+$, then the depth is
-a decreasing function of $\lambda$.
+* *Monotonicity relative to the deepest point* -- If $\tilde{x}$ is
+the deepest point and we consider any unit vector $u$, then we
+evaluate the depth at $\tilde{x} + \lambda u$ for $\lambda \in {\cal
+R}^+$, then the depth is a decreasing function of $\lambda$.
 
-* *Vanishing at infinity* -- for any sequence $z_i$ with $\|z_i\|$ tending
-to infinity, the depths of the $z_i$ tend to zero.
+* *Vanishing at infinity* -- for any sequence $z_i$ with $\|z_i\|$
+tending to infinity, the depths of the $z_i$ tend to zero.
 
 
 ## Quantization
