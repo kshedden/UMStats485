@@ -4,6 +4,18 @@ This document discusses several useful methods for analyzing
 multivariate data that are less widely known than the classical
 multivariate methods such as PCA, CCA, etc.
 
+## Functional data
+
+A particular type of multivariate data is so-called *functional data*,
+in which we observe vectors $v$ that arise from evaluating
+a function on a grid of points, i.e. $v_i = f_i(t_i)$ for
+a grid $t_1 < t_2 < \cdots$.  If the functions $f_i$ are smooth,
+then the elements of each $v_i$ will reflect this smoothness.
+Functional data analysis is often referred to as the domain
+of analyzing functions as data.  However in practice we never
+actually observe a function in its entirety, and instead only
+observe a function evaluated on a finite set of points.
+
 ## Data Depth
 
 There are various ways to measure the *depth* of a point $z \in {\cal
@@ -92,7 +104,7 @@ not change.
 i.e. if $-x$ is in the dataset whenever $x$ is in the dataset, then
 the vector $0_d$ achieves the maximum depth.
 
-* *Monotonicity relative to the deepest point* -- If $\tilde{x}$ is
+* *Monotonicity relative to the deepest point* -- Let $\tilde{x}$ be
 the deepest point and we consider any unit vector $u$, then we
 evaluate the depth at $\tilde{x} + \lambda u$ for $\lambda \in {\cal
 R}^+$, then the depth is a decreasing function of $\lambda$.
@@ -100,5 +112,30 @@ R}^+$, then the depth is a decreasing function of $\lambda$.
 * *Vanishing at infinity* -- for any sequence $z_i$ with $\|z_i\|$
 tending to infinity, the depths of the $z_i$ tend to zero.
 
+### Depth peeling
+
+Data depth can be used in exploratory multivariate analysis to identify
+the most central or typical points and then contrast them with the more
+outlying points.  A systematic way to do this is to stratify the data
+based on depth and then inspect the points in each depth stratum.  For
+example, if we stratify the data into 10 groups based on depth deciles,
+the first decile consists of the shallowest 10% of points and the last
+decile consists of the deepest 10% of points.
+
+Often (not always) there is little heterogeneity in the deepest decile,
+meaning that all of the deepest points are very similar.  However there
+is nearly always heterogeneity in the shallowest decile, as there are
+many different ways to be near the periphery of a collection of points.
 
 ## Quantization
+
+A quantization algoithm aims to represent a multivariate distribution
+through a relatively small finite number of representative points.
+This can be a useful exploratory technique if the distribution being
+studied has a complex form that is not well captured through factors
+(as in PCA).  The goal of almost any quantization algorithm is to
+find a collection of representative points $\{x_i\}$ that are optimal
+in some sense - for example we may wish to optimize the $x_i$ so as
+to minimize the distance from any observation to its closest representative
+point.  Inspecting the representative points may provide a quick
+means to understand the high probability regions of the distribution.
