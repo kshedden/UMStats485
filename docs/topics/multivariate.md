@@ -1,4 +1,4 @@
-# Multivariate analysis (various methods)
+# Various methods of multivariate analysis
 
 This document discusses several useful methods for analyzing
 multivariate data that are less widely known than the classical
@@ -14,7 +14,7 @@ surface of the point set.  Another terminology that is used in this
 area refers to the deep points as having high "centrality" and the
 shallow points as having low "centrality" or high "outlyingness".
 Data depth can be viewed as a multivariate generalization of the
-notion of a quantile, with the deepest point in a point set being a
+notion of a quantile, with the deepest point in a set being a
 type of multivariate median.
 
 Below are several examples of depths.
@@ -30,14 +30,14 @@ formally.  To calculate the halfspace depth of a single point $z\in
 of all unit vectors and define the halfspace depth as
 
 $$
-D(z) = 1 - {\rm min}_{u\in U} \sum_i {\cal I}(u^\prime (x_i - z) > 0).
+D(z) = {\rm min}_{u\in U} n^{-1}\sum_{i=1}^n {\cal I}(u^\prime (x_i - z) > 0).
 $$
 
 What we are doing here is searching for a line passing through $z$
 that places the greatest fraction of the $x_i$ on one side of the
 line.  If no such line exists then point $z$ is as deep as possible
-and will have halfspace depth approximately equal to 1/2.  In the
-other extreme, there is a line passing through $z$ such that all of
+and will have halfspace depth approximately equal to 1/2.  At the
+other extreme there is a line passing through $z$ such that all of
 the $x_i$ are on the same side of this line.  In this case the point
 $z$ is as shallow as possible and its halfspace depth is approximately
 equal to zero.
