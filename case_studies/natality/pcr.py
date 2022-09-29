@@ -80,7 +80,7 @@ for k in range(100):
 da = pd.merge(da, demog_f, on="FIPS", how="left")
 
 # Include this number of factors in all subsequent models
-npc = 20
+npc = 10
 
 # GLM, not appropriate since we have repeated measures on counties
 fml = "Births ~ logPop + RUCC_2013 + " + " + ".join(["pc%02d" % j for j in range(npc)])
@@ -92,6 +92,7 @@ m5 = sm.GEE.from_formula(fml, groups="FIPS", family=sm.families.Poisson(), data=
 r5 = m5.fit(scale="X2")
 
 # Use log population as an offset instead of a covarate
+fml = "Births ~ " + " + ".join(["pc%02d" % j for j in range(npc)])
 m6 = sm.GEE.from_formula(fml, groups="FIPS", offset="logPop", family=sm.families.Poisson(), data=da)
 r6 = m6.fit(scale="X2")
 
