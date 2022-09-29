@@ -50,7 +50,7 @@ r2 = m2.fit(scale="X2")
 
 # Use Gamma family to better match the mean/variance relationship.
 m3 = sm.GEE.from_formula("Births ~ RUCC_2013", groups="FIPS", offset="logPop",
-                         family=sm.families.Gamma(link=sm.families.links.log), data=da)
+                         family=sm.families.Gamma(link=sm.families.links.log()), data=da)
 r3 = m3.fit(scale="X2")
 
 # Demographic data, replace missing values with 0 and transform
