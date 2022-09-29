@@ -26,7 +26,7 @@ methods have been developed to take advantage of this property.
 There are various ways to measure the *depth* of a point $z \in {\cal
 R}^d$ relative to a distribution or collection of points $\{x_i\in
 {\cal R}^d; i=1,\ldots,n}$.  "Deep" points are surrounded in all
-directions by many other points, while "shallow" points are near the
+directions by many other points, while "shallow" points lie near the
 surface of the point set.  Another terminology that is used in this
 area refers to the deep points as having high "centrality" and the
 shallow points as having low "centrality" or high "outlyingness".
@@ -44,7 +44,7 @@ simple to describe graphically and a bit more difficult to define
 formally.  To calculate the halfspace depth of a single point $z\in
 {\cal R}^d$ with respect to a collection of points $\{x_i; i=1,
 \ldots, n\}$, with each $x_i \in {\cal R}^d$, let $U$ denote the set
-of all unit vectors and define the halfspace depth as
+of all unit vectors in ${\cal R}^d$ and define the halfspace depth as
 
 $$
 D(z) = {\rm min}_{u\in U} n^{-1}\sum_{i=1}^n {\cal I}(u^\prime (x_i - z) > 0).
@@ -95,7 +95,7 @@ making it quite distinct from many other methods of statistical data
 analysis.  For statistical methods based on probability there are
 standard properties such as unbiasedness, consistency, accuracy, and
 efficiency that are used to quantify the performance of the approach.
-Although it is possible to place depth in a probabilistic framework so
+Although it is possible to place depth into a probabilistic framework so
 that these notions can be applied, several researchers have attempted
 to define the geometric properties that a depth function should
 exhibit that do not depend on any probability framework.  Four basic
@@ -111,7 +111,7 @@ i.e. if $-x$ is in the dataset whenever $x$ is in the dataset, then
 the vector $0_d$ achieves the maximum depth.
 
 * *Monotonicity relative to the deepest point* -- Let $\tilde{x}$ be
-the deepest point and we consider any unit vector $u$, then we
+the deepest point and we consider any unit vector $u$, and we then
 evaluate the depth at $\tilde{x} + \lambda u$ for $\lambda \in {\cal
 R}^+$, then the depth is a decreasing function of $\lambda$.
 
