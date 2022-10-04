@@ -7,7 +7,8 @@ data which are periodically sent via satellite to land.  The floats
 submerge to several thousand meters, obtaining a high resolution
 vertical profile of temperature, pressure and salinity.  Pressure here
 is used as a proxy for depth, so the main interest is in the
-relationship between temperature and salinity given depth.  When each
+relationships between temperature and depth, salinity and depth,
+and the covariation of temperature and salinity.  When each
 profile is recorded, we know the latitude, longitude, and date where
 the float was located.
 
