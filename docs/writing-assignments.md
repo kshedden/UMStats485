@@ -22,3 +22,17 @@ primarily make use of Poisson regression and factor methods as discussed
 in class, but your analysis should address a question that is considerably
 deeper than we had time to develop during the discussions in lectures.
 
+* (October 18th) Write a memo addressing a specific research question
+that can be addressed using the Argo float data.  Your question should
+account for the multivariate and functional structure of the data, considering
+some aspect of the manner in which temperature and salinity vary with
+pressure, how they covary with each other, and how these patterns of variation
+and covariation may differ based on the location and time where the profile
+was collected.
+
+* (October 18th) Write a revision of either your BHHT or natality analysis
+memo.  You can refine your research question if needed, or retain your
+existing question.  It is acceptable to borrow extensively from your previous
+memo, but the revised memo should also include substantial new analysis,
+interpretation, or discussion.
+
