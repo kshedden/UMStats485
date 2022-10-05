@@ -148,4 +148,72 @@ means to understand the high probability regions of the distribution.
 
 A recently developed algorithm constructs
 [support points](https://arxiv.org/abs/1609.01811) that are an
-effective form of quanization.
+effective form of quanization.  To understand the support point
+algorithm, suppose that we are given a distribution function $F$ that
+we want to approximate with a finite set of points.  The sample
+space of $Y$ is ${\cal R}^d$, and let $Y$ denote a random draw
+from $F$.  Now consider an approximating distribution $G$ with
+random draw $X$.
+
+We are given $F$ and wish to construct $G$
+to approximate $F$.  To do this we define a distance function
+that measures how far apart $F$ and $G$ (or $X$ and $Y$) are from
+each other.  Note that this distance is a distance between two
+probability distributions (conventionally when we calculate distances
+we have distances between vectors).  Distances among probability distributions
+are playing an increasingly important role in statistics.  When $d=1$ many such
+distance measures can be constructed, but it is harder
+to construct good distances on probability distributions if the dimension
+$d$ is larger than one.
+
+One distance measure on distributions that turns out to be
+very effective is called the *energy distance* (it has other
+names as well), and is defined as
+
+$$
+2E\|X-Y\| - E\|X-X^\prime\| - E\|Y-Y^\prime\|.
+$$
+
+Here, $X$, $X^\prime$ are independent draws from $F$, and $Y$, $Y^\prime$
+are independent draws from $G$.  It turns out that expression above
+is equal to zero if and only if $F = G$.  This is a necessary property
+for a distance to have.
+
+The interpretation of the expression above is that $F$ is close to $G$
+if (i) a random draw from $F$ tends to be close to a random draw from $G$,
+(ii) two independent random draws from $F$ are far from each other, and
+(iii) two independent random draws from $G$ are far from each other.
+
+Our goal is to approximate a given distribution $F$ with a distribution $G$
+that we construct.  Further, we will construct $G$ to be simple in some
+way (here "simple" means that $G$ will have finite support, i.e. a finite
+sample space).  Since $F$ is given, the term $E\|Y-Y^\prime\|$ is fixed
+and can be ignored when constructing $G$.  Thus, our goal is to construct
+$G$ that minimizes
+
+$$
+2E\|X-Y\| - E\|X-X^\prime\|.
+$$
+
+It is worth considering an alternative approach in which we simply minimize
+the first term above, $E\|X-Y\|$.  However doing this always yields a degenerate
+solution in which $G$ places all of its probability mass on the
+*spatial median*, which is the vector
+$V$ that minimizes $E\|X - V\|$.  That is the reason that the second "repulsive"
+term is essential.
+
+In practice, we do not observe the distribution $F$ but instead observe a sample
+$y_1, \ldots, y_n$.  Also, we are seeking a set of points $x_1, \ldots, x_N$ to
+define the approximating ditribution $G$ that we are constructing.  This leads
+us to the empirical analogue of the distance function above:
+
+$$
+\frac{2}{nN}]sum_{i=1}^n\sum_{j=1}^N\|y_j - x_i\| - \frac{1}{n^2}\sum_{i=1}^N\sum_{j=1}^N\|x_i-x_j\|.
+$$
+
+Our goal here was to discuss the motivation behind the support point algorithm.
+We will not proceed further with discussion of the process of numerically minimizing this function (see
+the paper for computational details).
+
+
+
