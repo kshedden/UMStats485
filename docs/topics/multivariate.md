@@ -138,7 +138,8 @@ many different ways to be near the periphery of a collection of points.
 A quantization algoithm aims to represent a multivariate distribution
 through a relatively small number of representative points.
 This can be a useful exploratory technique if the distribution being
-studied has a complex form that is not well captured through additive factors
+studied has a complex form that is not approximately Gaussian or elliptical,
+and is not well captured through additive factors
 (as in PCA).  The goal of almost any quantization algorithm is to
 find a collection of representative points $\{x_i\}$ that are optimal
 in some sense - for example we may wish to optimize the $x_i$ so as
@@ -151,7 +152,7 @@ A recently developed algorithm constructs
 effective form of quantization.  To understand the support point
 algorithm, suppose that we are given a distribution function $F$ that
 we wish to approximate with a finite set of points.  The sample
-space of $Y$ is ${\cal R}^d$, and let $Y$ denote a random draw
+space is ${\cal R}^d$, and let $Y$ denote a random draw
 from $F$.  Now consider an approximating distribution $G$ with
 random draw $X$.
 
@@ -203,7 +204,7 @@ $V$ that minimizes $E\|Y - V\|$.  This is the reason that the second "repulsive"
 term in the distance measure is essential.
 
 In practice, we do not observe the distribution $F$ but instead observe a sample
-$y_1, \ldots, y_N$.  Also, we are seeking a set of points $x_1, \ldots, x_n$ to
+$y_1, \ldots, y_N$.  Also, we are seeking a finite set of points $x_1, \ldots, x_n$ to
 define the approximating ditribution $G$ that we are constructing.  This leads
 us to the empirical analogue of the distance function above:
 
