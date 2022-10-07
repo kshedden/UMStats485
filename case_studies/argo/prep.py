@@ -3,13 +3,14 @@ from scipy.interpolate import interp1d
 from netCDF4 import Dataset
 import numpy as np
 
-# Store the NetCDF files here.  This requires quite a bit of
-# space but can be deleted as soon as this script runs to
-# completion.
+# Path to the NetCDF files here, this path must be the same
+# as 'tpath' in the get_data.py script.  After running
+# prep.py, the contents of tpath can be deleted.
 tpath = "/scratch/stats_dept_root/stats_dept1/kshedden/argo/python"
 dpath = os.path.join(tpath, "argo/raw")
 
-# Store the files produced by this script here
+# Store the files produced by this script here.  This must
+# agree with the path set in the 'read.py' script.
 qpath = "/home/kshedden/data/Teaching/argo/python"
 os.makedirs(qpath, exist_ok=True)
 

@@ -5,7 +5,8 @@ import matplotlib
 from statsmodels.nonparametric.smoothers_lowess import lowess
 from read import *
 
-# https://arxiv.org/pdf/1609.01811.pdf
+# See this reference for information about the support points
+# algorithm: https://arxiv.org/pdf/1609.01811.pdf
 
 # Equation 22 in Mak et al.
 def update_support(X, Y):

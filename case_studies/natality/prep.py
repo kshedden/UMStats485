@@ -30,6 +30,14 @@ if False:
                 if line.startswith(b"2016"):
                     out.write(line)
 
+# Original
+x = [1, 5, 7, 9, 12, 14, 15, 16, 17, 19, 27]
+cs = [(x[i]-1, x[i+1]-1) for i in range(len(x)-1)]
+with gzip.open(os.path.join(pa, "2016ages.txt.gz")) as io:
+    demog = pd.read_fwf(io, colspecs=cs, header=None)
+demog.columns = ["Year", "State", "StateFIPS", "CountyFIPS", "Registry",
+                 "Race", "Origin", "Sex", "Age", "Population"]
+
 # Read the demographics for 2016.  It is a fixed-width format
 # file.
 x = [1, 5, 7, 9, 12, 14, 15, 16, 17, 19, 27]

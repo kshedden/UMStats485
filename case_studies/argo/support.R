@@ -1,6 +1,8 @@
 library(ggplot2)
 source("read.R")
 
+# See this reference for more information about the
+# support point algorithm:
 # https://arxiv.org/pdf/1609.01811.pdf
 
 # Equation 22 in Mak et al.
@@ -59,9 +61,9 @@ for (j in 1:2) {
     }
 
     # Make plots with different numbers of support points.
-    for (npt in c(5, 10, 20)) {
+    for (npt in c(1, 2, 5, 10, 20)) {
         cat(sprintf("npt=%d\n", npt))
-        X = support(x, npt, maxiter=100)
+        X = support(x, npt, maxiter=200)
 
         # Put the support points in long form for plotting
         da = data.frame(x=array(X), g=kronecker(1:npt, array(1, 100)),

@@ -136,7 +136,7 @@ many different ways to be near the periphery of a collection of points.
 ## Quantization
 
 A quantization algoithm aims to represent a multivariate distribution
-through a relatively small number of representative points.
+through a small number of representative points.
 This can be a useful exploratory technique if the distribution being
 studied has a complex form that is not approximately Gaussian or elliptical,
 and is not well captured through additive factors
@@ -145,10 +145,10 @@ find a collection of representative points $\{x_i\}$ that are optimal
 in some sense - for example we may wish to optimize the $x_i$ so as
 to minimize the distance from any observation to its closest representative
 point.  Inspecting the representative points may provide a quick
-means to understand the high probability regions of the distribution.
+means to understand the structure of the distribution.
 
 A recently developed algorithm constructs
-[support points](https://arxiv.org/abs/1609.01811) that are an
+[support points](https://arxiv.org/abs/1609.01811) that are a very
 effective form of quantization.  To understand the support point
 algorithm, suppose that we are given a distribution function $F$ that
 we wish to approximate with a finite set of points.  The sample
@@ -188,7 +188,8 @@ if (i) a random draw from $F$ tends to be close to a random draw from $G$,
 Our goal is to approximate a given distribution $F$ with a distribution $G$
 that we construct.  Further, we will construct $G$ to be simple in some
 way (here "simple" will mean that $G$ will have finite support, i.e. a finite
-sample space).  Since $F$ is given, the term $E\|Y-Y^\prime\|$ is fixed
+sample space).  Since $F$ is given, the term $E\|Y-Y^\prime\|$ in the
+energy distance is fixed
 and can be ignored when constructing $G$.  Thus, our goal is to construct
 $G$ that minimizes
 
@@ -200,12 +201,12 @@ It is worth considering an alternative approach in which we simply minimize
 the first term above, $E\|X-Y\|$.  However doing this always yields a degenerate
 solution in which $G$ places all of its probability mass on the
 *spatial median*, which is the vector
-$V$ that minimizes $E\|Y - V\|$.  This is the reason that the second "repulsive"
-term in the distance measure is essential.
+$V$ that minimizes $E\|Y - V\|$.  This is the reason that the "repulsive"
+term $E\|X-X^\prime\|$ in the distance measure is essential.
 
 In practice, we do not observe the distribution $F$ but instead observe a sample
-$y_1, \ldots, y_N$.  Also, we are seeking a finite set of points $x_1, \ldots, x_n$ to
-define the approximating ditribution $G$ that we are constructing.  This leads
+$y_1, \ldots, y_N$.  Also, the approximating distribution $G$ that we are constructing
+is supported on a finite set of points $x_1, \ldots, x_n$.  This leads
 us to the empirical analogue of the distance function above:
 
 $$
@@ -214,5 +215,5 @@ $$
 
 Our goal here was to discuss the motivation behind the support point algorithm.
 We will not proceed further with discussion of the process of numerically minimizing this function (see
-the paper for computational details).
+the paper linked above for computational details).
 
