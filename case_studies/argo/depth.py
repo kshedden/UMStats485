@@ -15,8 +15,8 @@ latx = lat[ii]
 lonx = lon[ii]
 dayx = day[ii]
 
-# Calculate the spatial depth of column i of x relative
-# to the other columns of x.
+# Calculate the spatial depth of vector v relative
+# to all columns of x.
 def sdepth(v, x):
     p, n = x.shape
     z = x - v[:, None]
@@ -26,6 +26,18 @@ def sdepth(v, x):
     u = z.mean(1)
     return 1 - np.sqrt(np.sum(u**2))
 
+# Calculate the L2 depth of vector v relative
+# to all columns of x.
+def l2depth(v, x):
+    p, n = x.shape
+    z = x - v[:, None]
+    zn = np.sqrt((z**2).sum(0))
+    d = zn.mean()
+    return 1e6 / (1 + d)
+
+# Estimate the band depth of vector v relative
+# to all columns of x, using 500 random draws
+# to estimate the band depth.
 def bdepth(v, x, m=500):
     p, n = x.shape
     t = 0.0
@@ -39,7 +51,8 @@ def bdepth(v, x, m=500):
     return t
 
 # Calculate the depth of every column of x relative
-# to the other columns, using the given depth function.
+# to the other columns, using 'dfun' as the depth
+# function.
 def depths(x, dfun, progress=False):
     p, n = x.shape
     d = np.zeros(n)
@@ -69,8 +82,8 @@ def depth_cut(dp, x, q, pressure, ylab):
         plt.xlabel("Pressure", size=15)
         pdf.savefig()
 
-dp_temp = depths(tempx, bdepth, progress=True)
-dp_psal = depths(psalx, bdepth, progress=True)
+dp_temp = depths(tempx, sdepth, progress=True)
+dp_psal = depths(psalx, sdepth, progress=True)
 
 q = 10
 depth_cut(dp_temp, tempx, q, pressure, "Temperature")
