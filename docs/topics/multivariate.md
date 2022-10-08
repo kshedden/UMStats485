@@ -86,6 +86,22 @@ The $L_2$ depth also has a simple definition and is easy to compute:
 
 $$
 D_{L_2}(z; \{x_i\}) = 1 / (1 + {\rm Avg}_i\{\|x_i-z\|\}).
+$$<
+
+### Band depth
+
+Another way to measure depth that is especially useful for vectors that are
+sampled functions is the *band depth*.   In the most common version of the
+band depth, we consider all triples of three distinct values in the reference
+set $\{x_i\}$, say $x_{j_1}$, $x_{j_2}$, $x_{j_3}$ where $j_1<j_2<j_3$.  For
+each such triple we calculate the proportion of indices $k$ such that $z_k$
+lies between the maximum and minimum of
+$x_{j_1k}$, $x_{j_2k}$, $x_{j_3k}$.  These values are then averaged over all
+triples of points in the reference set.  A more formal definition is as
+follows:
+
+$$
+D_B(z; \{x_i\}) = {\rm Avg}_{j_1<j_2<j_3} {\rm Avg}_k {\rm min}(x_{ij_1}, x_{ij_2}, x_{ij_3}) < v_k < {\rm max}(x_{ij_1}, x_{ij_2}, x_{ij_3})
 $$
 
 ### Properties of a good depth function
