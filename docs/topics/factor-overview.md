@@ -1,7 +1,7 @@
 # Factor analyses and embeddings
 
 A large class of powerful statistical methods considers data in which
-many "objects" are measured with respect to multiple variables.  At a
+many "objects" ("observations") are measured with respect to multiple variables.  At a
 high level, these analyses usually aim to simultaneously understand
 the relationships among the objects and the relationships among the
 variables.
@@ -11,10 +11,8 @@ person measured in terms of their height, weight, age, and sex.  In
 this example, two people are "similar" if they have similar values on
 most or all of the variables, and two variables are "similar" if
 knowing the value of just one of the variables for a particular object
-allows one to predict the value of the other variable.
-
-For another, more extensive treatment of the topics in this document,
-see [here](https://pca4ds.github.io).
+allows one to predict the value of the other variable for that same
+object.
 
 ## Embedding
 
@@ -203,6 +201,34 @@ to lie in the columnspace of $(VS^{-1})_{:,1:q}$. PCR
 works well if the projections of $X$ that explain the
 most variation in $X$ also explain the most variation
 in $Y$.  This is often, but not always the case.
+
+## Canonical Correlation Analysis
+
+Suppose we have two sets of variables and a collection of objects that
+are assessed with respect to all variables in both sets. PCA aims to understand
+the relationships between the two sets of variables.  This goal differs from
+the goal of PCA, which could be used to understand the
+relationships within each set of variables separately.
+Specifically, we can search for linear combinations of each set of variables
+that are maximally correlated with each other.
+
+Let $X \in {\cal R}^{n\times p}$ and $Y \in {\cal R}^{n\times q}$ denote
+the data for the two sets of variables.  In these data, we have measurements
+on $n$ objects (the rows of $X$ and $Y$), a set of $p$ variables in the columns of $X$,
+and a set of $q$ variables in the columns of $Y$.  Row $i$ of $X$ and row $i$ of $Y$
+correspond to the same object.
+
+Given coefficient vectors $a\in {\cal R}^p$ and $b\in {\cal R}^q$, we can
+form linear predictors $Xa$ and $Yb$, both of which are $n$-dimensional
+vectors.  The goal of CCA is to find $a$ and $b$ to maximize the correlation
+coefficient between $Xa$ and $Yb$.  Inspecting plots of these "canonical coefficients"
+can yield insight into the relationship between the variables in $X$ and the variables
+in $Y$.
+
+If the dimension is high, CCA can overfit the data.  A procedure analogous to
+principal components regression can be used.  We first reduce $X$ and $Y$ to lower
+dimensions using PCA, then we fit the CCA using these reduced data.  The coefficients
+from the reduced PCA can then be re-expressed in the original coordinates for interpretation.
 
 ## Correspondence Analysis
 

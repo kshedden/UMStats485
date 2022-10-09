@@ -7,9 +7,11 @@ n = dim(temp)[2] # Number of profiles
 
 # The mean profile
 tempmean = apply(temp, 1, mean)
+psalmean = apply(psal, 1, mean)
 
 # Center the profiles
 tempc = temp - outer(tempmean, array(1, n))
+psalc = psal - outer(psalmean, array(1, n))
 
 # Get the principal components
 cc = cov(t(tempc))
@@ -83,5 +85,60 @@ for (j in 1:3) {
         plot_pcscores(j, k)
     }
 }
+
+# Flip signs in two sets of loadings to make them easier to understand in a
+# plot.
+flip = function(xcoef, ycoef) {
+    for (j in 1:dim(xcoef)[2]) {
+        if (mean(xcoef[,j] > 0) + mean(ycoef[,j] > 0) < 1) {
+            xcoef[,j] = -xcoef[,j]
+            ycoef[,j] = -ycoef[,j]
+        }
+    }
+    return(list(xcoef=xcoef, ycoef=ycoef))
+}
+
+# Use a combined PCA/CCA approach to relate temperature and salinity.
+# Produce plots for a sequence of dimensions for the PCA dimension
+# reduction.
+plot_cca = function() {
+    X = t(tempc)
+    Y = t(psalc)
+    svx = svd(X)
+    svy = svd(Y)
+
+    for (q in c(1, 2, 5, 10)) {
+        cc = cancor(svx$u[,1:q], svy$u[,1:q])
+        rr = cc$cancorr
+
+        # Passing nrow and ncol is needed to avoid
+        # different behavior when q=1.
+        ddx = diag(svx$d[1:q], q, q)
+        ddy = diag(svy$d[1:q], q, q)
+
+        xcoef = svx$v[,1:q] %*% solve(ddx, cc$xcoef)
+        ycoef = svy$v[,1:q] %*% solve(ddy, cc$ycoef)
+        ll = flip(xcoef, ycoef)
+        xcoef = ll$xcoef
+        ycoef = ll$ycoef
+        da = data.frame(temp_weights=xcoef[,1], psal_weights=ycoef[,1], pressure=pressure)
+        plt = ggplot(aes(x=pressure, y=temp_weights), data=da) + geom_line()
+        plt = plt + labs(x="Pressure", y="Temperature coefficient")
+        plt = plt + ggtitle(sprintf("CCA with q=%d components, r=%.2f", q, rr[1]))
+        if (min(ycoef[,1]) > 0) {
+            plt = plt + ylim(0, NA)
+        }
+        print(plt)
+        plt = ggplot(aes(x=pressure, y=psal_weights), data=da) + geom_line()
+        plt = plt + labs(x="Pressure", y="Salinity coefficient")
+        plt = plt + ggtitle(sprintf("CCA with q=%d components, r=%.2f", q, rr[1]))
+        if (min(ycoef[,1]) > 0) {
+            plt = plt + ylim(0, NA)
+        }
+        print(plt)
+    }
+}
+
+plot_cca()
 
 dev.off()

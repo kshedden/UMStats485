@@ -90,11 +90,10 @@ depth_cut(dp_temp, tempx, q, pressure, "Temperature")
 depth_cut(dp_psal, psalx, q, pressure, "Salinity")
 
 # Plot the estimated conditional mean depth relative to each explanatory variable.
-# The bands in these plots are +/- 2 times the mean absolute deviation from the
+# The bands in these plots are +/- f times the mean absolute deviation from the
 # conditional mean.
-def depth_correlates(dp):
-    dpx = pd.DataFrame({"depth": dp, "lat": latx, "lon": lonx, "day": dayx})
-    f = 2
+def depth_correlates(dp, lat, lon, day, title, f=2):
+    dpx = pd.DataFrame({"depth": dp, "lat": lat, "lon": lon, "day": day})
     vn = {"lat": "Latitude", "lon": "Longitude", "day": "Day"}
     for v in ["lat", "lon", "day"]:
         xx = np.linspace(dpx[v].min(), dpx[v].max(), 100)
@@ -104,6 +103,7 @@ def depth_correlates(dp):
         dh = interp1d(m[:, 0], m[:, 1])(xx)
         dq = interp1d(r[:, 0], r[:, 1])(xx)
         plt.clf()
+        plt.title(title)
         plt.grid(True)
         plt.plot(xx, dh, "-")
         plt.fill_between(xx, dh-f*dq, dh+f*dq, color="grey", alpha=0.5)
@@ -111,7 +111,17 @@ def depth_correlates(dp):
         plt.ylabel("Depth", size=15)
         pdf.savefig()
 
-depth_correlates(dp_temp)
-depth_correlates(dp_psal)
+depth_correlates(dp_temp, latx, lonx, dayx, "Atlantic ocean temperature")
+depth_correlates(dp_psal, latx, lonx, dayx, "Atlantic ocean salinity")
+
+# Northern hemisphere
+ii = np.flatnonzero(latx > 0)
+depth_correlates(dp_temp[ii], latx[ii], lonx[ii], dayx[ii], "Northern hemisphere temperature")
+depth_correlates(dp_psal[ii], latx[ii], lonx[ii], dayx[ii], "Northern hemisphere salinity")
+
+# Southern hemisphere
+ii = np.flatnonzero(latx < 0)
+depth_correlates(dp_temp[ii], latx[ii], lonx[ii], dayx[ii], "Southern hemisphere temperature")
+depth_correlates(dp_psal[ii], latx[ii], lonx[ii], dayx[ii], "Southern hemisphere salinity")
 
 pdf.close()

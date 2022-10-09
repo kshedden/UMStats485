@@ -15,7 +15,7 @@ qpath = "/home/kshedden/data/Teaching/argo/python"
 os.makedirs(qpath, exist_ok=True)
 
 # Retain only profiles that span this range
-minpress = 100
+minpress = 20
 maxpress = 1500
 
 # Interpolate all data onto this pressure grid

@@ -51,14 +51,14 @@ for (j,x) in enumerate([temp, psal]):
     # Make plots with different numbers of support points.
     for npt in 5, 10, 20:
         print("npt=", npt)
-        X = support(x.T, npt, maxiter=100)
+        X = support(x.T, npt, maxiter=200)
         plt.clf()
         plt.grid(True)
         plt.title("%d support points" % npt)
         for i in range(npt):
             plt.plot(pressure, X[i, :], "-", color="grey")
         plt.xlabel("Pressure", size=15)
-        plt.ylabel(["Temperature", "Pressure"][j], size=15)
+        plt.ylabel(["Temperature", "Salinity"][j], size=15)
         pdf.savefig()
 
 # Plot support points for the combined temperature and salinity
@@ -71,7 +71,7 @@ psalz = (psal - psal.mean()) / psal.std()
 pt = np.vstack([tempz, psalz])
 for npt in 5,:
     print("npt=", npt)
-    X = support(pt.T, npt, maxiter=100)
+    X = support(pt.T, npt, maxiter=200)
     plt.clf()
     plt.axes([0.1, 0.1, 0.78, 0.8])
     plt.grid(True)
