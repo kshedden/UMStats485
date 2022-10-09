@@ -230,6 +230,35 @@ principal components regression can be used.  We first reduce $X$ and $Y$ to low
 dimensions using PCA, then we fit the CCA using these reduced data.  The coefficients
 from the reduced PCA can then be re-expressed in the original coordinates for interpretation.
 
+## Dimension reduction regression
+
+Dimension reduction regression (DR) is a flexible approach to regression analysis that
+can be seen as an extension of PCA to the regression setting.  In a DR analysis, we have
+a matrix $X \in {\cal R}^{n\times p}$ containing data on the explanatory variables,
+and we also have a vector $Y \in {\cal R}^n$
+containing values of a response variable.  Like PCA, the goal is to find *factors* or *components*
+among the $X$ variables, but in the case of DR the goal is for these factors to predict $Y$,
+not to predict $X$ itself.  One way to view DR is as a means to "steer" PCA toward variates
+that explain the variation in $Y$, rather than returning variates that explain the variation
+in $X$.
+
+In some cases, the variats in $X$ that explain $X$ and the variates in $X$ that
+explain $Y$ can be quite similar, but in other cases they dramatically differ.  This is
+one of the main critiques of principal component regression, which uses the PCs as
+explanatory variables and therefore can only find regression relationships that happen
+to coincide with the PCs.
+
+DR can be viewed as fitting the multi-index regression model
+
+$$
+E[Y|X=x] = f(b_1^\prime x, \ldots, b_q^\prime x) + \epsilon,
+$$
+
+where the $b_j \in {\cal R}^p$ are coefficient vectors defining the "indices" in
+$X$ that predict $Y$.  The appealing feature of this approach is that it incorporates
+a link function $f$ but this function does not need to be known.  Thus, DR provides
+a means to capture a wide range of nonlinear and non-additive regression relationships.
+
 ## Correspondence Analysis
 
 Correspondence analysis is an embedding approach that aims to

@@ -1,6 +1,7 @@
 source("read.R")
 
 library(ggplot2)
+library(dr)
 
 m = dim(temp)[1] # Number of pressure points
 n = dim(temp)[2] # Number of profiles
@@ -36,6 +37,7 @@ da = data.frame(pressure=pressure, tempmean=tempmean)
 plt = ggplot(aes(x=pressure, y=tempmean), data=da) + geom_line()
 print(plt)
 
+# Make several plots depicting the loading patterns.
 for (j in 1:5) {
     # Plot the loadings
     da = data.frame(pressure=pressure, loading=eigvec[,j])
@@ -86,7 +88,7 @@ for (j in 1:3) {
     }
 }
 
-# Flip signs in two sets of loadings to make them easier to understand in a
+# Flip signs in two sets of CCA loadings to make them easier to understand in a
 # plot.
 flip = function(xcoef, ycoef) {
     for (j in 1:dim(xcoef)[2]) {
@@ -140,5 +142,37 @@ plot_cca = function() {
 }
 
 plot_cca()
+
+plot_sir = function() {
+
+    X = t(tempc)
+    svx = svd(X)
+    q = 5
+
+    dd = dr.compute(svx$u[,1:q], lat, array(1, length(lat)))
+    ddx = diag(svx$d[1:q], q, q)
+    b = svx$v[,1:q] %*% solve(ddx, dd$evectors)
+
+    # Plot the loadings
+    da = data.frame(pressure=c(pressure, pressure, pressure))
+    da$dir = c(b[,1], b[,2], b[,3])
+    oo = array(1, length(pressure))
+    da$group = c(1*oo, 2*oo, 3*oo)
+    da$group = as.factor(da$group)
+    plt = ggplot(aes(x=pressure, y=dir, by=group, color=group), data=da) + geom_line()
+    plt = plt + labs(x="Pressure", y="Temperature loading")
+    plt = plt + ggtitle(sprintf("SIR with q=%d PC components", q))
+    print(plt)
+
+    scores = X %*% b[,1:3]
+    for (j in 1:3) {
+        da = data.frame(lat=lat, lon=lon, day=day, s=scores[,j])
+        plt = ggplot(aes(x=lat, y=s), data=da) + geom_point()
+        plt = plt + labs(x="Latitude", y=sprintf("SIR component %d", j))
+        print(plt)
+    }
+}
+
+da = plot_sir()
 
 dev.off()
