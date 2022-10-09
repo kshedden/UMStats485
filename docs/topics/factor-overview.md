@@ -233,7 +233,7 @@ from the reduced PCA can then be re-expressed in the original coordinates for in
 ## Dimension reduction regression
 
 Dimension reduction regression (DR) is a flexible approach to regression analysis that
-can be seen as an extension of PCA to the regression setting.  In a DR analysis, we have
+can be seen as an extension of PCA to the setting of regression.  In a DR analysis, we have
 a matrix $X \in {\cal R}^{n\times p}$ containing data on the explanatory variables,
 and we also have a vector $Y \in {\cal R}^n$
 containing values of a response variable.  Like PCA, the goal is to find *factors* or *components*
@@ -242,9 +242,9 @@ not to predict $X$ itself.  One way to view DR is as a means to "steer" PCA towa
 that explain the variation in $Y$, rather than returning variates that explain the variation
 in $X$.
 
-In some cases, the variats in $X$ that explain $X$ and the variates in $X$ that
+In some cases, the variates in $X$ that explain $X$ and the variates in $X$ that
 explain $Y$ can be quite similar, but in other cases they dramatically differ.  This is
-one of the main critiques of principal component regression, which uses the PCs as
+one of the main critiques of principal component regression (PCR), which uses the PCs as
 explanatory variables and therefore can only find regression relationships that happen
 to coincide with the PCs.
 
@@ -258,6 +258,17 @@ where the $b_j \in {\cal R}^p$ are coefficient vectors defining the "indices" in
 $X$ that predict $Y$.  The appealing feature of this approach is that it incorporates
 a link function $f$ but this function does not need to be known.  Thus, DR provides
 a means to capture a wide range of nonlinear and non-additive regression relationships.
+The parameter $q$ above determines the dimension of the regression relationship, and
+must be selected based on the data.  If $q=1$ we have a single-index model, like in a
+GLM, except that here the link function need not be pre-specified.  As $q$ grows,
+the model becomes more complex and therefore may underperform due to high variance
+and overfitting.  DR is most effective when relatively small values of $q$ can
+be used, thereby compressing the regression structure into a few variates.
+
+It is advantageous that the link function $f$ need not be known while estimating
+the coefficients $b_j$.  However later in the analysis we will probably want to estimate
+$f$, and commonly a nonparametric regression method like loess can be used for
+this purpose.
 
 ## Correspondence Analysis
 
