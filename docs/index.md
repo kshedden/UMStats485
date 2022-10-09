@@ -14,7 +14,7 @@
 
 [Regression analysis](topics/regression-extras.md)
 
-[Factor analysis overview](topics/factor-overview.md)
+[Overview of factor methods](topics/factor-overview.md)
 
 [Generalized Linear Models](topics/glm.md)
 
