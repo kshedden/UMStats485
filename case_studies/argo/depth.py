@@ -8,6 +8,7 @@ from read import *
 
 pdf = PdfPages("depth_py.pdf")
 
+# Subset the data for speed.
 ii = np.random.choice(np.arange(temp.shape[1]), 5000, replace=False)
 tempx = temp[:, ii]
 psalx = psal[:, ii]
@@ -70,7 +71,6 @@ def depth_cut(dp, x, q, pressure, ylab):
     dq = pd.qcut(dp, q)
     for (i,iv) in enumerate(dq.categories):
         ii = np.flatnonzero(dq == iv)
-        dd = dq[ii]
         jj = np.random.choice(ii, 10)
 
         plt.clf()
@@ -96,12 +96,21 @@ def depth_correlates(dp, lat, lon, day, title, f=2):
     dpx = pd.DataFrame({"depth": dp, "lat": lat, "lon": lon, "day": day})
     vn = {"lat": "Latitude", "lon": "Longitude", "day": "Day"}
     for v in ["lat", "lon", "day"]:
+
+        # A grid of 100 values covering the range of the
+        # explanatory variable.
         xx = np.linspace(dpx[v].min(), dpx[v].max(), 100)
+
+        # Use loess to regress depth on the explanatory variable
         m = lowess(dpx["depth"], dpx[v])
+        dh = interp1d(m[:, 0], m[:, 1])(xx)
+
+        # Use loess to regress the absolute depth residuals
+        # on the explanatory variable
         aresid = np.abs(m[:, 1] - dpx["depth"])
         r = lowess(aresid, dpx[v])
-        dh = interp1d(m[:, 0], m[:, 1])(xx)
         dq = interp1d(r[:, 0], r[:, 1])(xx)
+
         plt.clf()
         plt.title(title)
         plt.grid(True)

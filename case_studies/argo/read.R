@@ -1,7 +1,7 @@
 library(readr)
 
 # This path must match the path in prep.py.
-qpath = "/home/kshedden/data/Teaching/argo/julia"
+qpath = "/home/kshedden/data/Teaching/argo/python"
 
 Sys.setenv(VROOM_CONNECTION_SIZE=1000000)
 

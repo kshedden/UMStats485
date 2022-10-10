@@ -112,10 +112,11 @@ temp = temp[:, ii]
 psal = psal[:, ii]
 
 # Save all the files
-np.savetxt(os.path.join(qpath, "lat.csv.gz"), lat)
-np.savetxt(os.path.join(qpath, "lon.csv.gz"), lon)
-np.savetxt(os.path.join(qpath, "date.csv.gz"), date, fmt="%s")
-np.savetxt(os.path.join(qpath, "pressure.csv.gz"), pressure)
+np.savetxt(os.path.join(qpath, "lat.csv.gz"), lat, header="Column1", comments="")
+np.savetxt(os.path.join(qpath, "lon.csv.gz"), lon, header="Column1", comments="")
+np.savetxt(os.path.join(qpath, "date.csv.gz"), date, fmt="%s", header="Column1", comments="")
+np.savetxt(os.path.join(qpath, "pressure.csv.gz"), pressure, header="Column1", comments="")
 header = ["Column%d" % j for j in range(temp.shape[1])]
-np.savetxt(os.path.join(qpath, "temp.csv.gz"), temp, delimiter=",", header=header)
-np.savetxt(os.path.join(qpath, "psal.csv.gz"), psal, delimiter=",", header=header)
+header = ",".join(header)
+np.savetxt(os.path.join(qpath, "temp.csv.gz"), temp, delimiter=",", header=header, comments="")
+np.savetxt(os.path.join(qpath, "psal.csv.gz"), psal, delimiter=",", header=header, comments="")
