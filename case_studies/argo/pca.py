@@ -5,9 +5,8 @@ import matplotlib.pyplot as plt
 import os
 from scipy.interpolate import interp1d
 from statsmodels.nonparametric.smoothers_lowess import lowess
-from sklearn.cross_decomposition import CCA
 import statsmodels.api as sm
-from statsmodels.multivariate.cancorr import CanCorr
+from statsmodels.regression.dimred import SIR
 from read import *
 
 pdf = PdfPages("pca_py.pdf")
@@ -137,7 +136,9 @@ def my_cca(X, Y):
 # Standard CCA, due to the high dimensionality the results
 # make little sense.
 X = temp.T
+X -= X.mean(0)
 Y = psal.T
+Y -= Y.mean(0)
 xc, yc, r = my_cca(X, Y)
 
 # Flip the CCA components as needed for interpretability
@@ -181,5 +182,32 @@ for q in [1, 2, 5, 10, 20, 50]:
     plt.ylabel("Salinity", size=15)
     pdf.savefig()
     print(np.corrcoef(np.dot(X, xc1[:, 0]), np.dot(Y, yc1[:, 0]))[0,1])
+
+q = 5
+m = SIR(lat, ux[:, 0:q])
+r = m.fit()
+cf = np.dot(vtx.T[:, 0:q], np.linalg.solve(np.diag(sx[0:q]), r.params))
+
+# Plot the loadings.
+plt.clf()
+plt.grid(True)
+for j in range(3):
+    plt.plot(pressure, cf[:, j], "-", label="%d" % (j + 1))
+ha, lb = plt.gca().get_legend_handles_labels()
+leg = plt.figlegend(ha, lb, "center right")
+leg.draw_frame(False)
+plt.xlabel("Pressure", size=15)
+plt.ylabel("SIR loading", size=15)
+pdf.savefig()
+
+# Plot the scores against latitude.
+scores = np.dot(X, cf)
+for j in range(3):
+    plt.clf()
+    plt.grid(True)
+    plt.plot(lat, scores[:, j], "o", color="grey", alpha=0.3, rasterized=True)
+    plt.xlabel("Latitude", size=15)
+    plt.ylabel("Component %d score" % (j + 1), size=15)
+    pdf.savefig()
 
 pdf.close()

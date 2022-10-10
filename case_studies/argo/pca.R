@@ -1,6 +1,7 @@
 source("read.R")
 
 library(ggplot2)
+library(ggrastr)
 library(dr)
 
 m = dim(temp)[1] # Number of pressure points
@@ -143,12 +144,16 @@ plot_cca = function() {
 
 plot_cca()
 
+# SIR is a dimension reduction regression (DR) method.  Here we will use
+# it doidentify factors within the temperature data that predict latitude.
 plot_sir = function() {
 
     X = t(tempc)
-    svx = svd(X)
-    q = 5
 
+    # Due to high-dimensionality, we project the temperature data to
+    # a limited number of PC's before using SIR to estimate the coefficients.
+    q = 5
+    svx = svd(X)
     dd = dr.compute(svx$u[,1:q], lat, array(1, length(lat)))
     ddx = diag(svx$d[1:q], q, q)
     b = svx$v[,1:q] %*% solve(ddx, dd$evectors)
@@ -164,11 +169,13 @@ plot_sir = function() {
     plt = plt + ggtitle(sprintf("SIR with q=%d PC components", q))
     print(plt)
 
+    # Plot the scores against latitude.
     scores = X %*% b[,1:3]
     for (j in 1:3) {
         da = data.frame(lat=lat, lon=lon, day=day, s=scores[,j])
         plt = ggplot(aes(x=lat, y=s), data=da) + geom_point()
         plt = plt + labs(x="Latitude", y=sprintf("SIR component %d", j))
+        rasterize(plt, layers="Point")
         print(plt)
     }
 }
