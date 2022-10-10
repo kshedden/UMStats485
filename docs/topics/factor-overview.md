@@ -233,7 +233,7 @@ from the reduced PCA can then be re-expressed in the original coordinates for in
 ## Dimension reduction regression
 
 Dimension reduction regression (DR) is a flexible approach to regression analysis that
-can be seen as an extension of PCA to the setting of regression.  In a DR analysis, we have
+can be seen as extending PCA to the setting of regression.  In a DR analysis, we have
 a matrix $X \in {\cal R}^{n\times p}$ containing data on the explanatory variables,
 and we also have a vector $Y \in {\cal R}^n$
 containing values of a response variable.  Like PCA, the goal is to find *factors* or *components*
@@ -265,7 +265,7 @@ the model becomes more complex and therefore may underperform due to high varian
 and overfitting.  DR is most effective when relatively small values of $q$ can
 be used, thereby compressing the regression structure into a few variates.
 
-It is advantageous that the link function $f$ need not be known while estimating
+It is advantageous that the link function $f$ does not need to be known while estimating
 the coefficients $b_j$.  However later in the analysis we will probably want to estimate
 $f$, and commonly a nonparametric regression method like loess can be used for
 this purpose.
