@@ -239,7 +239,7 @@ and we also have a vector $Y \in {\cal R}^n$
 containing values of a response variable.  Like PCA, the goal is to find *factors* or *components*
 among the $X$ variables, but in the case of DR the goal is for these factors to predict $Y$,
 not to predict $X$ itself.  One way to view DR is as a means to "steer" PCA toward variates
-that explain the variation in $Y$, rather than returning variates that explain the variation
+that explain the variation in $Y$, rather than seeking variates that explain the variation
 in $X$.
 
 In some cases, the variates in $X$ that explain $X$ and the variates in $X$ that
@@ -255,12 +255,15 @@ E[Y|X=x] = f(b_1^\prime x, \ldots, b_q^\prime x) + \epsilon,
 $$
 
 where the $b_j \in {\cal R}^p$ are coefficient vectors defining the "indices" in
-$X$ that predict $Y$.  The appealing feature of this approach is that it incorporates
+$X$ that predict $Y$.  The span of $b_1, \ldots, b_q$ is known as the "dimension reduction"
+subpsace for the regression function $E[Y|X=x]$.
+
+The appealing feature of the DR approach is that it incorporates
 a link function $f$ but this function does not need to be known.  Thus, DR provides
 a means to capture a wide range of nonlinear and non-additive regression relationships.
-The parameter $q$ above determines the dimension of the regression relationship, and
-must be selected based on the data.  If $q=1$ we have a single-index model, like in a
-GLM, except that here the link function need not be pre-specified.  As $q$ grows,
+The parameter $q$ above determines the dimension of the dimension reduction subspace, and
+is selected based on the data.  If $q=1$ we have a single-index model, like in a
+GLM, except that here the link function does not need to be pre-specified.  As $q$ grows,
 the model becomes more complex and therefore may underperform due to high variance
 and overfitting.  DR is most effective when relatively small values of $q$ can
 be used, thereby compressing the regression structure into a few variates.
@@ -269,6 +272,29 @@ It is advantageous that the link function $f$ does not need to be known while es
 the coefficients $b_j$.  However later in the analysis we will probably want to estimate
 $f$, and commonly a nonparametric regression method like loess can be used for
 this purpose.
+
+One of the simplest and most widely-used approaches to dimension reduction regression
+is known as Sliced Inverse Regression (SIR).  Recall that the loading vectors of PCA
+are the eigenvectors of ${\rm cov}(X)$.  In SIR, we wish to steer the PCA loadings
+toward directions that are relevant for predicting $Y$.  To do this we consider
+$M_{xy} \equiv {\rm cov}E[X|Y]$, which is also a type of covariance matrix for $X$, but which
+suppresses the variation in $X$ that is irrelevant for $Y$.  This is accomplished
+by replacing $X$ in ${\rm cov}(X)$ with $E[X|Y]$, which suppresses the variation
+in $X$ that occurs when $Y$ is fixed. The matrix $M_{xy}$ is estimated by sorting
+the data $\{(x_i, y_i)\}$ by increasing values of $y$, dividing this sorted sequence
+into "slices" (blocks), and averaging the values of $x_i$ within each slice.  Let $\check{x}_\ell$
+denote the mean of slice $\ell$.  We then estimate $M_{xy}$ as the covariance matrix of the
+$\check{x}_\ell$.
+
+In SIR, we estimate the coefficient vectors $b_j$ by solving the generalized eigenvalue problem
+(GEP)
+
+$$
+M_{xy}b = \lambda S_xb,
+$$
+
+where $S_x = {\rm cov(X)}$ is the covariance matrix of $X$ (ignoring $Y$).  Solving the GEP
+identifies vectors $b$ such that $b^\prime E[X|y]$ has high variance relative to $b^\prime X$.
 
 ## Correspondence Analysis
 
