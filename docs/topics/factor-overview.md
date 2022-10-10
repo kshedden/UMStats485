@@ -282,9 +282,9 @@ suppresses the variation in $X$ that is irrelevant for $Y$.  This is accomplishe
 by replacing $X$ in ${\rm cov}(X)$ with $E[X|Y]$, which suppresses the variation
 in $X$ that occurs when $Y$ is fixed. The matrix $M_{xy}$ is estimated by sorting
 the data $\{(x_i, y_i)\}$ by increasing values of $y$, dividing this sorted sequence
-into "slices" (blocks), and averaging the values of $x_i$ within each slice.  Let $\tilde{x}_k$
-denote the mean of slice $\ell$.  We then estimate $M_{xy}$ as the covariance matrix of the
-$\tilde{x}_k$.
+into "slices" (blocks), and averaging the values of $x_i$ within each slice.  Let $u_k$
+denote the mean of slice $k$.  We then estimate $M_{xy}$ as the covariance matrix of the
+$u_k$.
 
 In SIR, we estimate the coefficient vectors $b_j$ by solving the generalized eigenvalue problem
 (GEP)
