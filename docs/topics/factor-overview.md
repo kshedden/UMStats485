@@ -258,7 +258,7 @@ where the $b_j \in {\cal R}^p$ are coefficient vectors defining the "indices" in
 $X$ that predict $Y$.  The span of $b_1, \ldots, b_q$ is known as the "dimension reduction"
 subpsace for the regression function $E[Y|X=x]$.
 
-The appealing feature of the DR approach is that it incorporates
+An appealing feature of the DR approach is that it incorporates
 a link function $f$ but this function does not need to be known.  Thus, DR provides
 a means to capture a wide range of nonlinear and non-additive regression relationships.
 The parameter $q$ above determines the dimension of the dimension reduction subspace, and
@@ -282,9 +282,9 @@ suppresses the variation in $X$ that is irrelevant for $Y$.  This is accomplishe
 by replacing $X$ in ${\rm cov}(X)$ with $E[X|Y]$, which suppresses the variation
 in $X$ that occurs when $Y$ is fixed. The matrix $M_{xy}$ is estimated by sorting
 the data $\{(x_i, y_i)\}$ by increasing values of $y$, dividing this sorted sequence
-into "slices" (blocks), and averaging the values of $x_i$ within each slice.  Let $\check{x}_\ell$
+into "slices" (blocks), and averaging the values of $x_i$ within each slice.  Let $\tilde{x}_\ell$
 denote the mean of slice $\ell$.  We then estimate $M_{xy}$ as the covariance matrix of the
-$\check{x}_\ell$.
+$\tilde{x}_\ell$.
 
 In SIR, we estimate the coefficient vectors $b_j$ by solving the generalized eigenvalue problem
 (GEP)
