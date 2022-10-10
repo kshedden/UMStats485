@@ -16,20 +16,23 @@ analyzing functions as data.  In practice we never
 actually observe a function in its entirety, and instead only
 observe a function evaluated on a finite set of points.  Thus
 the data we work with in FDA are finite dimensional vectors,
-and thus have the same form as other types
+and have the same form as other types
 of quantitative multivariate data.  But since the data are
-considered to arise by evaluating smooth functions, different
+considered to arise by evaluating smooth functions, a distinct set of
 methods have been developed to take advantage of this property.
 
 ## Data Depth
 
 There are various ways to measure the *depth* of a point $z \in {\cal
 R}^d$ relative to a distribution or collection of points $\{x_i\in
-{\cal R}^d; i=1,\ldots,n}$.  "Deep" points are surrounded in all
+{\cal R}^d; i=1,\ldots,n}$.  Formally, a *depth measure* on ${\cal R}^d$
+is a function from ${\cal R}^d\rightarrow{\cal R}^+$ that quantifies the
+depth of each point as a non-negative real number.
+
+"Deep" points are surrounded in all
 directions by many other points, while "shallow" points lie near the
-surface of the point set.  Another terminology that is used in this
-area refers to the deep points as having high "centrality" and the
-shallow points as having low "centrality" or high "outlyingness".
+surface or exterior of the point set.  Deep points are often referred to as having high "centrality" while
+shallow points have low centrality or high "outlyingness".
 Data depth can be viewed as a multivariate generalization of the
 notion of a quantile, with the deepest point in a set being a
 type of multivariate median.
