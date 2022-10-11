@@ -75,9 +75,9 @@ $$
 D_S(z; \{x_i\}) = 1 - \|{\rm Avg}_i\{(x_i-z)/\|x_i-z\|\}\|
 $$
 
-Note that $(x_i-z)/\|x_i-z\|$ is a unit vector pointing in the
+Note that $(x_i-z)/\\|x_i-z\\|$ is a unit vector pointing in the
 direction from $z$ to $x_i$.  If a point $z$ is "shallow" then most of
-the unit vectors $(x_i-z)/\|x_i-z\|$ point in roughly the same
+the unit vectors $(x_i-z)/\\|x_i-z\\|$ point in roughly the same
 direction, and therefore their average value will have large
 magnitude.  If a point $z$ is "deep" then these unit vectors will
 point in many different directions and their average value will have
@@ -134,7 +134,7 @@ the deepest point and we consider any unit vector $u$, and we then
 evaluate the depth at $\tilde{x} + \lambda u$ for $\lambda \in {\cal
 R}^+$, then the depth is a decreasing function of $\lambda$.
 
-* *Vanishing at infinity* -- for any sequence $z_i$ with $\|z_i\|$
+* *Vanishing at infinity* -- for any sequence $z_i$ with $\\|z_i\\|$
 tending to infinity, the depths of the $z_i$ tend to zero.
 
 ### Depth peeling
