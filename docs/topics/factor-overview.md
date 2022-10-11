@@ -410,7 +410,7 @@ $$
 $$
 
 Since $W_c = {\rm diag}(\hat{\mu})$, where $\hat{\mu}$ is an estimate
-of $\mu$, it follows that $\|F_{i,:} - F_{j,:} \|$ is an estimate of
+of $\mu$, it follows that $\\|F_{i,:} - F_{j,:} \\|$ is an estimate of
 the chi-square distance between $P^r_{i,:}$ and $P^r_{j,:}$.  Thus,
 the rows of $F$ embed the rows of $P^r$ as desired.  Applying the same
 argument to $X^T$ shows that the rows of $G$ embed the columns of
