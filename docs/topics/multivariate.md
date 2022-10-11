@@ -207,7 +207,7 @@ if (i) a random draw from $F$ tends to be close to a random draw from $G$,
 Our goal is to approximate a given distribution $F$ with a distribution $G$
 that we construct.  Further, we will construct $G$ to be simple in some
 way (here "simple" will mean that $G$ will have finite support, i.e. a finite
-sample space).  Since $F$ is given, the term $E\|Y-Y^\prime\|$ in the
+sample space).  Since $F$ is given, the term $E\\|Y-Y^\prime\\|$ in the
 energy distance is fixed
 and can be ignored when constructing $G$.  Thus, our goal is to construct
 $G$ that minimizes
@@ -217,11 +217,11 @@ $$
 $$
 
 It is worth considering an alternative approach in which we simply minimize
-the first term above, $E\|X-Y\|$.  However doing this always yields a degenerate
+the first term above, $E\\|X-Y\\|$.  However doing this always yields a degenerate
 solution in which $G$ places all of its probability mass on the
 *spatial median*, which is the vector
-$V$ that minimizes $E\|Y - V\|$.  This is the reason that the "repulsive"
-term $E\|X-X^\prime\|$ in the distance measure is essential.
+$V$ that minimizes $E\\|Y - V\\|$.  This is the reason that the "repulsive"
+term $E\\|X-X^\prime\\|$ in the distance measure is essential.
 
 In practice, we do not observe the distribution $F$ but instead observe a sample
 $y_1, \ldots, y_N$.  Also, the approximating distribution $G$ that we are constructing
@@ -235,4 +235,3 @@ $$
 Our goal here was to discuss the motivation behind the support point algorithm.
 We will not proceed further with discussion of the process of numerically minimizing this function (see
 the paper linked above for computational details).
-
