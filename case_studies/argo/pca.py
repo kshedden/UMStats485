@@ -51,8 +51,8 @@ def get_pcs(x):
 
     return xm, pcw, pcv, scores
 
-# Plot the j^th PC score against the k^th feature.
-def pcplot(j, k, mean, pcv, scores, label):
+# Plot the j^th PC score against all features.
+def pcplot(j, mean, pcv, scores, label):
 
     # Plot the mean profile
     plt.clf()
@@ -84,35 +84,34 @@ def pcplot(j, k, mean, pcv, scores, label):
     pdf.savefig()
 
     # Plot the conditional mean PC score against an observed variable
-    xx = np.linspace(Y[:, k].min(), Y[:, k].max(), 100)
-    m = lowess(scores[:, j], Y[:, k], delta=0.01*np.ptp(Y[:, k]))
-    resid = scores[:, j] - m[:, 1]
-    r = lowess(np.abs(resid), Y[:, k], delta=0.01*np.ptp(Y[:, k]))
-    yy = interp1d(m[:, 0], m[:, 1])(xx)
-    yr = interp1d(r[:, 0], r[:, 1])(xx)
-    f = 2
-    ymx = (yy + f*yr).max()
-    ymn = (yy - f*yr).min()
-    plt.clf()
-    plt.grid(True)
-    plt.plot(xx, yy, "-", color="red")
-    plt.plot(xx, yy-f*yr, "-", color="grey")
-    plt.plot(xx, yy+f*yr, "-", color="grey")
-    plt.gca().set_ylim([ymn, ymx])
-    plt.gca().set_xlabel(fn[k], size=15)
-    plt.gca().set_ylabel("%s PC %d score" % (label.title(), j + 1), size=15)
-    pdf.savefig()
+    for k in range(3):
+        xx = np.linspace(Y[:, k].min(), Y[:, k].max(), 100)
+        m = lowess(scores[:, j], Y[:, k], delta=0.01*np.ptp(Y[:, k]))
+        resid = scores[:, j] - m[:, 1]
+        r = lowess(np.abs(resid), Y[:, k], delta=0.01*np.ptp(Y[:, k]))
+        yy = interp1d(m[:, 0], m[:, 1])(xx)
+        yr = interp1d(r[:, 0], r[:, 1])(xx)
+        f = 2
+        ymx = (yy + f*yr).max()
+        ymn = (yy - f*yr).min()
+        plt.clf()
+        plt.grid(True)
+        plt.plot(xx, yy, "-", color="red")
+        plt.plot(xx, yy-f*yr, "-", color="grey")
+        plt.plot(xx, yy+f*yr, "-", color="grey")
+        plt.gca().set_ylim([ymn, ymx])
+        plt.gca().set_xlabel(fn[k], size=15)
+        plt.gca().set_ylabel("%s PC %d score" % (label.title(), j + 1), size=15)
+        pdf.savefig()
 
 tempmean, tempw, tempv, tempscores = get_pcs(temp)
 psalmean, psalw, psalv, psalscores = get_pcs(psal)
 
 for j in range(3):
-    for k in range(3):
-        pcplot(j, k, tempmean, tempv, tempscores, "temperature")
+    pcplot(j, tempmean, tempv, tempscores, "temperature")
 
 for j in range(3):
-    for k in range(3):
-        pcplot(j, k, psalmean, psalv, psalscores, "salinity")
+    pcplot(j, psalmean, psalv, psalscores, "salinity")
 
 # CCA that agrees with R.
 def my_cca(X, Y):
