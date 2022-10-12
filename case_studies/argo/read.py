@@ -10,14 +10,14 @@ import os
 # script.
 qpath = "/home/kshedden/data/Teaching/argo/python"
 
-lat = np.loadtxt(os.path.join(qpath, "lat.csv.gz"))
-lon = np.loadtxt(os.path.join(qpath, "lon.csv.gz"))
+lat = np.loadtxt(os.path.join(qpath, "lat.csv.gz"), skiprows=1)
+lon = np.loadtxt(os.path.join(qpath, "lon.csv.gz"), skiprows=1)
 
-date = np.loadtxt(os.path.join(qpath, "date.csv.gz"), dtype="str")
+date = np.loadtxt(os.path.join(qpath, "date.csv.gz"), dtype="str", skiprows=1)
 date = pd.to_datetime(date)
 day = date - date.min()
 day = np.asarray([x.days for x in day])
 
-temp = np.loadtxt(os.path.join(qpath, "temp.csv.gz"))
-pressure = np.loadtxt(os.path.join(qpath, "pressure.csv.gz"))
-psal = np.loadtxt(os.path.join(qpath, "psal.csv.gz"))
+temp = np.loadtxt(os.path.join(qpath, "temp.csv.gz"), skiprows=1, delimiter=",")
+pressure = np.loadtxt(os.path.join(qpath, "pressure.csv.gz"), skiprows=1)
+psal = np.loadtxt(os.path.join(qpath, "psal.csv.gz"), skiprows=1, delimiter=",")

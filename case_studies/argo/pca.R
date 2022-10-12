@@ -43,6 +43,7 @@ for (j in 1:5) {
     # Plot the loadings
     da = data.frame(pressure=pressure, loading=eigvec[,j])
     plt = ggplot(aes(x=pressure, y=loading), data=da) + geom_line()
+    plt = plt + labs(x="Pressure", y="Temperature loading")
     plt = plt + ggtitle(sprintf("PC %d", j))
     print(plt)
 
@@ -55,6 +56,7 @@ for (j in 1:5) {
     }
     da$f = as.factor(da$f)
     plt = ggplot(aes(x=pressure, y=profile, color=f, group=f), data=da) + geom_line()
+    plt = plt + labs(x="Pressure", y="Temperature")
     plt = plt + ggtitle(sprintf("PC %d", j))
     print(plt)
 }
@@ -169,14 +171,16 @@ plot_sir = function() {
     plt = plt + ggtitle(sprintf("SIR with q=%d PC components", q))
     print(plt)
 
-    # Plot the scores against latitude.
+    # Plot the scores against latitude, longitude, and day.
     scores = X %*% b[,1:3]
-    for (j in 1:3) {
-        da = data.frame(lat=lat, lon=lon, day=day, s=scores[,j])
-        plt = ggplot(aes(x=lat, y=s), data=da) + geom_point()
-        plt = plt + labs(x="Latitude", y=sprintf("SIR component %d", j))
-        rasterize(plt, layers="Point")
-        print(plt)
+    for (v in c("lat", "lon", "day")) {
+        for (j in 1:3) {
+            da = data.frame(lat=lat, lon=lon, day=day, s=scores[,j])
+            plt = ggplot(aes(x=!!sym(v), y=s), data=da) + geom_point()
+            plt = plt + labs(x=v, y=sprintf("SIR component %d", j))
+            rasterize(plt, layers="Point")
+            print(plt)
+        }
     }
 }
 

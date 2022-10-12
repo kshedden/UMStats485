@@ -205,7 +205,7 @@ in $Y$.  This is often, but not always the case.
 ## Canonical Correlation Analysis
 
 Suppose we have two sets of variables and a collection of objects that
-are assessed with respect to all variables in both sets. PCA aims to understand
+are assessed with respect to all variables in both sets. CCA aims to understand
 the relationships between the two sets of variables.  This goal differs from
 the goal of PCA, which could be used to understand the
 relationships within each set of variables separately.
@@ -226,7 +226,7 @@ can yield insight into the relationship between the variables in $X$ and the var
 in $Y$.
 
 If the dimension is high, CCA can overfit the data.  A procedure analogous to
-principal components regression can be used.  We first reduce $X$ and $Y$ to lower
+principal components regression can be used to address this.  We first reduce $X$ and $Y$ to lower
 dimensions using PCA, then we fit the CCA using these reduced data.  The coefficients
 from the reduced PCA can then be re-expressed in the original coordinates for interpretation.
 

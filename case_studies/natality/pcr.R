@@ -26,7 +26,7 @@ mmv = lm(log_births_var ~ log_births_mean, data=mv)
 da = merge(births, pop, on="FIPS", how="left")
 da = merge(da, rucc, on="FIPS", how="left")
 da = mutate(da, logPop = log(da$Population))
-
+stop()
 # Basic GLM looking at births in terms of population and urbanicity.
 # This model does not account for correlations between repeated
 # observations on the same county.
