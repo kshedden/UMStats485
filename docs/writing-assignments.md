@@ -22,7 +22,7 @@ primarily make use of Poisson regression and factor methods as discussed
 in class, but your analysis should address a question that is considerably
 deeper than we had time to develop during the discussions in lectures.
 
-* (October 18th) Write a memo addressing a specific research question
+* (October 21st) Write a memo addressing a specific research question
 that can be addressed using the Argo float data.  Your question should
 account for the multivariate and functional structure of the data, considering
 some aspect of the manner in which temperature and salinity vary with
