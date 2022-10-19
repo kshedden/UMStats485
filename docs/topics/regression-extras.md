@@ -35,9 +35,11 @@ covariates in a "linear" model.  This retains the benefits of linear
 estimation, while allowing the model for the conditional mean function
 to be non-linear in the covariates.
 
-Including powers of covariates (like $x^2$) as regressors is now seen
-as a somewhat problematic approach, but it may be the earliest example
-of a general technique utilizing "basis functions".  A family of basis
+Including powers of covariates (like $x^2$) as regressors is a method
+known as *polynomial regression*, and is now seen
+as a somewhat problematic approach.  But it may be the earliest example
+of a general technique utilizing *basis functions* to incorporate nonlinearity
+into regression analyses.  A family of basis
 functions is a collection of functions $g_1, g_2, \ldots$, each from ${\cal
 R}\rightarrow {\cal R}$, such that we can include $g_1(x), g_2(x),
 \ldots$ as covariates in a model in place of $x$.  This allows the
