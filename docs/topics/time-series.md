@@ -1,12 +1,12 @@
 # Analysis of time series
 
 A *time series* is a sequence of observed values viewed as a single
-sample from a joint probability distribution. The central premise
-of a time series is that the order in which the values are observed
+sample from a joint probability distribution. The central premise of a
+time series is that the order in which the values are observed
 contains information about the underlying probability distribution.
-Let $y_1, y_2,
-\ldots,y_n$ denote a time series.  This is a sample of size $n=1$ from
-a probability distribution on the sample space ${\cal R}^n$.
+Let $y_1, y_2, \ldots,y_n$ denote a time series.  This is a sample of
+size $n=1$ from a probability distribution on the sample space ${\cal
+R}^n$.
 
 Some time series exhibit very strong *mean trends*.  For example, if
 $y_t$ is the global human population in year $t$, say where $t=1000,
@@ -42,9 +42,8 @@ model for its population distribution.
 
 Statistical analysis is *empirical* and aims to learn primarily from
 the data.  To achieve this goal, most statistical analysis is based on
-exploiting some
-form of "replication" in the data.  For example, if we wish to
-estimate the population mean from independent and identically
+exploiting some form of "replication" in the data.  For example, if we
+wish to estimate the population mean from independent and identically
 distributed (IID) data, we can use the sample mean of the data.  The
 replicated observations in the IID sample enable us to learn about the
 population mean from the sample mean.  However time series are not
@@ -62,8 +61,8 @@ $y_{t+1}$ is a constant that does not depend on $t$.  More generally,
 the correlation between $y_t$ and $y_{t+d}$ is a constant called the
 *autocorrelation at lag* $d$ that we will denote $\gamma_d$.  We may
 also say that $\gamma_d$ as a function of $d$ is the *autocorrelation
-function* of the time series.  This autocorrelation can be estimated by
-taking the Pearson correlation between $y_1, \ldots, y_{n-d}$ and
+function* of the time series.  This autocorrelation can be estimated
+by taking the Pearson correlation between $y_1, \ldots, y_{n-d}$ and
 $y_{1+d}, \ldots, y_n$.
 
 For IID data, the autocorrelation function is $(\sigma^2, 0, 0,
@@ -149,3 +148,49 @@ $$
 &&\cdots\\
 \end{array}\right).
 $$
+
+Using this response vector and design matrix, we can use many methods
+for fitting regression models including OLS, PCR, dimension reduction
+regression, kernel methods, and many forms of regularized modeling
+such as the lasso and ridge regression.
+
+## Hurst parameters
+
+A useful way to summarize the dependence structure of a time series is
+through the *Hurst parameter*.  There are various ways to introduce
+the Hurst parameter and we will only consider one approach here.
+Recall that if we have IID data $X_1, \ldots, X_m$, the variance of
+the sample mean $\bar{X}_m = (X_1 + \cdots X_m)/m$ is $\sigma^2/m$.
+Thus, if we double the sample size, the variance of the sample mean is
+reduced by a factor of two.  It turns out that this scaling
+relationship between the variance of the sample mean and the sample
+size continues to hold as long as the dependence is "short range" as
+defined above.  However if the dependence is long range, the variance
+will scale in a qualitatively different way.
+
+For a given block-size $b$, we can calculate the sample means computed
+for consecutive blocks of $b$ observations, $m^b_1 = {\rm Avg}(y_1,
+\ldots, y_b)$, $m^b_2={\rm Avg}(y_{b+1}, \ldots, y_{2b})$ etc., and
+then calculate the sample variance of these sample means:
+
+$$
+v_b = {\rm var}(m^b_1, m^b_2, \ldots).
+$$
+
+Finally, we can consider the log-space relationship between $\log(b)$
+and $\log(v_b)$.  If $v_b = a\cdot b^f$ then $\log(v_b) = \log(a) +
+f\log(b)$, so $f$ is the slope of $\log(v_b)$ on $\log(b)$.  For IID
+and short-range dependent data, then $f=-1$ will hold.  If $f>-1$ then
+the variances decreases slower than in the IID case, which is a
+logical consequence of long-range dependence.  Long-range dependence
+implies that the time series is not mixing and does not exhibit enough
+independence for the sample means derived from different parts of the
+series to average to something that reflects the population struture.
+
+The Hurst parameter is defined to be $h = 1 + b/2$, where the slope
+$b$ is defined as above.  When $b=-1$, the Hurst parameter is $h=1/2$.
+When $b>-1$, it follows that $h > 1/2$.
+
+The description of the Hurst parameter above based on variances of
+sample means and considering how these variances scale with the sample
+size leads directly to an estimator of the Hurst parameter.
