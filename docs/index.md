@@ -19,3 +19,5 @@
 [Generalized Linear Models](topics/glm.md)
 
 [Multivariate methods](topics/multivariate.md)
+
+[Time series analysis](topics/time-series.md)
