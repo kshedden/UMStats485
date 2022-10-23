@@ -1,7 +1,10 @@
 # Analysis of time series
 
 A *time series* is a sequence of observed values viewed as a single
-sample from a joint probability distribution. Let $y_1, y_2,
+sample from a joint probability distribution. The central premise
+of a time series is that the order in which the values are observed
+contains information about the underlying probability distribution.
+Let $y_1, y_2,
 \ldots,y_n$ denote a time series.  This is a sample of size $n=1$ from
 a probability distribution on the sample space ${\cal R}^n$.
 
@@ -35,10 +38,11 @@ the so-called *ARIMA* models.  We will not review model-based
 approaches to time series analysis here.  Instead we focus on
 approaches to time series analysis that aim to capture certain
 features of a time series without aiming to produce a comprehensive
-model for that population.
+model for its population distribution.
 
 Statistical analysis is *empirical* and aims to learn primarily from
-the data.  To achieve this goal, most of statistics is based on some
+the data.  To achieve this goal, most statistical analysis is based on
+exploiting some
 form of "replication" in the data.  For example, if we wish to
 estimate the population mean from independent and identically
 distributed (IID) data, we can use the sample mean of the data.  The
@@ -56,14 +60,14 @@ meaningful results.
 If a time series is stationary, then the correlation between $y_t$ and
 $y_{t+1}$ is a constant that does not depend on $t$.  More generally,
 the correlation between $y_t$ and $y_{t+d}$ is a constant called the
-*autocorrelation at lag* $d$ that we will call $\gamma_d$.  We may
+*autocorrelation at lag* $d$ that we will denote $\gamma_d$.  We may
 also say that $\gamma_d$ as a function of $d$ is the *autocorrelation
-function* of the time series.  This correlation can be estimated by
+function* of the time series.  This autocorrelation can be estimated by
 taking the Pearson correlation between $y_1, \ldots, y_{n-d}$ and
 $y_{1+d}, \ldots, y_n$.
 
 For IID data, the autocorrelation function is $(\sigma^2, 0, 0,
-\ldots)$, or $\gamma_j = \sigma^2{\cal I}_{j=d}$.  Other
+\ldots)$, or $\gamma_j = \sigma^2{\cal I}_{j=1}$.  Other
 commonly-encountered forms for the autocorrelation function are an
 exponential form $\gamma_j \propto \exp(-j/\lambda)$, or a power-law
 form $\gamma_j = c/(1+j)^b$.
@@ -77,9 +81,7 @@ power-law case, the autocorrelations are summable if and only if $b >
 
 A time series with summable autocorrelations exhibits *short range
 dependence* while otherwise the series exhibits *long range
-dependence*.
-
-A more extreme case of short range dependendence is known as
+dependence*.  A special case of short range dependendence is known as
 *m-dependence*, where $\gamma_j = 0$ when $j>m$.
 
 ## Autoregression
@@ -142,8 +144,8 @@ $$
 \left(
 \begin{array}{rrrrr}
 1 & y_t & y_{t-1} & \cdots & y_{t-m+1}\\
-1 & y_{t-1} & y_{t-2} & \cdots & y_{t-m}\\
-1 & y_{t-2} & y_{t-3} & \cdots & y_{t-m-1}\\
+1 & y_{t+1} & y_{t} & \cdots & y_{t-m+2}\\
+1 & y_{t+2} & y_{t+1} & \cdots & y_{t-m+3}\\
 &&\cdots\\
 \end{array}\right).
 $$
