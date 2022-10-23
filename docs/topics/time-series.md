@@ -8,10 +8,15 @@ Let $y_1, y_2, \ldots,y_n$ denote a time series.  This is a sample of
 size $n=1$ from a probability distribution on the sample space ${\cal
 R}^n$.
 
-Some time series exhibit very strong *mean trends*.  For example, if
+Some time series exhibit strong *mean trends*.  For example, if
 $y_t$ is the global human population in year $t$, say where $t=1000,
-1001, \ldots$, then $y_t$ is strictly increasing (although we know
-that within 100 years from now it will very likely begin to decline).
+1001, \ldots$, then $y_t$ is increasing.  We don't know for sure
+if this is a trend in the mean, i.e. that $E[y_t]$ is increasing,
+since we can only observe the history
+of humanity on Earth one time, but based on the nature of biological
+growth, it is reasonable to view the increasing values of $y_t$ as
+an inevitable fact that would recur in any "replication" of the
+observations.  That is, it is reasonable to supose that $E[y_t]$ is increasing.
 Many methods of time series analysis assume that no mean trend is
 present, or that any mean trend present in the observed time series
 has been removed.
@@ -22,7 +27,7 @@ Such a series may still have variance and/or covariance trends,
 e.g. perhaps ${\rm var}(y_t)$ is increasing in $t$, or ${\rm cov}(y_t,
 y_{t+1})$ is increasing (or decreasing) in $t$.
 
-A time series is *stationary* if for any $m>0$, the probability
+A time series is *stationary* if for any $m>0$, the joint probability
 distribution of $y_t, y_{t+1}, \ldots, y_{t+m}$ does not depend on
 $t$. For example, the probability distribution of $(y_{100}, y_{101})$
 is the same as the probability distribution of $(y_{200}, y_{201})$.
@@ -44,13 +49,13 @@ Statistical analysis is *empirical* and aims to learn primarily from
 the data.  To achieve this goal, most statistical analysis is based on
 exploiting some form of "replication" in the data.  For example, if we
 wish to estimate the population mean from independent and identically
-distributed (IID) data, we can use the sample mean of the data.  The
+distributed (IID) data, we can use the sample mean of the data as an estimate of the population mean.  The
 replicated observations in the IID sample enable us to learn about the
-population mean from the sample mean.  However time series are not
-generally IID.  Fortunately, many time series exhibit a property
+population mean from the sample mean.  However time series are
+generally not IID.  Fortunately, many time series exhibit a property
 called *mixing* that implies that forming averages over the values of
 a time series enables estimation of population parameters, despite the
-lack of IID data.  Not all time series are mixing, but when a time
+lack of IID data.  Not all time series are mixing, and when a time
 series is not mixing most of the methods discussed here will not give
 meaningful results.
 
@@ -60,8 +65,8 @@ If a time series is stationary, then the correlation between $y_t$ and
 $y_{t+1}$ is a constant that does not depend on $t$.  More generally,
 the correlation between $y_t$ and $y_{t+d}$ is a constant called the
 *autocorrelation at lag* $d$ that we will denote $\gamma_d$.  We may
-also say that $\gamma_d$ as a function of $d$ is the *autocorrelation
-function* of the time series.  This autocorrelation can be estimated
+also view $\gamma_d$ as a function of $d$ that is the *autocorrelation
+function* of the time series.  This autocorrelation at lag $d$ can be estimated
 by taking the Pearson correlation between $y_1, \ldots, y_{n-d}$ and
 $y_{1+d}, \ldots, y_n$.
 
@@ -149,7 +154,7 @@ $$
 \end{array}\right).
 $$
 
-Using this response vector and design matrix, we can use many methods
+Using this response vector and design matrix, we can apply many methods
 for fitting regression models including OLS, PCR, dimension reduction
 regression, kernel methods, and many forms of regularized modeling
 such as the lasso and ridge regression.
@@ -160,7 +165,7 @@ A useful way to summarize the dependence structure of a time series is
 through the *Hurst parameter*.  There are various ways to introduce
 the Hurst parameter and we will only consider one approach here.
 Recall that if we have IID data $X_1, \ldots, X_m$, the variance of
-the sample mean $\bar{X}_m = (X_1 + \cdots X_m)/m$ is $\sigma^2/m$.
+the sample mean $\bar{X}_m = (X_1 + \cdots + X_m)/m$ is $\sigma^2/m$.
 Thus, if we double the sample size, the variance of the sample mean is
 reduced by a factor of two.  It turns out that this scaling
 relationship between the variance of the sample mean and the sample
@@ -181,16 +186,67 @@ Finally, we can consider the log-space relationship between $\log(b)$
 and $\log(v_b)$.  If $v_b = a\cdot b^f$ then $\log(v_b) = \log(a) +
 f\log(b)$, so $f$ is the slope of $\log(v_b)$ on $\log(b)$.  For IID
 and short-range dependent data, then $f=-1$ will hold.  If $f>-1$ then
-the variances decreases slower than in the IID case, which is a
+the variances decrease slower than in the IID case, which is a
 logical consequence of long-range dependence.  Long-range dependence
 implies that the time series is not mixing and does not exhibit enough
 independence for the sample means derived from different parts of the
 series to average to something that reflects the population struture.
 
 The Hurst parameter is defined to be $h = 1 + b/2$, where the slope
-$b$ is defined as above.  When $b=-1$, the Hurst parameter is $h=1/2$.
+$b$ is defined as above.  When $b=-1$ (as in IID data), the Hurst parameter is $h=1/2$.
 When $b>-1$, it follows that $h > 1/2$.
 
-The description of the Hurst parameter above based on variances of
-sample means and considering how these variances scale with the sample
-size leads directly to an estimator of the Hurst parameter.
+## Differencing
+
+A simple and important technique in time series analysis is *differencing*.
+If our time series is $y_1, y_2, \ldots$, then the differenced time
+series is $y_2-y_1$, $y_3-y_2, \ldots$.  We can then difference these
+differences, yielding second order differences $y_3-2y_2+y_1$,
+$y_4-2y_3+y_2$, and so on.  Differencing is analogous to taking the
+derivative of a smooth function, and has the effect of removing longer-range
+trends and focusing on more local structure.  It turns out that in many
+cases the differenced series have shorter-range dependence than the original
+series.  At the same time differencing loses certain information about the
+series.  In practice it may be helpful to difference one or two times and
+consider the structure of the original series as well as a few differenced
+series.
+
+## Heavy-tailed distributions and tail parameter estimation
+
+Tail parameters are a property of univariate distributions and do not directly
+relate to time series.  However, there is an important way in which tail parameters
+and time series are related, so we discuss tail parameters here.  The tail parameter
+of a probability distribution $f(t)$ describes how rapidly the tail probability $P(X>x)$
+goes to zero as $x$ increases.  In a *heavy tailed* distribution, these probabilities
+do not shrink exponentially fast, which means that
+
+$$
+\lim_{x\rightarrow \infty} \exp(tx) \cdot P(X>x) = \infty
+$$
+
+for all $t > 0$.  To understand this definition, suppose that it does not hold,
+so there is a value $t>0$ and a constant $c$ such that
+
+$$
+\lim_{x\rightarrow \infty} \exp(tx) \cdot P(X>x) = c
+$$
+
+Roughly speaking this means that $P(X>x)$ behaves like $\exp(-tx)$ for large $x$, or
+if $c = 0$ it means that $P(X>x)$ is dominated by $\exp(-tx)$ for large $x$.
+
+To quantify the tail of a probability distribution
+based on a sample of data $\\{X_i\\}$, consider the *order statistics* $X_{(1)}\le X_{(2)} \le \cdots \le X_{(n)}$.
+The "Hill slope estimate" is
+
+$$
+k^{-1}\sum_{i=0}^{k-1} \log(X_{(n-i)}) - \log(X_{(n-k)}),
+$$
+
+where $k$ is a chosen tuning parameter.  We won't be able to justify this entirely, but
+note that this is the average in log space of the differences between the upper $k$
+order statistics, and the $n-k^{\rm th}$ order statistic.  This turns out to be an
+estimator of the constant $\gamma$ in the expression $1 - F(x) \sim x^{-1/\gamma}$,
+where $F$ is the CDF corresponding to the pdf $f$.
+
+If $F$ lacks heavy tails then $\gamma = 0$ but for heavy-tailed distributions we have
+$\gamma > 0$ and the estimator defined above should reflect this.
