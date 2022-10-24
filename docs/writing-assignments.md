@@ -36,3 +36,9 @@ existing question.  It is acceptable to borrow extensively from your previous
 memo, but the revised memo should also include substantial new analysis,
 interpretation, or discussion.
 
+* (November 6th) Write a memo addressing a specific research question
+that can be addressed using the NHANES data, specifically focusing on
+blood pressure as an outcome.  Your memo should consider the nonlinear
+and non-additive relationships between several explanatory variables and
+blood pressure, considering conditional mean blood pressure as well as other
+aspects of its conditional distribution.
