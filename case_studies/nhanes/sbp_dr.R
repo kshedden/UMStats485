@@ -10,8 +10,8 @@ dx = dx[complete.cases(dx),]
 dx$RIAGENDRx = recode(dx$RIAGENDR, "F"=1, "M"=-1)
 
 for (m in names(dx)) {
-    if (is.numeric(dx[,m])) {
-        dx[,m] = scale(dx[,m], scale=F)
+    if (is.numeric(dx[[m]])) {
+        dx[[m]] = scale(dx[[m]], scale=F)
     }
 }
 

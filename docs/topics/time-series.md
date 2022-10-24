@@ -173,7 +173,7 @@ size continues to hold as long as the dependence is "short range" as
 defined above.  However if the dependence is long range, the variance
 will scale in a qualitatively different way.
 
-For a given block-size $b$, we can calculate the sample means computed
+For a given block-size $b$, we can calculate the sample means
 for consecutive blocks of $b$ observations, $m^b_1 = {\rm Avg}(y_1,
 \ldots, y_b)$, $m^b_2={\rm Avg}(y_{b+1}, \ldots, y_{2b})$ etc., and
 then calculate the sample variance of these sample means:
