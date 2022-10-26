@@ -20,7 +20,7 @@ for (file in list.files(pa)) {
     if (!endsWith(file, ".XPT")) {
         next
     }
-    f = sprintf("%s/%s", pa, file)
+    f = file.path(pa, file)
     da = read_xpt(f)
     write_csv(da, gsub(".XPT", ".csv.gz", f))
 }

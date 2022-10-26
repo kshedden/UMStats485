@@ -5,9 +5,11 @@ source("read.R")
 
 pdf("nhanes_sbp_r.pdf")
 
+# Data for plotting
 dp = df[1:100,]
-dp[,"RIDAGEYR"] = seq(18, 80, length.out=100)
-dp[,"BPXSY1"] = 0
+dp$RIDAGEYR = seq(18, 80, length.out=100)
+dp$BPXSY1 = 0
+dp$RIDRETH1 = "OH"
 
 # Plot predicted SBP by sex
 plot1 = function(mm, ii, dbands=FALSE) {
@@ -153,5 +155,40 @@ all_plots(m8, 8)
 f9 = as.formula("BPXSY1 ~ bs(RIDAGEYR, 5) * BMXBMI * RIAGENDR")
 m9 = lm(f9, df)
 all_plots(m9, 9)
+
+# Full interactions among nonlinear age, BMI, and sex with additive control for ethnicity
+f10 = as.formula("BPXSY1 ~ bs(RIDAGEYR, 5) * BMXBMI * RIAGENDR + RIDRETH1")
+m10 = lm(f10, df)
+all_plots(m10, 10)
+
+# Full interactions among nonlinear age, BMI, and sex with ethnicity x sex interactions
+f11 = as.formula("BPXSY1 ~ (bs(RIDAGEYR, 5) * BMXBMI + RIDRETH1) * RIAGENDR")
+m11 = lm(f11, df)
+all_plots(m11, 11)
+
+# Full interactions among nonlinear age, BMI, and sex, and between sex and ethnicity, and
+# between linear age and ethnicity.
+f12 = as.formula("BPXSY1 ~ bs(RIDAGEYR, 5) * BMXBMI * RIAGENDR + (RIAGENDR + RIDAGEYR) * RIDRETH1")
+m12 = lm(f12, df)
+all_plots(m12, 12)
+
+# Full interactions among nonlinear age, BMI, and sex, and between sex and ethnicity, and
+# between nonlinear age and ethnicity.
+f13 = as.formula("BPXSY1 ~ bs(RIDAGEYR, 5) * BMXBMI * RIAGENDR + (RIAGENDR + bs(RIDAGEYR, 5)) * RIDRETH1")
+m13 = lm(f13, df)
+all_plots(m13, 13)
+
+# Full interactions among nonlinear age, BMI, sex, and ethnicity.
+f14 = as.formula("BPXSY1 ~ bs(RIDAGEYR, 5) * BMXBMI * RIAGENDR * RIDRETH1")
+m14 = lm(f14, df)
+all_plots(m14, 14)
+
+# Calculate AIC for all models
+mm = list(m0, m1, m2, m3, m4, m5, m6, m7, m8, m9, m10, m11, m12, m13, m14)
+maic = array(0, length(mm))
+for (i in 1:length(mm)) {
+    maic[i] = AIC(mm[[i]])
+}
+maic = maic - min(maic)
 
 dev.off()

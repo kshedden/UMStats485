@@ -36,7 +36,8 @@ plotstrat = function(j, k) {
         data.frame(score=xx, sbp=f(xx))
     })
     dg$stratq = as.factor(dg$stratq)
-    plt = ggplot(aes(x=score, y=sbp, color=stratq), data=dg) + geom_line()
+    plt = ggplot(aes(x=score, y=sbp, color=stratq), data=dg)
+    plt = plt + geom_line()
     plt = plt + labs(x=sprintf("Score %d", k), y="SBP (centered)")
     print(plt)
 }
@@ -58,15 +59,20 @@ plt = ggplot(aes(s1, s2, z=yy), data=xx) + geom_contour_filled()
 print(plt)
 
 # Plot the DV (SBP) against each score, or plot each score against every covariate.
+dx$sex2 = recode(dx$RIAGENDR, "F"="EF", "M"="EM")
 for (j in 1:2) {
     for (x in names(dx)) {
         if (x != "BPXSY1") {
-            dp = data.frame(x=dx[[x]], y=scores[,j], sex=as.factor(dx$RIAGENDR))
-            plt = ggplot(aes(x=x, y=y, color=sex), data=dp) + geom_point() + geom_smooth(se=FALSE)
+            dp = data.frame(x=dx[[x]], y=scores[,j], sex=as.factor(dx$RIAGENDR),
+                            sex2=as.factor(dx$sex2))
+            plt = ggplot(aes(x=x, y=y, color=sex), data=dp)
+            plt = plt + geom_point(alpha=0.2, fill=NA)
+            plt = plt + geom_smooth(se=FALSE)
             plt = plt + labs(x=x, y=sprintf("Score %d", j))
         } else {
             dp = data.frame(x=scores[,j], y=dx[[x]])
-            plt = ggplot(aes(x=x, y=y), data=dp) + geom_point() + geom_smooth(se=FALSE)
+            plt = ggplot(aes(x=x, y=y), data=dp) + geom_point(alpha=0.2, fill=NA)
+            plt = plt + geom_smooth(se=FALSE)
             plt = plt + labs(y=x, x=sprintf("Score %d", j))
         }
         print(plt)

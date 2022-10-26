@@ -182,9 +182,43 @@ m9 = sm.OLS.from_formula(f9, df)
 r9 = m9.fit()
 plot_all(r9, 9)
 
+# Full interactions among nonlinear age, BMI, and sex with additive control for ethnicity
+f10 = "BPXSY1 ~ bs(RIDAGEYR, 5) * BMXBMI * RIAGENDR + RIDRETH1"
+m10 = sm.OLS.from_formula(f10, df)
+r10 = m10.fit()
+plot_all(r10, 10)
+
+# Full interactions among nonlinear age, BMI, and sex with ethnicity x sex interactions
+f11 = "BPXSY1 ~ (bs(RIDAGEYR, 5) * BMXBMI + RIDRETH1) * RIAGENDR"
+m11 = sm.OLS.from_formula(f11, df)
+r11 = m11.fit()
+plot_all(r11, 11)
+
+# Full interactions among nonlinear age, BMI, and sex, and between sex and ethnicity, and
+# between linear age and ethnicity.
+f12 = "BPXSY1 ~ bs(RIDAGEYR, 5) * BMXBMI * RIAGENDR + (RIAGENDR + RIDAGEYR) * RIDRETH1"
+m12 = sm.OLS.from_formula(f12, df)
+r12 = m12.fit()
+plot_all(r12, 12)
+
+# Full interactions among nonlinear age, BMI, and sex, and between sex and ethnicity, and
+# between nonlinear age and ethnicity.
+f13 = "BPXSY1 ~ bs(RIDAGEYR, 5) * BMXBMI * RIAGENDR + (RIAGENDR + bs(RIDAGEYR, 5)) * RIDRETH1"
+m13 = sm.OLS.from_formula(f13, df)
+r13 = m13.fit()
+plot_all(r13, 13)
+
+# Full interactions among nonlinear age, BMI, sex, and ethnicity.
+f14 = "BPXSY1 ~ bs(RIDAGEYR, 5) * BMXBMI * RIAGENDR * RIDRETH1"
+m14 = sm.OLS.from_formula(f14, df)
+r14 = m14.fit()
+plot_all(r14, 14)
+
 # Check AICs
 print("AIC for models 0-9:")
-print([x.aic for x in (r0, r1, r2, r3, r4, r5, r6, r7, r8, r9)])
+maic = [x.aic for x in (r0, r1, r2, r3, r4, r5, r6, r7, r8, r9, r10, r11, r12, r13, r14)]
+maic = np.asarray(maic)
+maic -= maic.min()
 
 pdf.close()
 
