@@ -16,10 +16,16 @@ x_spline = dx[["RIDAGEYR", "BMXBMI"]]
 bs = BSplines(x_spline, df=[12, 10], degree=[3, 3])
 
 f0 = "BPXSY1 ~ RIDAGEYR + BMXBMI + RIAGENDR"
-alpha = np.r_[10000., 100.]
+alpha = np.r_[20., 20.]
 m0 = GLMGam.from_formula(f0, data=dx, smoother=bs, alpha=alpha)
 r0 = m0.fit()
 
-alpha = m0.select_penweight(niter=20)[0]
+r0.plot_partial(0, cpr=True)
+pdf.savefig()
+
+r0.plot_partial(1, cpr=True)
+pdf.savefig()
+
+#alpha = m0.select_penweight(niter=20)[0]
 
 pdf.close()
