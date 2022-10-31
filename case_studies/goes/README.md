@@ -26,17 +26,17 @@ A series of satellites called
 (for *Geostationary Operational Environmental Satellite*) have been
 operated for several decades to monitor many characteristics of the
 Earth, including the magnetosphere.  Here we analyze X-ray flux data
-for the year 2019, captured in two variables named flux-1 and flux-2.
+captured in two variables named flux-1 and flux-2.
 These are time series measured at approximately a 2 second sampling
 rate.  However the sampling is not consistently at a 2-second cadence,
 and there are occasional large gaps.
 
-X-ray flux has units if watts per square meter. A strong X-ray flux event is
+X-ray flux has units of watts per square meter. A strong X-ray flux event is
 called a "flare", and flares can be classified in increasing severity as
-B, C, M, and X class flares according to [these thresholds](http://solar-center.stanford.edu/SID/activities/flare.html#:~:text=Scientists%20classify%20solar%20flares%20according,M9%2C%20and%20X1%20to%20X9.).
+B, C, M, and X class flares according to these [thresholds](http://solar-center.stanford.edu/SID/activities/flare.html#:~:text=Scientists%20classify%20solar%20flares%20according,M9%2C%20and%20X1%20to%20X9.).
 
 There are a number of interesting questions that can be addressed with
-these data.  Here are a few examples
+the GOES X-ray flux data.  Here are a few examples
 
 * What is the temporal correlation structure of the flux levels?
 
