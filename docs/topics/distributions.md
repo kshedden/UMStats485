@@ -2,11 +2,14 @@
 
 Probability distributions are the central object of probability theory and statistics.
 Probability theory provides us with means of representing probability distributions,
-such as the probability density function (pdf), cumulative distribution function
-(cdf), and moment generating function (mgf).  It also provides us with a means to
+such as the [probability density function](https://en.wikipedia.org/wiki/Probability_density_function) (pdf),
+[cumulative distribution function](https://en.wikipedia.org/wiki/Cumulative_distribution_function)
+(cdf), and moment generating function (https://en.wikipedia.org/wiki/Moment-generating_function) (mgf).
+It also provides us with a means to
 summarize probability distributions using characteristics such as the mean and
 variance.  Statistics provides us with estimators of these quantities, such
-as the empirical cdf, the histogram (an estimator of the pdf), and the sample mean.
+as the [empirical cdf](https://en.wikipedia.org/wiki/Empirical_distribution_function),
+the [histogram](https://en.wikipedia.org/wiki/Histogram) (an estimator of the pdf), and the sample mean.
 
 The two most common characteristics used to summarize univariate distributions of
 a quantitative value (i.e. probability distributions on the real line) are *moments*
