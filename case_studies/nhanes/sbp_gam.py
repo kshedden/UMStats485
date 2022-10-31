@@ -26,6 +26,7 @@ pdf.savefig()
 r0.plot_partial(1, cpr=True)
 pdf.savefig()
 
+# Very slow
 #alpha = m0.select_penweight(niter=20)[0]
 
 pdf.close()

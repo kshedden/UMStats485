@@ -20,4 +20,6 @@
 
 [Multivariate methods](topics/multivariate.md)
 
+[Characterizing distributions](topics/distributions.md)
+
 [Time series analysis](topics/time-series.md)

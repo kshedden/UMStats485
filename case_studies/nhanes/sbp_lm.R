@@ -3,7 +3,7 @@ library(ggplot2)
 library(readr)
 source("read.R")
 
-pdf("nhanes_sbp_r.pdf")
+pdf("sbp_lm_r.pdf")
 
 # Data for plotting
 dp = df[1:100,]
