@@ -1,7 +1,7 @@
 # Characterizing distributions
 
 Probability distributions are the central object of probability theory and statistics.
-Probability theory provides us with means of representing probability distributions,
+Probability theory provides us with several ways to represent a probability distribution,
 such as the [probability density function](https://en.wikipedia.org/wiki/Probability_density_function) (pdf),
 [cumulative distribution function](https://en.wikipedia.org/wiki/Cumulative_distribution_function)
 (cdf), and [moment generating function](https://en.wikipedia.org/wiki/Moment-generating_function) (mgf).
@@ -15,9 +15,9 @@ The two most common characteristics used to summarize univariate distributions o
 a quantitative value (i.e. probability distributions on the real line) are [moments](https://en.wikipedia.org/wiki/Moment_(mathematics))
 and [quantiles](https://en.wikipedia.org/wiki/Quantile).  Both of these approaches can provide us with measures of
 *location* (also known as *centrality* or *central tendency*), such as the mean
-or median, and measures of dispersion (also known as *scale*), such as the standard
-deviation, [inter-quartile range](https://en.wikipedia.org/wiki/Interquartile_range) (IQR),
-or [MAD](https://en.wikipedia.org/wiki/Median_absolute_deviation) (median absolute deviation).  Skew
+or median, and measures of [dispersion](https://en.wikipedia.org/wiki/Statistical_dispersion) (also known as *scale*), such as the
+[standard deviation](https://en.wikipedia.org/wiki/Standard_deviation), [inter-quartile range](https://en.wikipedia.org/wiki/Interquartile_range) (IQR),
+or [MAD](https://en.wikipedia.org/wiki/Median_absolute_deviation) (median absolute deviation).  [Skew](https://en.wikipedia.org/wiki/Skewness)
 and [kurtosis](https://en.wikipedia.org/wiki/Kurtosis) are additional properties of probability distributions on the real
 line that are sometimes of interest.
 
