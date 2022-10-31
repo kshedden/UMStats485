@@ -22,7 +22,7 @@ print(dr.test(m))
 
 scores = m$x %*% m$evectors
 
-pdf("nhanes_dr_r.pdf")
+pdf("sbp_dr_r.pdf")
 
 # Stratify on the j'th score, plot the mean of SBP with respect to the
 # k'th score.

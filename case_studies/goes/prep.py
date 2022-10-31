@@ -9,6 +9,7 @@ tpath = "/scratch/stats_dept_root/stats_dept1/kshedden/goes/python"
 # Location of the csv file produced by this script
 qpath = "/home/kshedden/data/Teaching/goes"
 
+# Create a single long-form data file for the given year.
 def prep_year(year):
 
     xl = []

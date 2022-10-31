@@ -4,9 +4,16 @@ import matplotlib.pyplot as plt
 from matplotlib.backends.backend_pdf import PdfPages
 from read import get_goes
 
+# Generate summary time series plots showing the daily minimum and
+# daily maximum flux for each instrument (flux-1 and flux-2) in
+# each year.  Mark the thresholds for C, M, and X flares with
+# horizontal lines.
+
+years = [2017, 2019]
+
 pdf = PdfPages("tsplot_py.pdf")
 
-for year in [2017, 2019]:
+for year in years:
 
     df = get_goes(year)
     df["Time"] = pd.to_datetime(df[["Year", "Month", "Day"]])

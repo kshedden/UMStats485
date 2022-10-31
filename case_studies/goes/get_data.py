@@ -1,10 +1,15 @@
 import os, requests
 from calendar import monthrange
 
+# Set this path to a directory where raw files can be stored.
+# These files can be deleted after running the prep.py script.
 tpath = "/scratch/stats_dept_root/stats_dept1/kshedden/goes/python"
 
 url = "https://umbra.nascom.nasa.gov/goes/fits"
 
+# Get data for a specific year, from a specific GOES satellite.
+# Browse the url above to see which satellites produce data in
+# each year.
 def getdata(year, go):
     os.makedirs("%s/%04d" % (tpath, year), exist_ok=True)
     print("%d: " % year, end="")

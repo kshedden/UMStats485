@@ -27,8 +27,8 @@ A series of satellites called
 operated for several decades to monitor many characteristics of the
 Earth, including the magnetosphere.  Here we analyze X-ray flux data
 captured in two variables named flux-1 and flux-2.
-These are time series measured at approximately a 2 second sampling
-rate.  However the sampling is not consistently at a 2-second cadence,
+These are time series measured at approximately a two-second sampling
+rate.  However the sampling is not consistently at a two-second cadence,
 and there are occasional large gaps.
 
 X-ray flux has units of watts per square meter. A strong X-ray flux event is
