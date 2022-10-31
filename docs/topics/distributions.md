@@ -4,7 +4,7 @@ Probability distributions are the central object of probability theory and stati
 Probability theory provides us with means of representing probability distributions,
 such as the [probability density function](https://en.wikipedia.org/wiki/Probability_density_function) (pdf),
 [cumulative distribution function](https://en.wikipedia.org/wiki/Cumulative_distribution_function)
-(cdf), and moment generating function (https://en.wikipedia.org/wiki/Moment-generating_function) (mgf).
+(cdf), and [moment generating function](https://en.wikipedia.org/wiki/Moment-generating_function) (mgf).
 It also provides us with a means to
 summarize probability distributions using characteristics such as the mean and
 variance.  Statistics provides us with estimators of these quantities, such
