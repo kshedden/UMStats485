@@ -12,8 +12,8 @@ as the [empirical cdf](https://en.wikipedia.org/wiki/Empirical_distribution_func
 the [histogram](https://en.wikipedia.org/wiki/Histogram) (an estimator of the pdf), and the sample mean.
 
 The two most common characteristics used to summarize univariate distributions of
-a quantitative value (i.e. probability distributions on the real line) are *moments*
-and *quantiles*.  Both of these approaches can provide us with measures of
+a quantitative value (i.e. probability distributions on the real line) are [moments](https://en.wikipedia.org/wiki/Moment_(mathematics))
+and [quantiles](https://en.wikipedia.org/wiki/Quantile).  Both of these approaches can provide us with measures of
 *location* (also known as *centrality* or *central tendency*), such as the mean
 or median, and measures of dispersion (also known as *scale*), such as the standard
 deviation, inter-quartile range (IQR), or MAD (median absolute deviation).  Skew
@@ -27,7 +27,7 @@ and ways to estimate these characteristics from data.
 
 The tail parameter
 of a random variable $X$ describes how rapidly the tail probability $P(X>x)$
-(the complementary CDF) goes to zero as $x$ increases.  In a *heavy tailed* distribution,
+(the complementary CDF) converges to zero as $x$ grows.  In a [heavy tailed distribution](https://en.wikipedia.org/wiki/Heavy-tailed_distribution),
 these probabilities
 do not shrink exponentially fast, which means that
 
