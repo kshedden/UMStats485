@@ -16,8 +16,9 @@ a quantitative value (i.e. probability distributions on the real line) are [mome
 and [quantiles](https://en.wikipedia.org/wiki/Quantile).  Both of these approaches can provide us with measures of
 *location* (also known as *centrality* or *central tendency*), such as the mean
 or median, and measures of dispersion (also known as *scale*), such as the standard
-deviation, inter-quartile range (IQR), or MAD (median absolute deviation).  Skew
-and kurtosis are additional properties of probability distributions on the real
+deviation, [inter-quartile range](https://en.wikipedia.org/wiki/Interquartile_range) (IQR),
+or [MAD](https://en.wikipedia.org/wiki/Median_absolute_deviation) (median absolute deviation).  Skew
+and [kurtosis](https://en.wikipedia.org/wiki/Kurtosis) are additional properties of probability distributions on the real
 line that are sometimes of interest.
 
 Below we summarize some less familiar characteristics of probability distributions,
@@ -45,10 +46,10 @@ $$
 Roughly speaking this means that $P(X>x)$ behaves like $\exp(-tx)$ for large $x$, or
 if $c = 0$ it means that $P(X>x)$ is dominated by $\exp(-tx)$ for large $x$.
 
-If a distribution is not heavy-tailed, then it may have a *power law* tail, meaning
+If a distribution is not heavy-tailed, then it may have a [power law](https://en.wikipedia.org/wiki/Power_law) tail, meaning
 that $P(X>x) ~ x^{-\alpha}$.  The value of $\alpha$ is called the *tail index*.  To
 estimate the tail index based on a sample of data $\\{X_i\\}$,
-consider the *order statistics* $X_{(1)}\le X_{(2)} \le \cdots \le X_{(n)}$.
+consider the [order statistics](https://en.wikipedia.org/wiki/Order_statistic) $X_{(1)}\le X_{(2)} \le \cdots \le X_{(n)}$.
 The "Hill slope estimate" of $\alpha$ is
 
 $$
