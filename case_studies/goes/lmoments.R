@@ -26,5 +26,4 @@ for (j in 1:4) {
     }
 }
 
-
 dev.off()
