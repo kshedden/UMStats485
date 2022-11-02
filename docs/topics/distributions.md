@@ -63,9 +63,9 @@ order statistics, and the $n-k^{\rm th}$ order statistic.
 ## L-moments
 
 A classical statistical moment is defined to be the expected value of a random
-variable raised to a power.  For example, $E[X^1]$ is the expected value and
-$E[X^2]$ is the raw second moment.  In practice we usually work with the centered
-moments, for example $E[(X-EX)^2]$ is the centered second moment, which is better known
+variable raised to a power.  For example, $E[X]$ is the expected value and
+$E[X^2]$ is the raw second moment.  In practice we usually work with the *centered
+moments*, for example $E[(X-EX)^2]$ is the centered second moment, which is better known
 as the variance.
 
 In principle, if you know all the moments of a distribution, then you know everything
@@ -79,12 +79,14 @@ sample sizes.
 
 As noted earlier, many descriptive statistics are either moments or quantiles.  If high
 order moments are hard to estimate, perhaps there is a quantile-based analogue to these
-moments that is easier to estimate.  This idea led to the development of *L-moments* which
+moments that is easier to estimate?  This idea led to the development of [L-moments](https://en.wikipedia.org/wiki/L-moment) which
 are linear combinations of order statistics (order statistics in turn are estimates of
 quantiles).
 
 The definition of an L-moment of arbitrary order is complex, so we focus here on the first
-four L-moments.  The first L-moment $\lambda_1$ is the same as the usual mean.
+four L-moments.
+
+The first L-moment $\lambda_1$ is the same as the usual mean.
 
 The second L-moment of
 a distribution represented through the random variable $X$ is
@@ -105,8 +107,8 @@ $$
 $$
 
 Often we work with the standardized third and fourth L-moments, $\lambda_3^s = \lambda_3/\lambda_2$
-and $\lambda_4^s = \lambda_4/\lambda_2$.  Note that these standardized L-moments are scale invariant
+and $\lambda_4^s = \lambda_4/\lambda_2$.  Note that these standardized L-moments are *scale invariant*
 meaning that their value is not changed by scaling the data.  All L-moments except for the first
-L-moment are translation invariance, meaning that its value is not changed by adding a constant
+L-moment are *translation invariant*, meaning that its value is not changed by adding a constant
 to all values.  Scale and translation invariance are important becuase they imply that the
 result does not depend on the units or origin of the measurement scale.
