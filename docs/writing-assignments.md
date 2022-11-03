@@ -50,5 +50,5 @@ methods that you employ.  Be specific with your claims and precise with your
 language.  You should use your previous Argo memo as a starting point but you
 are welcome to incorporate different analysis approaches -- however these should
 broadly reflect the approaches discussed in class.  Since this is a revision,
-be especially cognizant of clarity, organization, and style.
+be especially aware of clarity, organization, and style.
  
