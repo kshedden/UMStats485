@@ -42,3 +42,13 @@ blood pressure as an outcome.  Your memo should consider the nonlinear
 and non-additive relationships between several explanatory variables and
 blood pressure, considering conditional mean blood pressure as well as other
 aspects of its conditional distribution.
+
+* (November 17th) Write a revision of your memo analyzing the Argo data.  As always, your two
+pages should overwhelmingly focus on your specific research question, analysis
+findings, and interpretation, along with critical review and exposition of the 
+methods that you employ.  Be specific with your claims and precise with your
+language.  You should use your previous Argo memo as a starting point but you
+are welcome to incorporate different analysis approaches -- however these should
+broadly reflect the approaches discussed in class.  Since this is a revision,
+be especially cognizant of clarity, organization, and style.
+ 

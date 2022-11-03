@@ -10,8 +10,8 @@ def get_goes(year):
 
 # Create a data matrix whose rows are non-overlapping blocks
 # of X-ray flux data, each block having length m.  The values
-# within each block are uniformly spaced with 2-second time
-# differences.
+# within each block are uniformly spaced in time, with approximately
+# 2-second time differences.
 def make_blocks(df, m, d):
 
     df["Date"] = pd.to_datetime(df[["Year", "Month", "Day"]])
@@ -44,5 +44,3 @@ def make_blocks(df, m, d):
 
     return tix, flx
 
-#df = get_goes(2017)
-#tix, flx = make_blocks(df, 100, 0)
