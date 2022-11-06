@@ -1,4 +1,4 @@
-(plantnet.org)[plantnet.org/en] is a platform and mobile app that allows people
+(Plantnet)[plantnet.org/en] is a platform and mobile app that allows people
 to submit photographs of plant life, which may then be identified either by
 AI or by human contributors.  
 
