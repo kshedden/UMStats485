@@ -6,8 +6,10 @@ import matplotlib.pyplot as plt
 from matplotlib.backends.backend_pdf import PdfPages
 import os
 
+# The raw data file constructed by prep.jl should be available at this path.
 pa = "/home/kshedden/myscratch/plantnet"
 
+# Load the raw data
 df = pd.read_csv(os.path.join(pa, "short.csv.gz"))
 df["Date"] = pd.to_datetime(df.Date)
 
@@ -101,7 +103,7 @@ def fit_linear(response):
 # Fit a nonlinear model for the response variable (should be one of
 # latitude, longitude, or elevation) predicted by other control
 # variables, with and without year.  If year is included, it
-# is modeled nonlinearly with a cubic polynomial.
+# is modeled nonlinearly with a 5-degree spline.
 def fit_nonlin(response):
     pvb = []
     terms = get_covariate_terms(response)

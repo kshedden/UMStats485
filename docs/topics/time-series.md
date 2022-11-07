@@ -3,24 +3,29 @@
 A *time series* is a sequence of observed values viewed as a single
 sample from a joint probability distribution. The central premise of a
 time series is that the order in which the values are observed
-contains information about the underlying probability distribution.
+matters.  The underlying probability distribution assigns different
+probabilities to the same set of values if they are observed in 
+different orders.
+
 Let $y_1, y_2, \ldots,y_n$ denote a time series.  This is a sample of
 size $n=1$ from a probability distribution on the sample space ${\cal
 R}^n$.
 
-Some time series exhibit strong *mean trends*.  For example, if
+The *mean trend* is the sequence of means of the values in the time
+series, i.e. $E[y_t]$.  Some time series exhibit strong patterns that
+are best viewed as mean trends.  For example, if
 $y_t$ is the global human population in year $t$, say where $t=1000,
 1001, \ldots$, then $y_t$ is increasing.  We don't know for sure
 if this is a trend in the mean, i.e. that $E[y_t]$ is increasing,
 since we can only observe the history
-of humanity on Earth one time, but based on the nature of biological
+of humanity on Earth one time.  But based on the nature of biological
 growth, it is reasonable to view the increasing values of $y_t$ as
 an inevitable fact that would recur in any "replication" of the
 observations.  That is, it is reasonable to supose that $E[y_t]$ is increasing.
+
 Many methods of time series analysis assume that no mean trend is
 present, or that any mean trend present in the observed time series
 has been removed.
-
 If a time series has no mean trend, then $E[y_t]= c$ for all $t$, for
 some constant $c\in {\cal R}$.  In many cases we will have $c=0$.
 Such a series may still have variance and/or covariance trends,
@@ -87,6 +92,34 @@ A time series with summable autocorrelations exhibits *short range
 dependence* while otherwise the series exhibits *long range
 dependence*.  A special case of short range dependendence is known as
 *m-dependence*, where $\gamma_j = 0$ when $j>m$.
+
+For time series with heavy tails, the conventional autocorrelation
+based on Pearson correlation is not sufficiently robust.  A common
+technique that can be used in this situation is the *tau autocorrelation*.
+To define this correlation measure, first consider paired data
+$(x_i, y_i)$ (not time series data).  Two pairs of these pairs, say $(x_i, y_i)$ and $(x_j, y_j)$
+(where $i \ne j$) are *concordant* if $x_i>x_j$ and $y_i>y_j$ or
+$x_i<x_j$ and $y_i<y_j$.  On the other hand, the two pairs are discordant if $x_i>x_j$ and
+$y_i<y_j$ or $x_i<x_j$ and $y_i>y_j$.  There are various ways of handling
+ties but we won't consider that here.  The *tau-correlation* is defined
+to be $(a-b)/c$, where $a$ is the number of concordant pairs, $b$
+is the number of discordant pairs, and $c$ is the total number of pairs.
+
+Like the Pearson correlation, the tau-correlation falls between -1 and 1,
+and is equal to zero if $x_i, y_i$ are sampled from the joint distribution
+of independent random variables $X$ and $Y$.  As with Pearson correlation,
+the converse is not true -- the tau-correlation can be zero even if $X$
+and $Y$ are dependent.  Positive values of the tau-correlation corresponds
+to a type of positive association (but is different from the positive 
+association in Pearson correlation).  The main reason to use tau-correlation
+is if the data come from heavy-tailed distributions and the extreme values
+make if very difficult to accurately estimate the Pearson correlation.
+
+Returning to the time series setting, we can define the tau-autocorrelation
+as follows.  For a given lag parameter $d$, consider pairs of the form
+$(x_t, x_{t+d})$.  Then consider the concordance of pairs of these pairs
+as discussed above.  If the tau-autocorrelation is large (close to 1), then
+knowing that $x_t > x_s$ tells us that it is very likely that $x_{t+d} > x_{s+d}$.
 
 ## Autoregression
 
