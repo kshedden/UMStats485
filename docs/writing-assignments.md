@@ -51,4 +51,15 @@ language.  You should use your previous Argo memo as a starting point but you
 are welcome to incorporate different analysis approaches -- however these should
 broadly reflect the approaches discussed in class.  Since this is a revision,
 be especially aware of clarity, organization, and style.
- 
+
+* (December 2nd) Write a memo addressing a specific research question using the
+GOES X-ray flux data.  Your memo should build on the methods and analyses 
+discussed in class, aiming to understand the temporal behavior of the two
+time series (Flux-1 and Flux-2) in one or more years.
+
+* (December 7th) Write a memo addressing a specific research question using
+the Plantnet data.  The format and expectations will be the same as in all
+other memos in this course, details TBA.
+
+* (December 12th) Write a revision of any memo from this course (except
+for memos that you have already revised).
