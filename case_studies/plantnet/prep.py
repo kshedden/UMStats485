@@ -2,10 +2,14 @@ import os
 import numpy as np
 import pandas as pd
 
+# The raw file from plantnet should be located here.
 pa = "/home/kshedden/myscratch/plantnet"
-fn = os.path.join(pa, "0140072-220831081235567.csv.gz")
 
-df = pd.read_csv(fn, delimiter="\t")
+# This is the raw data file.  If your file name does not
+# match it this needs to be changed.
+fn = "0140072-220831081235567.csv.gz"
+
+df = pd.read_csv(os.path.join(pa, fn), delimiter="\t")
 
 # Keep the 200 most common species.
 ds = df.groupby("scientificName").size()
@@ -15,7 +19,9 @@ df = df.loc[df.scientificName.isin(set(species)), :]
 df["Date"] = pd.to_datetime(df[["year", "month", "day"]])
 
 df = df[["scientificName", "Date", "elevation", "decimalLatitude", "decimalLongitude"]]
+df.to_csv(os.path.join(pa, "short.csv.gz"), index=None)
 
+# Calculate the circular mean.
 def circmean(x):
     x = np.pi * x / 180
     s = np.sin(x).mean()

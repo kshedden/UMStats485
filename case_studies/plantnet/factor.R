@@ -81,21 +81,21 @@ for (j in 1:10) {
 	# Scatterplot the species factor scores against the mean
 	# latitude for the species.
 	dp = data.frame(x=dz$decimalLatitude, y=usv$v[,j])
-	plt = ggplot(aes(x=x, y=y), data=dp) + geom_line()
+	plt = ggplot(aes(x=x, y=y), data=dp) + geom_point()
 	plt = plt + labs(x="Latitude", y=sprintf("Factor %d score", j))
 	print(plt)
 
 	# Scatterplot the species factor scores against the mean
 	# longitude for the species.
 	dp = data.frame(x=dz$decimalLongitude, y=usv$v[,j])
-	plt = ggplot(aes(x=x, y=y), data=dp) + geom_line()
+	plt = ggplot(aes(x=x, y=y), data=dp) + geom_point()
 	plt = plt + labs(x="Longitude", y=sprintf("Factor %d score", j))
 	print(plt)
 
 	# Scatterplot the species factor scores against the mean
 	# elvation for the species.
 	dp = data.frame(x=dz$elevation, y=usv$v[,j])
-	plt = ggplot(aes(x=x, y=y), data=dp) + geom_line()
+	plt = ggplot(aes(x=x, y=y), data=dp) + geom_point()
 	plt = plt + labs(x="Elevation", y=sprintf("Factor %d score", j))
 	print(plt)
 }

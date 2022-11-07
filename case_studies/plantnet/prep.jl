@@ -1,8 +1,13 @@
 using CSV, DataFrames, Dates, Statistics
 
+# The raw file from plantnet should be located here.
 pa = "/home/kshedden/myscratch/plantnet"
-fn = joinpath(pa, "0140072-220831081235567.csv.gz")
 
+# This is the raw data file.  If your file name does not
+# match this needs to be changed.
+fn = "0140072-220831081235567.csv.gz"
+
+fn = joinpath(pa, fn)
 df = open(fn) do io
 	CSV.read(io, DataFrame)
 end
@@ -16,6 +21,7 @@ df = filter(r->r.scientificName in species, df)
 df[:, :Date] = Date.(df[:, :year], df[:, :month], df[:, :day])
 df = df[:, [:scientificName, :Date, :elevation, :decimalLatitude, :decimalLongitude]]
 
+# Calculate the circular mean
 function circmean(x)
     x = pi * x / 180
     s = mean(sin, x)
