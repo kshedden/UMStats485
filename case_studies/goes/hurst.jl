@@ -2,6 +2,8 @@ using Statistics
 
 include("read.jl")
 
+nn = [4, 8, 16, 32, 64, 128]
+
 ti = df[:, :Time]
 fl = df[:, :Flux1]
 
@@ -34,7 +36,7 @@ end
 # As a check, estimate the Hurst parameter for 
 # IID normal data (the true value is 1/2). 
 fx = randn(length(ti))
-h0 = hurst(ti, fx, [4, 8, 16, 32, 64, 128], 0)
+h0 = hurst(ti, fx, nn, 0)
 println(h0)
 
 # As another check, simulate correlated data
@@ -45,11 +47,11 @@ r = 0.5
 for i in 2:length(ti)
 	fx[i] = r*fx[i-1] + sqrt(1 - r^2)*fx[i]
 end
-h0 = hurst(ti, fx, [4, 8, 16, 32, 64, 128], 0)
+h0 = hurst(ti, fx, nn, 0)
 println(h0)
 
 # Estimate the Hurst Parameter for the GOES data.
-h0 = hurst(ti, 1e8*fl, [4, 8, 16, 32, 64, 128], 0)
-h1 = hurst(ti, 1e8*fl, [4, 8, 16, 32, 64, 128], 1)
-h2 = hurst(ti, 1e8*fl, [4, 8, 16, 32, 64, 128], 2)
+h0 = hurst(ti, 1e8*fl, nn, 0)
+h1 = hurst(ti, 1e8*fl, nn, 1)
+h2 = hurst(ti, 1e8*fl, nn, 2)
 println([h0, h1, h2])
