@@ -257,7 +257,7 @@ the *sinusoidal curves*.  A sinusoidal curve of period $p$ can be
 written in the form
 
 $$
-a\sin(2\pi t/p) + b\cos(2\pi t/p)
+a\cdot \sin(2\pi t/p) + b\cdot \cos(2\pi t/p)
 $$
 
 where $a, b$ are real scalars.  Instead of expressing this function in terms
