@@ -213,11 +213,12 @@ is $\sigma^2/m$. Thus, if we double the sample size to $2m$, the variance of the
 mean 
 
 $$
-\bar{x}_{2m} = (x_1 + \cdots + x_{2m})
+\bar{x}_{2m} = (x_1 + \cdots + x_{2m})/(2m)
 $$ 
 
 is $\sigma^2/(2m)$ -- the variance of the sample mean is
-reduced by a factor of two.  It turns out that this scaling
+reduced by a factor of two when we double the sample size.  
+It turns out that this scaling
 relationship between the variance of the sample mean and the sample
 size continues to hold as long as the dependence is "short range" as
 defined above.  However if the dependence is long range, the variance
@@ -292,7 +293,7 @@ the FFT algorithm does not impact the interpretation of this method.
 
 If the time series is not observed at equally-spaced time points a generalization of
 this framework can be used.  Let $t_1, \ldots, t_n$ denote the time points at which
-a time series $y_1, \ldotsl, y_n$ was observed, and define sinusoidal basis functions
+a time series $y_1, \ldots, y_n$ was observed, and define sinusoidal basis functions
 as $s_k(i) = [\sin(t\pi kt_i)]_{i=1}^n$ and $c_k(i) = [\cos(t\pi kt_i)]_{i=1}^n$.
 We can use least square regression to fit $y$ to a set of such basis functions and 
 produce the periodogram.  In this case, the basis functions are not orthogonal
