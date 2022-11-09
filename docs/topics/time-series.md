@@ -267,7 +267,8 @@ turns out that sinusoidal curves of integer-valued frequency are mutually
 orthogonal.  This makes it convenient to use least squares regression
 to assess the periodicity of an observed time series.
 
-Specifically, let $s_k(i) = \sin(2\pi ki)$ and $c_k(i) = \cos(2\pi ki)$.
+Specifically, let $s_k(i) = \sin(2\pi ki)$ and $c_k(i) = \cos(2\pi ki)$
+for $i=1, \ldots, n$.
 These vectors are mutually orthogonal: if $j \ne k$, $s_j^\prime s_k = 0$, $c_j^\prime c_k = 0$,
 and $s_j^\prime c_k = 0$ for all $j, k$.  We can use a collection of these 
 vectors as basis vectors for least squares regression.  The fitted time series
@@ -289,16 +290,17 @@ A plot of power against frequency is a *periodogram*.
 
 The above least square problem is equivalent to the *discrete Fourier transform* (DFT), and
 can be calculated very quickly using the fast Fourier transform (FFT).  But using
-the FFT algorithm does not impact the interpretation of this method.
+the FFT algorithm does not impact the interpretation of the results of this method.
 
 If the time series is not observed at equally-spaced time points a generalization of
 this framework can be used.  Let $t_1, \ldots, t_n$ denote the time points at which
 a time series $y_1, \ldots, y_n$ was observed, and define sinusoidal basis functions
-as $s_k(i) = [\sin(t\pi kt_i)]_{i=1}^n$ and $c_k(i) = [\cos(t\pi kt_i)]_{i=1}^n$.
+as $s_k(i) = \sin(t\pi kt_i)$ and $c_k(i) = \cos(t\pi kt_i)$.
 We can use least square regression to fit $y$ to a set of such basis functions and 
 produce the periodogram.  In this case, the basis functions are not orthogonal
 and the calculation is much more expensive.  There are various ways to accomplish
-this with the most well-known being the *Lomb-Scargle periodogram*. 
+this with the most well-known being the 
+[Lomb-Scargle periodogram](https://en.wikipedia.org/wiki/Least-squares_spectral_analysis). 
 
 ## Differencing
 
