@@ -215,7 +215,7 @@ will scale in a qualitatively different way.
 
 For a given block-size $m$, we can calculate the sample means
 for consecutive blocks of $m$ observations, $\bar{x}^m_1 = {\rm Avg}(x_1,
-\ldots, x_m)$, $\bar{x}^m_2={\rm Avg}(x_{m+1}, \ldots, y_{2m})$ etc., and
+\ldots, x_m)$, $\bar{x}^m_2={\rm Avg}(x_{m+1}, \ldots, x_{2m})$ etc., and
 then calculate the sample variance of these sample means:
 
 $$
@@ -223,9 +223,9 @@ v_m = {\rm var}(\bar{x}^m_1, \bar{x}^m_2, \ldots).
 $$
 
 Finally, we can consider the log-space relationship between $\log(m)$
-and $\log(v_m)$.  If $v_m = a\cdot m^f$ then $\log(v_m) = \log(a) +
-f\log(m)$, so $f$ is the slope of $\log(v_m)$ on $\log(m)$.  For IID
-and short-range dependent data, then $f=-1$ will hold.  If $f>-1$ then
+and $\log(v_m)$.  If $v_m = a\cdot m^b$ then $\log(v_m) = \log(a) +
+b\log(m)$, so $b$ is the slope of $\log(v_m)$ on $\log(m)$.  For IID
+and short-range dependent data, then $b=-1$ will hold.  If $b>-1$ then
 the variances decrease slower than in the IID case, which is a
 logical consequence of long-range dependence.  Long-range dependence
 implies that the time series is not mixing and does not exhibit enough
