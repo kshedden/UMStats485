@@ -12,7 +12,8 @@ size $n=1$ from a probability distribution on the sample space ${\cal
 R}^n$.
 
 The *mean trend* is the sequence of means of the values in the time
-series, i.e. $E[y_t]$.  Some time series exhibit strong patterns that
+series, i.e. the sequence $E[y_t]$ for $t=1, 2, \ldots$.  
+Some time series exhibit strong patterns that
 are best viewed as mean trends.  For example, if
 $y_t$ is the global human population in year $t$, say where $t=1000,
 1001, \ldots$, then $y_t$ is increasing.  We don't know for sure
@@ -42,12 +43,12 @@ of $y_t$ does not depend on $t$, so there is a constant $k$ such that
 ${\rm var}[y_t] = k$ for all $t$.  If the series is standardized then
 $k=1$.
 
-One approach to time series analysis is based on probability models.
+Many powerful approaches to time series analysis are based on probability models.
 There are many famous parametric models for time series, especially
-the so-called *ARIMA* models.  We will not review model-based
+the so-called *ARIMA* models and their extensions.  We will not review model-based
 approaches to time series analysis here.  Instead we focus on
 approaches to time series analysis that aim to capture certain
-features of a time series without aiming to produce a comprehensive
+features of a time series without producing a comprehensive
 model for its population distribution.
 
 Statistical analysis is *empirical* and aims to learn primarily from
@@ -82,7 +83,7 @@ exponential form $\gamma_j \propto \exp(-j/\lambda)$, or a power-law
 form $\gamma_j = c/(1+j)^b$.
 
 If we consider all autocorrelations at all possible lags, we can
-consider whether the autocorrelations are summable, i.e. does $\sum_j
+ask whether the autocorrelations are summable, i.e. does $\sum_{j=0}^\infty
 \gamma_j$ exist as a finite value?  If the autocorrelations decay
 exponentially, then the autocorrelations are summable.  In the
 power-law case, the autocorrelations are summable if and only if $b >
@@ -93,27 +94,31 @@ dependence* while otherwise the series exhibits *long range
 dependence*.  A special case of short range dependendence is known as
 *m-dependence*, where $\gamma_j = 0$ when $j>m$.
 
+### Robust autocorrelation
+
 For time series with heavy tails, the conventional autocorrelation
-based on Pearson correlation is not sufficiently robust.  A common
-technique that can be used in this situation is the *tau autocorrelation*.
+based on Pearson correlation is not very robust.  A common
+technique that can be used in this situation is the *tau-autocorrelation*.
 To define this correlation measure, first consider paired data
 $(x_i, y_i)$ (not time series data).  Two pairs of these pairs, say $(x_i, y_i)$ and $(x_j, y_j)$
 (where $i \ne j$) are *concordant* if $x_i>x_j$ and $y_i>y_j$ or
 $x_i<x_j$ and $y_i<y_j$.  On the other hand, the two pairs are discordant if $x_i>x_j$ and
-$y_i<y_j$ or $x_i<x_j$ and $y_i>y_j$.  There are various ways of handling
-ties but we won't consider that here.  The *tau-correlation* is defined
+$y_i<y_j$ or $x_i<x_j$ and $y_i>y_j$ (there are various ways of handling
+ties but we won't consider that here).  The sample *tau-correlation* is defined
 to be $(a-b)/c$, where $a$ is the number of concordant pairs, $b$
 is the number of discordant pairs, and $c$ is the total number of pairs.
+There is an analogous definition for the population tau-correlation but
+we do not give that here.
 
-Like the Pearson correlation, the tau-correlation falls between -1 and 1,
-and is equal to zero if $x_i, y_i$ are sampled from the joint distribution
-of independent random variables $X$ and $Y$.  As with Pearson correlation,
-the converse is not true -- the tau-correlation can be zero even if $X$
-and $Y$ are dependent.  Positive values of the tau-correlation corresponds
-to a type of positive association (but is different from the positive 
-association in Pearson correlation).  The main reason to use tau-correlation
+Like the Pearson correlation, the tau-correlation lies between -1 and 1,
+and it population values is equal to zero when considering the tau-correlation
+between two independent random variables $X$ and $Y$.  As with Pearson correlation,
+the converse of this statement is not true -- the tau-correlation can be zero even if $X$
+and $Y$ are dependent.  Positive values of the tau-correlation correspond
+to a type of positive association -- but this is different from the positive 
+association in Pearson correlation.  The main reason to use tau-correlation
 is if the data come from heavy-tailed distributions and the extreme values
-make if very difficult to accurately estimate the Pearson correlation.
+make it very difficult to accurately estimate the Pearson correlation.
 
 Returning to the time series setting, we can define the tau-autocorrelation
 as follows.  For a given lag parameter $d$, consider pairs of the form
@@ -197,8 +202,8 @@ such as the lasso and ridge regression.
 A useful way to summarize the dependence structure of a time series is
 through the *Hurst parameter*.  There are various ways to introduce
 the Hurst parameter and we will only consider one approach here.
-Recall that if we have IID data $X_1, \ldots, X_m$, the variance of
-the sample mean $\bar{X}_m = (X_1 + \cdots + X_m)/m$ is $\sigma^2/m$.
+Recall that if we have IID data $x_1, \ldots, x_m$, the variance of
+the sample mean $\bar{x}_m = (x_1 + \cdots + x_m)/m$ is $\sigma^2/m$.
 Thus, if we double the sample size, the variance of the sample mean is
 reduced by a factor of two.  It turns out that this scaling
 relationship between the variance of the sample mean and the sample
@@ -206,18 +211,18 @@ size continues to hold as long as the dependence is "short range" as
 defined above.  However if the dependence is long range, the variance
 will scale in a qualitatively different way.
 
-For a given block-size $b$, we can calculate the sample means
-for consecutive blocks of $b$ observations, $m^b_1 = {\rm Avg}(y_1,
-\ldots, y_b)$, $m^b_2={\rm Avg}(y_{b+1}, \ldots, y_{2b})$ etc., and
+For a given block-size $m$, we can calculate the sample means
+for consecutive blocks of $m$ observations, $\bar{x}^m_1 = {\rm Avg}(x_1,
+\ldots, x_m)$, $\bar{x}^m_2={\rm Avg}(x_{m+1}, \ldots, y_{2m})$ etc., and
 then calculate the sample variance of these sample means:
 
 $$
-v_b = {\rm var}(m^b_1, m^b_2, \ldots).
+v_m = {\rm var}(\bar{x}^m_1, \bar{x}^m_2, \ldots).
 $$
 
-Finally, we can consider the log-space relationship between $\log(b)$
-and $\log(v_b)$.  If $v_b = a\cdot b^f$ then $\log(v_b) = \log(a) +
-f\log(b)$, so $f$ is the slope of $\log(v_b)$ on $\log(b)$.  For IID
+Finally, we can consider the log-space relationship between $\log(m)$
+and $\log(v_m)$.  If $v_m = a\cdot m^f$ then $\log(v_m) = \log(a) +
+f\log(m)$, so $f$ is the slope of $\log(v_m)$ on $\log(m)$.  For IID
 and short-range dependent data, then $f=-1$ will hold.  If $f>-1$ then
 the variances decrease slower than in the IID case, which is a
 logical consequence of long-range dependence.  Long-range dependence
