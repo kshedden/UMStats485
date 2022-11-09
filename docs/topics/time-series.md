@@ -279,7 +279,7 @@ $$
 The *energy* (or *power*) in the observed time series $y$ at frequency $j$ is 
 
 $$
-(s_j^\prime y)^2 / (s_j^\prime s_j)^2 + (c_j^\prime y) / (c_j^\prime c_j)
+(s_j^\prime y)^2 / (s_j^\prime s_j)^2 + (c_j^\prime y)^2 / (c_j^\prime c_j)^2
 $$
 
 (there are various alternative scalings of this quantity).
