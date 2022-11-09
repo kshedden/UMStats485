@@ -236,6 +236,59 @@ The Hurst parameter is defined to be $h = 1 + b/2$, where the slope
 $b$ is defined as above.  When $b=-1$ (as in IID data), the Hurst parameter is $h=1/2$.
 When $b>-1$, it follows that $h > 1/2$.
 
+## Periodicity
+
+Many time series exhibit periodic behavior, meaning that for some period $p$,
+$y_{t+p} \approx y_t$ for all $t$.  *Mean periodicity* refers to the setting
+where $E[y_{t+p}] = E[y_t]$ for all $t$.  
+
+An important class of mathematical functions that are continuous are
+the *sinusoidal curves*.  A sinusoidal curve of period $p$ can be
+written in the form
+
+$$
+a\sin(2\pi t/p) + b\cos(2\pi t/p)
+$$
+
+where $a, b$ are real scalars.  Instead of expressing this function in terms
+of the period, we can express it in terms of the frequency $f=1/p$.  It
+turns out that sinusoidal curves of integer-valued frequency are mutually
+orthogonal.  This makes it convenient to use least squares regression
+to assess the periodicity of an observed time series.
+
+Specifically, let $s_k(i) = [\sin(2\pi ki)]_{i=1}^n$ and $c_k(i) = [\cos(2\pi ki)]_{i=1}^n$.
+These vectors are mutually orthogonal: if $j \ne k$, $s_j^\prime s_k = 0$, $c_j^\prime c_k = 0$,
+and $s_j^\prime c_k = 0$ for all $j, k$.  We can use a collection of these 
+vectors as basis vectors for least squares regression.  The fitted time series
+corresponding to a given basis set is
+
+$$
+\hat{y} = \sum_j (s_j^\prime y) \cdot s_j / (s_j^\prime s_j) + (c_j^\prime y) \cdot c_j / (c_j^\prime c_j). 
+$$
+
+The *energy* (or *power*) in the observed time series $y$ at frequency $j$ is 
+
+$$
+(s_j^\prime y)^2 / (s_j^\prime s_j)^2 + (c_j^\prime y) / (c_j^\prime c_j)
+$$
+
+(there are various alternative scalings of this quantity).
+
+A plot of power against frequency is a *periodogram*.
+
+The above least square problem is equivalent to the *discrete Fourier transform* (DFT), and
+can be calculated very quickly using the fast Fourier transform (FFT).  But using
+the FFT algorithm does not impact the interpretation of this method.
+
+If the time series is not observed at equally-spaced time points a generalization of
+this framework can be used.  Let $t_1, \ldots, t_n$ denote the time points at which
+a time series $y_1, \ldotsl, y_n$ was observed, and define sinusoidal basis functions
+as $s_k(i) = [\sin(t\pi kt_i)]_{i=1}^n$ and $c_k(i) = [\cos(t\pi kt_i)]_{i=1}^n$.
+We can use least square regression to fit $y$ to a set of such basis functions and 
+produce the periodogram.  In this case, the basis functions are not orthogonal
+and the calculation is much more expensive.  There are various ways to accomplish
+this with the most well-known being the *Lomb-Scargle periodogram*. 
+
 ## Differencing
 
 A simple and important technique in time series analysis is *differencing*.
