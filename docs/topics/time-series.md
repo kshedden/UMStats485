@@ -203,10 +203,20 @@ A useful way to summarize the dependence structure of a time series is
 through the *Hurst parameter*.  There are various ways to introduce
 the Hurst parameter and we will only consider one approach here.
 Recall that if we have IID data $x_1, \ldots, x_m$, the variance of
-the sample mean $\bar{x}_m = (x_1 + \cdots + x_m)/m$ is $\sigma^2/m$.
-Thus, if we double the sample size to $2m$, the variance of the sample
-mean $\bar{x}_{2m} = (x_1 + \cdots + x_{2m})$ is $\sigma^2/(2m)$ -- 
-the variance of the sample mean is
+the sample mean 
+
+$$
+\bar{x}_m = (x_1 + \cdots + x_m)/m
+$$ 
+
+is $\sigma^2/m$. Thus, if we double the sample size to $2m$, the variance of the sample
+mean 
+
+$$
+\bar{x}_{2m} = (x_1 + \cdots + x_{2m})
+$$ 
+
+is $\sigma^2/(2m)$ -- the variance of the sample mean is
 reduced by a factor of two.  It turns out that this scaling
 relationship between the variance of the sample mean and the sample
 size continues to hold as long as the dependence is "short range" as
