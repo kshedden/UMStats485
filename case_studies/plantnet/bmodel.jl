@@ -14,25 +14,7 @@ using LinearAlgebra
 rm("plots", force=true, recursive=true)
 mkdir("plots")
 
-# The raw data file constructed by prep.jl should be available at this path.
-pa = "/home/kshedden/myscratch/plantnet"
-
-# Load the raw data
-df = open(joinpath(pa, "short.csv.gz")) do io
-	CSV.read(io, DataFrame)
-end
-
-# The data are heavily skewed toward the more recent years, optionally
-# restrict the analysis to these years.
-firstyear = 2010
-df = filter(r->r.Date >= Date(firstyear, 1, 1), df)
-
-# Generate some time variables
-df[!, :year] = year.(df[:, :Date])
-df[!, :dayOfYear] = dayofyear.(df[:, :Date])
-
-# There are very few records from southern hemisphere
-df = filter(r->r.decimalLatitude >= 0, df)
+include("read.jl")
 
 # Generate basis functions for latitude, longitude, elevation,
 # and day within year (seasonality).  Seasonality and longitude

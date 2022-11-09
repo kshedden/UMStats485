@@ -32,12 +32,14 @@ df = df.loc[df.decimalLatitude >= 0, :]
 # are circular variables.
 def setbasis(df):
 
+    # Basis functions for season
     per = 365
     for k in range(4):
         df["sin_day_%d" % k] = np.sin(2*np.pi*df.dayOfYear/per)
         df["cos_day_%d" % k] = np.cos(2*np.pi*df.dayOfYear/per)
         per /= 2
 
+    # Basis functions for longitude
     per = 180
     for k in range(4):
         df["sin_lon_%d" % k] = np.sin(2*np.pi*df.decimalLongitude/per)
@@ -49,7 +51,7 @@ def setbasis(df):
     for k in range(1, 4):
         df["lat%d" % k] = x**k
 
-    # Basis functions for latitude.
+    # Basis functions for elevation.
     x = (df["elevation"] - 100) / 1000
     for k in range(1, 4):
         df["elv%d" % k] = x**k
