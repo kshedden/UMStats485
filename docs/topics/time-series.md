@@ -267,7 +267,7 @@ turns out that sinusoidal curves of integer-valued frequency are mutually
 orthogonal.  This makes it convenient to use least squares regression
 to assess the periodicity of an observed time series.
 
-Specifically, let $s_k(i) = \[\sin(2\pi ki)\]_{i=1}^n$ and $c_k(i) = [\cos(2\pi ki)]_{i=1}^n$.
+Specifically, let $s_k(i) = \sin(2\pi ki)$ and $c_k(i) = \cos(2\pi ki)$.
 These vectors are mutually orthogonal: if $j \ne k$, $s_j^\prime s_k = 0$, $c_j^\prime c_k = 0$,
 and $s_j^\prime c_k = 0$ for all $j, k$.  We can use a collection of these 
 vectors as basis vectors for least squares regression.  The fitted time series
