@@ -10,7 +10,7 @@ da = leftjoin(da, rucc, on = :FIPS)
 da[:, :logPop] = log.(da[:, :Population])
 da = da[completecases(da), :]
 
-# Calcuate the mean and variance within each county to
+# Calculate the mean and variance within each county to
 # assess the mean/variance relationship.
 mv = combine(groupby(births, :FIPS), :Births => mean, :Births => var)
 scatterplot(log.(mv[:, :Births_var]), log.(mv[:, :Births_mean]))

@@ -16,7 +16,7 @@ da["logPop"] = np.log(da["Population"])
 
 pdf = PdfPages("pcr_py.pdf")
 
-# Calcuate the mean and variance within each county to
+# Calculate the mean and variance within each county to
 # assess the mean/variance relationship.
 mv = births.groupby("FIPS")["Births"].agg([np.mean, np.var])
 lmv = np.log(mv)
@@ -137,17 +137,24 @@ for npc in pcs:
     models.append((m, r))
 
     plt.clf()
-    ax = plt.axes([0.17, 0.18, 0.75, 0.75])
+    plt.figure(figsize=(9, 7))
+    ax = plt.axes([0.14, 0.18, 0.7, 0.75])
     ax.grid(True)
     for i in range(c.shape[0]):
         a = c.index[i]
-        ax.plot(ages, c.iloc[i, :], lt[a[2]] + sym[a[1]], color=colors[a[0]])
+        la = "/".join(a)
+        ax.plot(ages, c.iloc[i, :], lt[a[2]] + sym[a[1]], color=colors[a[0]],
+                label=la)
 
     # Setup the horizontal axis labels
     ax.set_xticks(ages)
     ax.set_xticklabels(age_groups)
     for x in plt.gca().get_xticklabels():
         x.set_rotation(-90)
+
+    ha, lb = plt.gca().get_legend_handles_labels()
+    leg = plt.figlegend(ha, lb, "center right")
+    leg.draw_frame(False)
 
     plt.xlabel("Age group", size=17)
     plt.ylabel("Coefficient", size=17)
