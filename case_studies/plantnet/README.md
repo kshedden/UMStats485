@@ -12,3 +12,7 @@ the download.
 
 The data we have here records the location (latitude, longitude,
 elevation) and date for each observation of each plant species. 
+
+After downloading the data file as described above, run one of the "prep"
+scripts to prepare analysis files.  You will need to adjust some of the
+paths in the prep script.
