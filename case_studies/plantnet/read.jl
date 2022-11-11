@@ -23,3 +23,8 @@ df = filter(r->r.decimalLatitude >= 0, df)
 # Elevation is very skewed, to prevent the extreme values
 # from dominating the fit, clamp at 3000 meters.
 df[!, :elevation] = clamp.(df[:, :elevation], -Inf, 3000)
+
+# Centered and scaled year (one unit of decode corresponds to 10
+# years of time).
+meanyear = mean(df[:, :year])
+df[:, :decade] = (df[:, :year] .- meanyear) / 10

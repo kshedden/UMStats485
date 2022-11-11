@@ -11,17 +11,12 @@ linear trend for each species based on the mixed model BLUPS (best
 linear unbiased predictors).
 =#
 
-using PyPlot, Dates, MixedModels, Printf, Statistics, StatsModels
+using PyPlot, MixedModels, Printf, Statistics, StatsModels
 
 rm("plots", force=true, recursive=true)
 mkdir("plots")
 
 include("read.jl")
-
-# Centered and scaled year (one unit of decode corresponds to 10
-# years of time).
-meanyear = mean(df[:, :year])
-df[:, :decade] = (df[:, :year] .- meanyear) / 10
 
 # Each of these variables can be the outcome, and the other
 # two are predictors.
@@ -74,7 +69,7 @@ end
 # Generate a plot of predicted trends for each species.
 function make_plots(mm, rr, va, ifig)
 
-	# The fitted value at the central lcoation, used as an intercept.
+	# The fitted value at the central location, used as an intercept.
 	xx = modelmatrix(mm)
 	xm = mean(xx, dims=1)[:]
 	xm[2] = 0
