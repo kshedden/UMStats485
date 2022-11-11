@@ -20,14 +20,15 @@ dx = as.matrix(dx)
 # Variance stabilizing transformation
 dx = sqrt(dx)
 
+speciesmeans = colMeans(dx)
+datemeans = rowMeans(dx)
+
 # Double center the data
 dx = dx - mean(dx)
-speciesmeans = colMeans(dx)
 n = dim(dx)[1]
 p = dim(dx)[2]
-dx = dx - outer(array(1, n), speciesmeans)
-datemeans = rowMeans(dx)
-dx = dx - outer(datemeans, array(1, p))
+dx = dx - outer(array(1, n), colMeans(dx))
+dx = dx - outer(rowMeans(dx), array(1, p))
 
 # Plot the means
 pd = data.frame(x=dates, y=datemeans)
@@ -52,6 +53,7 @@ usv = svd(dx)
 pd = data.frame(x=seq(length(usv$d)), s=usv$d)
 plt = ggplot(aes(x=x, y=s), data=pd) + geom_line()
 plt = plt + labs(x="SVD component", y="Singular value")
+plt = plt + ggtitle("Scree plot")
 print(plt)
 
 # Log/log scree plot
@@ -60,6 +62,7 @@ s1 = s[s > 1e-8]
 pd = data.frame(x=seq(length(s1)), s=s1)
 plt = ggplot(aes(x=log(x), y=log(s)), data=pd) + geom_line()
 plt = plt + labs(x="log SVD component", y="log Singular value")
+plt = plt + ggtitle("Scree plot (log space)")
 print(plt)
 
 for (j in 1:10) {
@@ -67,14 +70,14 @@ for (j in 1:10) {
 	n = length(dates)
 	dp = data.frame(x=dates[(n-2500):n], y=usv$u[(n-2500):n,j])
 	plt = ggplot(aes(x=x, y=y), data=dp) + geom_line()
-	plt = plt + labs(x="Date", y="Date factor")
+	plt = plt + labs(x="Date", y=sprintf("Date factor %d score", j))
 	plt = plt + ggtitle(sprintf("Factor %d", j))
 	print(plt)
 
 	# Plot the species factor scores
 	dp = data.frame(x=seq(1, length(usv$d)), y=usv$v[,j])
 	plt = ggplot(aes(x=x, y=y), data=dp) + geom_line()
-	plt = plt + labs(x="Species", y="Species factor")
+	plt = plt + labs(x="Species", y=sprintf("Species factor %d score", j))
 	plt = plt + ggtitle(sprintf("Factor %d", j))
 	print(plt)
 

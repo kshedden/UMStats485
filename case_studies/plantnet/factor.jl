@@ -25,28 +25,33 @@ dx = unstack(dx, :Date, :scientificName, :nobs)
 dates = dx[:, :Date]
 dx = select(dx, Not(:Date))
 species = names(dx)
-ii = sortperm(species)
-dx = dx[:, ii]
+dx = dx[:, sortperm(species)]
 species = names(dx)
 dx = Matrix(dx)
 
+# Make sure that the occurrence data and meta-data are ordered
+# the same way.
 @assert all(dz[:, :scientificName] .== species)
 
 # Variance stabilizing transformation
 dx = sqrt.(dx)
 
+speciesmeans = mean(dx, dims=1)[:]
+datemeans = mean(dx, dims=2)[:]
+
 # Double center the data
 dx .-= mean(dx)
-speciesmeans = mean(dx, dims=1)
 for j in 1:size(dx, 2)
-	dx[:, j] .-= speciesmeans[j]
+	dx[:, j] .-= mean(dx[:, j])
 end
-datemeans = mean(dx, dims=2)
 for i in 1:size(dx, 1)
-	dx[i, :] .-= datemeans[i]
+	dx[i, :] .-= mean(dx[i, :])
 end
 
 function plotmeans(ifig)
+
+	# Plot the mean at each date (this is the mean number of 
+	# occurrences summed over all species on a specific date).
 	PyPlot.clf()
 	PyPlot.grid(true)
 	PyPlot.plot(dates, datemeans, "-")
@@ -55,9 +60,22 @@ function plotmeans(ifig)
         x.set_rotation(-90)
 	end
 	PyPlot.xlabel("Date", size=15)
-	PyPlot.ylabel("Date mean", size=15)
+	PyPlot.ylabel("Date mean (mean occurrences/species)", size=15)
 	PyPlot.savefig(@sprintf("plots/%03d.pdf", ifig))
-	return ifig + 1
+	ifig += 1
+
+	# The species have no order so plot the order statistics
+	# of the species means.
+	PyPlot.clf()
+	PyPlot.grid(true)
+	PyPlot.plot(sort(speciesmeans), "-")
+	PyPlot.xlabel("Sorted position", size=15)
+	PyPlot.ylabel("Species mean (mean occurrences/day)", size=15)
+	PyPlot.title("Species mean order statistics")
+	PyPlot.savefig(@sprintf("plots/%03d.pdf", ifig))
+	ifig += 1
+
+	return ifig
 end
 
 ifig = plotmeans(ifig)
@@ -74,20 +92,25 @@ dz = dz[ii, :]
 u, s, v = svd(dx)
 
 function plotscree(ifig)
+
+	# A scree plot (singular value versus position).
 	PyPlot.clf()
 	PyPlot.grid(true)
 	PyPlot.plot(s, "-")
 	PyPlot.xlabel("SVD component", size=15)
 	PyPlot.ylabel("Singular value", size=15)
+	PyPlot.title("Scree plot")
 	PyPlot.savefig(@sprintf("plots/%03d.pdf", ifig))
 	ifig += 1
 
+	# The scree plot in log/log space.
 	s1 = s[s.>1e-8]
 	PyPlot.clf()
 	PyPlot.grid(true)
 	PyPlot.plot(log.(1:length(s1)), log.(s1), "-")
 	PyPlot.xlabel("Log SVD component", size=15)
 	PyPlot.ylabel("Log singular value", size=15)
+	PyPlot.title("Scree plot (log space)")
 	PyPlot.savefig(@sprintf("plots/%03d.pdf", ifig))
 	ifig += 1
 
@@ -99,6 +122,7 @@ ifig = plotscree(ifig)
 function make_plots(ifig)
 	for j in 1:10
 
+		# Plot the left-side (date) loadings for component j.
     	PyPlot.clf()
     	PyPlot.axes([0.13, 0.2, 0.8, 0.7])
    	 	PyPlot.grid(true)
@@ -108,11 +132,12 @@ function make_plots(ifig)
         	x.set_rotation(-90)
 		end
     	PyPlot.xlabel("Date", size=15)
-    	PyPlot.ylabel("Date factor", size=15)
+    	PyPlot.ylabel("Date factor $(j) score", size=15)
     	PyPlot.title("Factor $(j)")
     	PyPlot.savefig(@sprintf("plots/%03d.pdf", ifig))
 		ifig += 1
 
+		# Plot the right side (date) loadings for component j.
     	PyPlot.clf()
     	PyPlot.axes([0.15, 0.2, 0.8, 0.7])
     	PyPlot.grid(true)
@@ -123,6 +148,8 @@ function make_plots(ifig)
     	PyPlot.savefig(@sprintf("plots/%03d.pdf", ifig))
 		ifig += 1
 
+		# Plot the species scores against the mean latitude at which
+		# each species is observed.
     	PyPlot.clf()
     	PyPlot.axes([0.15, 0.2, 0.8, 0.7])
     	PyPlot.grid(true)
@@ -132,6 +159,8 @@ function make_plots(ifig)
     	PyPlot.savefig(@sprintf("plots/%03d.pdf", ifig))
 		ifig += 1
 
+		# Plot the species scores against the mean longitude at which
+		# each species is observed.
     	PyPlot.clf()
     	PyPlot.axes([0.15, 0.2, 0.8, 0.7])
     	PyPlot.grid(true)
@@ -141,6 +170,8 @@ function make_plots(ifig)
     	PyPlot.savefig(@sprintf("plots/%03d.pdf", ifig))
 		ifig += 1
 
+		# Plot the species scores against the mean elevation at which
+		# each species is observed.
     	PyPlot.clf()
     	PyPlot.grid(true)
     	PyPlot.plot(dz[:, :elevation], v[:, j], "o", mfc="none")
@@ -149,6 +180,7 @@ function make_plots(ifig)
     	PyPlot.savefig(@sprintf("plots/%03d.pdf", ifig))
 		ifig += 1
 	end
+
 	return ifig
 end
 

@@ -21,12 +21,13 @@ dx.columns = [x[1] for x in dx.columns]
 # Variance stabilizing transformation
 dx = np.sqrt(dx)
 
+speciesmeans = dx.mean(0)
+datemeans = dx.mean(1)
+
 # Double center the data
 dx -= dx.mean().mean()
-speciesmeans = dx.mean(0)
-dx -= speciesmeans
-datemeans = dx.mean(1)
-dx -= datemeans[:, None]
+dx -= dx.mean(0)
+dx -= dx.mean(1)[:, None]
 
 # Plot date means
 plt.clf()
@@ -37,7 +38,16 @@ plt.gca().xaxis.set_major_locator(mdates.YearLocator(5))
 for x in plt.gca().xaxis.get_ticklabels():
     x.set_rotation(-90)
 plt.xlabel("Date", size=15)
-plt.ylabel("Mean", size=15)
+plt.ylabel("Date mean (occurrences/species)", size=15)
+pdf.savefig()
+
+# Plot order statistics of species means
+plt.clf()
+plt.axes([0.15, 0.2, 0.8, 0.7])
+plt.grid(True)
+plt.plot(np.arange(len(speciesmeans)), np.sort(speciesmeans), "-")
+plt.xlabel("Position", size=15)
+plt.ylabel("Species mean (occurrences/day)", size=15)
 pdf.savefig()
 
 # Make sure the count data and location data are aligned
@@ -76,6 +86,7 @@ pdf.savefig()
 
 for j in range(10):
 
+    # Plot the date factor scores (only for most recent dates)
     plt.clf()
     plt.axes([0.13, 0.2, 0.8, 0.7])
     plt.grid(True)
@@ -84,18 +95,21 @@ for j in range(10):
     for x in plt.gca().xaxis.get_ticklabels():
         x.set_rotation(-90)
     plt.xlabel("Date", size=15)
-    plt.ylabel("Date factor", size=15)
+    plt.ylabel("Date %d factor score" % (j + 1), size=15)
     plt.title("Factor %d" % (j + 1))
     pdf.savefig()
 
+    # Plot the species factor scores
     plt.clf()
     plt.grid(True)
     plt.title("Factor %d" % (j + 1))
-    plt.ylabel("Species factor", size=15)
     plt.xlabel("Species", size=15)
+    plt.ylabel("Species factor %d" % (j + 1), size=15)
     plt.plot(v[:, j], "-")
     pdf.savefig()
 
+    # Plot the species factor scores against the mean latitude for
+    # the species.
     plt.clf()
     plt.grid(True)
     plt.plot(dz["decimalLatitude"], v[:, j], "o", mfc="none")
@@ -103,6 +117,8 @@ for j in range(10):
     plt.ylabel("Factor %d score" % (j + 1), size=15)
     pdf.savefig()
 
+    # Plot the species factor scores against the mean longitude for
+    # the species.
     plt.clf()
     plt.grid(True)
     plt.plot(dz["decimalLongitude"], v[:, j], "o", mfc="none")
@@ -110,6 +126,8 @@ for j in range(10):
     plt.ylabel("Factor %d score" % (j + 1), size=15)
     pdf.savefig()
 
+    # Plot the species factor scores against the mean elevation for
+    # the species.
     plt.clf()
     plt.grid(True)
     plt.plot(dz["elevation"], v[:, j], "o", mfc="none")
