@@ -9,12 +9,18 @@ different orders.
 
 Let $y_1, y_2, \ldots,y_n$ denote a time series.  This is a sample of
 size $n=1$ from a probability distribution on the sample space ${\cal
-R}^n$.
+R}^n$.  For the most part we focus here on *gridded* time series,
+meaning that the amount of time elapsing from $y_t$ to $y_{t+1}$
+is the same for all values of $t$.  Some time series are irregularly
+spaced or non-gridded, so we must consider the underlying sequence of time
+values $t_i$ at which the data are observed.
 
 The *mean trend* is the sequence of means of the values in the time
 series, i.e. the sequence $E[y_t]$ for $t=1, 2, \ldots$.  
+Note that this is a deterministic sequence, not a sequence of random
+variables.
 Some time series exhibit strong patterns that
-are best viewed as mean trends.  For example, if
+are best viewed as *mean trends*.  For example, if
 $y_t$ is the global human population in year $t$, say where $t=1000,
 1001, \ldots$, then $y_t$ is increasing.  We don't know for sure
 if this is a trend in the mean, i.e. that $E[y_t]$ is increasing,
@@ -63,7 +69,8 @@ called *mixing* that implies that forming averages over the values of
 a time series enables estimation of population parameters, despite the
 lack of IID data.  Not all time series are mixing, and when a time
 series is not mixing most of the methods discussed here will not give
-meaningful results.
+meaningful results.  We willnot give a formal definition of mixing
+here, but it is important to understand it intuitively.
 
 ## Autocorrelation
 
@@ -73,8 +80,8 @@ the correlation between $y_t$ and $y_{t+d}$ is a constant called the
 *autocorrelation at lag* $d$ that we will denote $\gamma_d$.  We may
 also view $\gamma_d$ as a function of $d$ that is the *autocorrelation
 function* of the time series.  This autocorrelation at lag $d$ can be estimated
-by taking the Pearson correlation between $y_1, \ldots, y_{n-d}$ and
-$y_{1+d}, \ldots, y_n$.
+by taking the sample Pearson correlation between the sequences $(y_1, \ldots, y_{n-d})$ and
+$(y_{1+d}, \ldots, y_n)$.
 
 For IID data, the autocorrelation function is $(\sigma^2, 0, 0,
 \ldots)$, or $\gamma_j = \sigma^2{\cal I}_{j=1}$.  Other
@@ -83,8 +90,8 @@ exponential form $\gamma_j \propto \exp(-j/\lambda)$, or a power-law
 form $\gamma_j = c/(1+j)^b$.
 
 If we consider all autocorrelations at all possible lags, we can
-ask whether the autocorrelations are summable, i.e. does $\sum_{j=0}^\infty
-\gamma_j$ exist as a finite value?  If the autocorrelations decay
+ask whether the autocorrelations are summable, i.e. does $\sum_{j=-\infty}^\infty
+|\gamma_j|$ exist as a finite value?  If the autocorrelations decay
 exponentially, then the autocorrelations are summable.  In the
 power-law case, the autocorrelations are summable if and only if $b >
 1$.
@@ -101,7 +108,7 @@ based on Pearson correlation is not very robust.  A common
 technique that can be used in this situation is the *tau-autocorrelation*.
 To define this correlation measure, first consider paired data
 $(x_i, y_i)$ (not time series data).  Two pairs of these pairs, say $(x_i, y_i)$ and $(x_j, y_j)$
-(where $i \ne j$) are *concordant* if $x_i>x_j$ and $y_i>y_j$ or
+(where $i \ne j$) are *concordant* if $x_i>x_j$ and $y_i>y_j$ or if
 $x_i<x_j$ and $y_i<y_j$.  On the other hand, the two pairs are discordant if $x_i>x_j$ and
 $y_i<y_j$ or $x_i<x_j$ and $y_i>y_j$ (there are various ways of handling
 ties but we won't consider that here).  The sample *tau-correlation* is defined
@@ -111,13 +118,13 @@ There is an analogous definition for the population tau-correlation but
 we do not give that here.
 
 Like the Pearson correlation, the tau-correlation lies between -1 and 1,
-and it population values is equal to zero when considering the tau-correlation
+and it population values is equal to zero when evaluating the tau-correlation
 between two independent random variables $X$ and $Y$.  As with Pearson correlation,
 the converse of this statement is not true -- the tau-correlation can be zero even if $X$
 and $Y$ are dependent.  Positive values of the tau-correlation correspond
 to a type of positive association -- but this is different from the positive 
 association in Pearson correlation.  The main reason to use tau-correlation
-is if the data come from heavy-tailed distributions and the extreme values
+arises when the data come from heavy-tailed distributions and the extreme values
 make it very difficult to accurately estimate the Pearson correlation.
 
 Returning to the time series setting, we can define the tau-autocorrelation
@@ -218,13 +225,23 @@ $$
 
 is $\sigma^2/(2m)$ -- the variance of the sample mean is
 reduced by a factor of two when we double the sample size.  
+If we consider the log variance of the sample mean in relation
+to to the log sample size, we get
+
+$$
+\log({\rm var}(\bar{x}_m)) = \log(\sigma^2) - \log(m).
+$$
+
+Thus in log/log coordinates, the variance of the sample mean and
+the sample size are linearly related with a slope of $-1$.
+
 It turns out that this scaling
 relationship between the variance of the sample mean and the sample
 size continues to hold as long as the dependence is "short range" as
 defined above.  However if the dependence is long range, the variance
 will scale in a qualitatively different way.
 
-For a given block-size $m$, we can calculate the sample means
+If we have a sufficient amount of data, for a given block-size $m$ we can calculate the sample means
 for consecutive blocks of $m$ observations, $\bar{x}^m_1 = {\rm Avg}(x_1,
 \ldots, x_m)$, $\bar{x}^m_2={\rm Avg}(x_{m+1}, \ldots, x_{2m})$ etc., and
 then calculate the sample variance of these sample means:
@@ -240,8 +257,8 @@ and short-range dependent data, then $b=-1$ will hold.  If $b>-1$ then
 the variances decrease slower than in the IID case, which is a
 logical consequence of long-range dependence.  Long-range dependence
 implies that the time series is not mixing and does not exhibit enough
-independence for the sample means derived from different parts of the
-series to average to something that reflects the population struture.
+independence for the sample statistics derived from different parts of the
+series to average to something that reflects the population structure.
 
 The Hurst parameter is defined to be $h = 1 + b/2$, where the slope
 $b$ is defined as above.  When $b=-1$ (as in IID data), the Hurst parameter is $h=1/2$.
@@ -253,16 +270,30 @@ Many time series exhibit periodic behavior, meaning that for some period $p$,
 $y_{t+p} \approx y_t$ for all $t$.  *Mean periodicity* refers to the setting
 where $E[y_{t+p}] = E[y_t]$ for all $t$.  
 
-An important class of mathematical functions that are continuous are
-the *sinusoidal curves*.  A sinusoidal curve of period $p$ can be
-written in the form
+Instead of discussing periodicity in terms
+of the period $p$, we can express it in terms of the frequency $f=1/p$.  
+The period is the amount of time needed to complete one cycle.  The
+frequency is the number of cycles completed in each unit of time.
+
+An important class of mathematical functions that are smooth and
+periodic are
+the *sinusoidal curves*.  A sinusoidal curve can be written
+$A\cos(2\pi f t + \phi)$ where $A$ is the amplitude, $f$ is
+the frequency (number of cycles per unit time), and $\phi$
+is the phase offset.  The offset determines where in its range
+the time series falls when $t=0$.  For example, if $\phi=0$ then at $t=0$ the time
+series has value zero.
+
+An important fact is that the sinusoidal curve above can be written as a linear
+combination of cosine and sine functions with offset zero, due to the identity
 
 $$
-a\cdot \sin(2\pi t/p) + b\cdot \cos(2\pi t/p)
+A\cos(2\pi ft + \phi) = a\cdot \cos(2\pi ft) + b\cdot \sin(2\pi ft)
 $$
 
-where $a, b$ are real scalars.  Instead of expressing this function in terms
-of the period, we can express it in terms of the frequency $f=1/p$.  It
+where $a, b$ are real scalars.  
+
+It
 turns out that sinusoidal curves of integer-valued frequency are mutually
 orthogonal.  This makes it convenient to use least squares regression
 to assess the periodicity of an observed time series.

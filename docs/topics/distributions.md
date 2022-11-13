@@ -88,14 +88,14 @@ th}$ order statistic.
 Rather than estimating the tail index, we can make a plot that captures
 the tail behavior of a distribution.  One of the most common ways
 to do this proceeds as follows.  Given a sample $X_1, \ldots, X_n$,
-form the order statistic $X_{(1)} \le X_{(2)} \le \cdots$.  Recall
+form the order statistics $X_{(1)} \le X_{(2)} \le \cdots$.  Recall
 that the $j^{\rm th}$ order statistic $X_{(j)}$ is an estimate of
 the $j/n$ quantile of the distribution.  The probability of
 observing a value greater than the $p^{\rm th}$ quantile of a 
 distribution is $1-p$, so the probability of observing a value
 greater than $X_{(j)}$ is $1 - j/n$.  
 
-A *Pareto tail plot* plots $\log(1 - j/n)$ against $\log(X_{j)})$.  If
+A *Pareto tail plot* plots $\log(1 - j/n)$ against $\log(X_{(j)})$.  If
 the tail is exactly $P(X>x) = c/x^\alpha$ then $\log P(X>x) = \log(c) - \alpha\log(x)$.
 This implies that the Pareto tail plot will have a linear pattern with a
 slope of $-\alpha$.
@@ -155,7 +155,7 @@ $\lambda_3^s = \lambda_3/\lambda_2$ and $\lambda_4^s =
 \lambda_4/\lambda_2$.  Note that these standardized L-moments are
 *scale invariant* meaning that their value is not changed by scaling
 the data.  All L-moments except for the first L-moment are
-*translation invariant*, meaning that its value is not changed by
+*translation invariant*, meaning that their values are not changed by
 adding a constant to all values.  Scale and translation invariance are
 important becuase they imply that the result does not depend on the
 units or origin of the measurement scale.
