@@ -53,8 +53,8 @@ function doridge(ifig)
 		PyPlot.grid(true)
 		PyPlot.plot(tax, b, "-")
 		PyPlot.title(@sprintf("f=%.0f", f))
-	    PyPlot.ylabel("Coefficient", size=15)
-    	PyPlot.xlabel("Minutes before current time", size=15)
+		PyPlot.ylabel("Coefficient", size=15)
+		PyPlot.xlabel("Minutes before current time", size=15)
 		PyPlot.savefig(@sprintf("plots/%03d.pdf", ifig))
 		ifig += 1
 	end
