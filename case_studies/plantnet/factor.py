@@ -6,6 +6,7 @@ from matplotlib.backends.backend_pdf import PdfPages
 import matplotlib.dates as mdates
 import os
 
+# Adjust the path below to find the data files.
 pa = "/home/kshedden/myscratch/plantnet"
 df = pd.read_csv(os.path.join(pa, "plants_occurrences.csv.gz"))
 dz = pd.read_csv(os.path.join(pa, "plants_locations.csv.gz"))
