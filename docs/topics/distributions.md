@@ -1,6 +1,6 @@
 # Characterizing distributions
 
-Probability distributions are the central object of probability theory
+Probability distributions are the central object of study in probability theory
 and statistics.  Probability theory provides us with several ways to
 represent a probability distribution, such as the [probability density
 function](https://en.wikipedia.org/wiki/Probability_density_function)
@@ -9,9 +9,9 @@ function](https://en.wikipedia.org/wiki/Cumulative_distribution_function)
 (cdf), and [moment generating
 function](https://en.wikipedia.org/wiki/Moment-generating_function)
 (mgf).  It also provides us with a means to summarize probability
-distributions using characteristics such as the mean and variance.
+distributions using numerical characteristics such as the mean and variance.
 The field of statistics (as opposed to the field of probability)
-provides us with estimators of these quantities, such as the
+focuses on estimating these quantities from data, using estimators such as the
 [empirical
 cdf](https://en.wikipedia.org/wiki/Empirical_distribution_function),
 the [histogram](https://en.wikipedia.org/wiki/Histogram) (an estimator
@@ -23,18 +23,21 @@ on the real line) are
 [moments](https://en.wikipedia.org/wiki/Moment_(mathematics)) and
 [quantiles](https://en.wikipedia.org/wiki/Quantile).  Both of these
 approaches can provide us with measures of *location* (also known as
-*centrality* or *central tendency*), such as the mean or median, and
+*centrality* or *central tendency*), and
 measures of
 [dispersion](https://en.wikipedia.org/wiki/Statistical_dispersion)
-(also known as *scale*), such as the [standard
+(also known as *scale*).  A moment-based measure of location is
+the mean, while a quantile-based measure of location is the median.
+A moment-based measure of dispersion is the [standard
 deviation](https://en.wikipedia.org/wiki/Standard_deviation),
-[inter-quartile
-range](https://en.wikipedia.org/wiki/Interquartile_range) (IQR), or
+while quantile-based measures of dispersion include the [inter-quartile
+range](https://en.wikipedia.org/wiki/Interquartile_range) (IQR) and the
 [MAD](https://en.wikipedia.org/wiki/Median_absolute_deviation) (median
-absolute deviation).  [Skew](https://en.wikipedia.org/wiki/Skewness)
-and [kurtosis](https://en.wikipedia.org/wiki/Kurtosis) are additional
-properties of probability distributions on the real line that are
-sometimes of interest.
+absolute deviation).  
+
+"Higher order" characteristics of a distribution such as [skew](https://en.wikipedia.org/wiki/Skewness)
+and [kurtosis](https://en.wikipedia.org/wiki/Kurtosis) are less commonly
+encountered but remain of interest in some settings.
 
 Below we summarize some less familiar characteristics of probability
 distributions, and ways to estimate these characteristics from data.
