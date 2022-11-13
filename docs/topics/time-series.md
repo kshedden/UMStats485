@@ -285,13 +285,13 @@ the time series falls when $t=0$.  For example, if $\phi=0$ then at $t=0$ the ti
 series has value zero.
 
 An important fact is that the sinusoidal curve above can be written as a linear
-combination of cosine and sine functions with offset zero, due to the identity
+combination of cosine and sine functions with offset $\phi=0$, due to the identity
 
 $$
 A\cos(2\pi ft + \phi) = a\cdot \cos(2\pi ft) + b\cdot \sin(2\pi ft)
 $$
 
-where $a, b$ are real scalars.  
+where $a, b$ are real scalars (specifically $a=A\cos(\phi)$ and $b=-A\sin(\phi)$).  
 
 It
 turns out that sinusoidal curves of integer-valued frequency are mutually
@@ -326,7 +326,7 @@ the FFT algorithm does not impact the interpretation of the results of this meth
 If the time series is not observed at equally-spaced time points a generalization of
 this framework can be used.  Let $t_1, \ldots, t_n$ denote the time points at which
 a time series $y_1, \ldots, y_n$ was observed, and define sinusoidal basis functions
-as $s_k(i) = \sin(t\pi kt_i)$ and $c_k(i) = \cos(t\pi kt_i)$.
+as $s_k(i) = \sin(2\pi kt_i)$ and $c_k(i) = \cos(2\pi kt_i)$.
 We can use least square regression to fit $y$ to a set of such basis functions and 
 produce the periodogram.  In this case, the basis functions are not orthogonal
 and the calculation is much more expensive.  There are various ways to accomplish
