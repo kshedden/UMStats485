@@ -40,12 +40,12 @@ for (i in 1:length(dlags)) {
 
 	d = dlags[i]
 
-    # Get the autocorrelation for each block
-    r = array(0, p)
-    for (j in 1:p) {
-        r[j] = cor.fk(flx[1:(n-d), j], flx[(d+1):n, j])
-    }
-    qa[i,] = quantile(r[is.finite(r)], pr)
+	# Get the autocorrelation for each block
+	r = array(0, p)
+	for (j in 1:p) {
+		r[j] = cor.fk(flx[1:(n-d), j], flx[(d+1):n, j])
+	}
+	qa[i,] = quantile(r[is.finite(r)], pr)
 }
 
 # Make a data frame for plotting

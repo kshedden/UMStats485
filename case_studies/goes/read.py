@@ -14,11 +14,12 @@ def get_goes(year):
 # 2-second time differences.
 def make_blocks(df, m, d):
 
-    df["Date"] = pd.to_datetime(df[["Year", "Month", "Day"]])
-    df["DayofYear"] = [x.dayofyear for x in df.Date]
-    df = df.loc[df.Time >= 0, :]
-    df["Timex"] = df.DayofYear * 60 * 60 * 24 + df.Time
+    df.loc[:, "Date"] = pd.to_datetime(df[["Year", "Month", "Day"]])
+    df.loc[:, "DayofYear"] = [x.dayofyear for x in df["Date"]]
+    df = df.loc[df["Time"] >= 0, :].copy()
+    df.loc[:, "Timex"] = df["DayofYear"] * 60 * 60 * 24 + df["Time"]
     df = df.sort_values(by="Timex")
+
     ti = df["Timex"].values
     fl = df["Flux1"].values
 

@@ -11,7 +11,6 @@ def l2(x):
     m /= (2 * comb(n, 2))
     return m
 
-
 def l3(x):
     n = len(x)
     ix = np.arange(n)
