@@ -23,3 +23,5 @@
 [Characterizing distributions](topics/distributions.md)
 
 [Time series analysis](topics/time-series.md)
+
+[Multilevel regression](topics/multilevel-regression.md)
