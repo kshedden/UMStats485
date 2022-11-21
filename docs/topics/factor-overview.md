@@ -46,25 +46,26 @@ relationships among the variables.
 There are many ways to pre-process the data prior to performing
 a factor analysis.  Suppose that $X$ is a $n\times p$ matrix whose rows
 are the observations or objects, and whose columns are the variables.
-Note that here $X$ corresponds to a matrix
-whose rows are observations.
 
 Some factor-type methods work with the covariance matrix of the variables,
 which is a $p\times p$ positive semidefinite matrix.  Since covariances
 by definition are derived from mean centered variables, it is common to 
 mean center the variables (columns) of $X$ prior to running a factor analysis.
+
 Furthermore, in many cases we do not wish our results to depend on the
 units in which each variable was measured, or we wish to explicitly
-remove any influence of the dispersions of the variables on our results.
+remove any influence of differing dispersions of the variables on our results.
 This motivates standardizing the columns of $X$ prior to performing
 a factor analysis, where *standardization* involves first mean
 centering each column and then dividing each column by its standard
-deviation.  In some cases it is desirable for the variables
+deviation.  
+
+While standardization is commonly performed, in some cases it is desirable for the variables
 with more dispersion to have more influence on the results of a factor
 analysis, and in these cases one may choose not to standardize the
 variables.
 
-In some *transposable* data sets there is no clear distinction between
+In some datasets there is no clear distinction between
 an observation and a variable, and it may be desirable to standardize
 both the rows and the columns.  To achieve this, the following three
 steps can be performed: (i) center the overall matrix around its 
