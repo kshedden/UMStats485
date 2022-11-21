@@ -16,7 +16,8 @@ object.
 
 ## Embedding
 
-Embedding algorithms take input data vectors $X$ and transform them
+Many methods of factor analysis can be viewed as a means to obtain
+an *embedding*.  Embedding algorithms take input data vectors $X$ and transform them
 into output data vectors $Z$.  Many embedding algorithms take the form
 of a "dimension reduction", so that $q \equiv {\rm dim}(Z) < {\rm
 dim}(X) \equiv p$.  However some embeddings preserve or even increase
@@ -39,6 +40,39 @@ objects provides a reduced feature representation for each object that
 can be passed on to additional analysis procedures, or interpreted
 directly.  Embedding the variables provides a means to interpret the
 relationships among the variables.
+
+## Centering and standardization
+
+There are many ways to pre-process the data prior to performing
+a factor analysis.  Suppose that $X$ is a $n\times p$ matrix whose rows
+are the observations or objects, and whose columns are the variables.
+Note that here $X$ corresponds to a matrix
+whose rows are observations.
+
+Some factor-type methods work with the covariance matrix of the variables,
+which is a $p\times p$ positive semidefinite matrix.  Since covariances
+by definition are derived from mean centered variables, it is common to 
+mean center the variables (columns) of $X$ prior to running a factor analysis.
+Furthermore, in many cases we do not wish our results to depend on the
+units in which each variable was measured, or we wish to explicitly
+remove any influence of the dispersions of the variables on our results.
+This motivates standardizing the columns of $X$ prior to performing
+a factor analysis, where *standardization* involves first mean
+centering each column and then dividing each column by its standard
+deviation.  In some cases it is desirable for the variables
+with more dispersion to have more influence on the results of a factor
+analysis, and in these cases one may choose not to standardize the
+variables.
+
+In some *transposable* data sets there is no clear distinction between
+an observation and a variable, and it may be desirable to standardize
+both the rows and the columns.  To achieve this, the following three
+steps can be performed: (i) center the overall matrix around its 
+grand mean, (ii) center each row of the matrix with respect to the
+row mean, (iii) center each column of the matrix with respect to
+the column mean.  After these three steps, each row and each column
+of the matrix will have mean zero and we can refer to the matrix as
+having been *double centered*.
 
 ## Singular Value Decoposition
 
@@ -73,6 +107,29 @@ Thus we have
 $$
 \tilde{X} = {\rm argmin}_{A: {\rm rank}(A) = k} \|A - X\|_F.
 $$
+
+### Analyzing a data matrix using the SVD
+
+Suppose we have a data matrix $X$ and wish to understand its structure.  We
+can begin my double centering the matrix $X$ as discussed above:
+
+$$
+X_{ij} = m + r_i + c_j + S_{ij}.
+$$
+
+Here, $S_{ij} \equiv X_{ij} - m - r_i - c_j$ are residuals.  Next we can
+take the SVD of $S$, yielding $S = USV^T$, or equivalently
+
+$$
+S_{ij} = \sum_{k=1}^p S_{kk} U_{ik}V_{jk}.
+$$
+
+Although there are $p$ terms in the SVD of $S$, the first few terms may capture
+most of the structure.  One important property that results from calculating
+the SVD for a double-centered matrix is that $U_{\cdot k} = 0$ and $V_{\cdot k} = 0$.
+That is, the columns of $U$ and $V$ are centered.  This column centering means
+that the SVD captures "deviations from the mean" represented by the additive
+model $m + r_i + c_j$.
 
 ## Principal Components Analysis
 
