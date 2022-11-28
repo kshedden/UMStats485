@@ -106,7 +106,7 @@ Let $\check{\beta}$ denote this estimator, while $\hat{\beta}$ denotes the
 estimated mean parameters for the mixed model.  Further, let $\check{\sigma}^2$ denote
 the MLE of $\sigma^2$ for simple linear regression (essentially the sample variance of the residuals).
 
-It is a fact that $\check{\beta} \approx \hat{\beta}$$.  That is, we can still recover the
+It is a fact that $\check{\beta} \approx \hat{\beta}$.  That is, we can still recover the
 mean parameters even when ignoring the correlations present in the data.  Further, $\check{\sigma}^2$
 will be approximately equal to $\sigma^2 + \tau^2$, the total variance from both random effects
 and unexplained variation.  Nevertheless, there are at least two important reasons that OLS is not
