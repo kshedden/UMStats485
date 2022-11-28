@@ -45,7 +45,7 @@ $i$).
 The *mean structure* is parameterized through the linear predictor
 
 $$
-\beta^\primex_{ij} = \beta_0 + \beta_1x_{ij1} + \cdots \beta_p x_{ijp}.
+\beta^\prime_{ij} = \beta_0 + \beta_1x_{ij1} + \cdots \beta_p x_{ijp}.
 $$
 
 This linear predictor is exactly the same as would be present in a
