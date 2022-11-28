@@ -127,10 +127,9 @@ example, we may have a response variable $y$, a block variable $b$, and covariat
 and $x_2$.  Observation $y_i$ belongs to block $b_i$ and has covariates $x_{1i}$, $x_{2i}$, etc.
 
 The "random intercepts" model discussed above can be expressed using the formula
-*y ~ x1 + x2 + (1 | b)*, where the special syntax (1 | b) indicates that a random intercept
-is included with every distinct value of $b$ defining a group that has its own random
-intercept.
-
+*y ~ x1 + x2 + (1 | b)*, where the special syntax *(1 | b)* indicates that the model
+has a random intercept, with distinct values of $b$ defining groups that each have
+their own random intercept.
 
 ## Random slopes
 
@@ -146,7 +145,9 @@ $$
 y_{ij} = \beta^\prime x_i + \theta_i + \gamma_i x_{1ij} + \epsilon_{ij}.
 $$
 
-Here we view $\gamma_i$ as a random variable with mean zero and variance
+Here we view $\gamma_i$ as a latent random variable with mean zero and variance
 $\tau_1^2$, and as above $\theta_i$ is random witnh mean zero and variance
 $\tau^2$.  Further, we take $\gamma_i$ and $\theta_i$ to be independent
 of each other.
+
+
