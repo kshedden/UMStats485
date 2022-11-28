@@ -131,7 +131,7 @@ sample size.
 
 Most modern software for fitting multilevel models expects the data to
 be in long form.  That is, instead of having the data indexed by two
-subscripts $y_{ij}$, as above, with $i$ indexing blocks and $j$
+subscripts $y_{ij}$ with $i$ indexing blocks and $j$
 indexing observations within blocks, in long form we have only a single index for
 all observations in all blocks.  A second variable $b$ is used to
 denote the block for each observation.  For example, we may have a
