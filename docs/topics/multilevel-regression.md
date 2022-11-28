@@ -33,7 +33,7 @@ A random intercept is a random
 variable $\theta_i$ that arises in the following model:
 
 $$
-y_{ij} = \beta^\prime x_i + \theta_i + \epsilon_{ij}.
+y_{ij} = \beta^\prime x_{ij} + \theta_i + \epsilon_{ij}.
 $$
 
 In this model, $i=1, \ldots n$ indexes blocks and $j=1, \ldots, n_i$
@@ -42,7 +42,7 @@ indexes observations within block $i$ ($n_i$ is the size of block $i$).
 The *mean structure* is parameterized through the linear predictor
 
 $$
-\beta^\prime = \beta_0 + \beta_1x_{i1} + \cdots \beta_p x_{ip}.
+\beta^\primex_{ij} = \beta_0 + \beta_1x_{ij1} + \cdots \beta_p x_{ijp}.
 $$
 
 This linear predictor is exactly the same as would be present in a
@@ -59,7 +59,7 @@ We can now study the marginal moments of the multilevel model.
 The marginal mean is
 
 $$
-E[y_{ij}] = \beta^\prime x_i,
+E[y_{ij}] = \beta^\prime x_{ij},
 $$
 
 since the random effects $\theta_i$ and the unexplained "errors"
@@ -142,7 +142,7 @@ there may be a slope $\gamma_i$ specifically for block $i$, leading to the
 following model:
 
 $$
-y_{ij} = \beta^\prime x_i + \theta_i + \gamma_i x_{1ij} + \epsilon_{ij}.
+y_{ij} = \beta^\prime x_{ij} + \theta_i + \gamma_i x_{1ij} + \epsilon_{ij}.
 $$
 
 Here we view $\gamma_i$ as a latent random variable with mean zero and variance
