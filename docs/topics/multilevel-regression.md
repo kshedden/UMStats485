@@ -116,9 +116,21 @@ about any findings.  Second, OLS will not recover $\beta$ as efficiently as poss
 "efficiency" here means that we get the most accurate estimate possible for a given sample
 size.
 
+## Model formulas and long form data
+
+Most modern software for fitting multilevel models expects the data to be in long form.
+That is, instead of having the data indexed by two subscripts $y_{ij}$, as above, we
+hav a single index, and then an other variable is used to denote the block.  For
+example, we may have a response variable $y$, a block variable $b$, and covariates $x_1$
+and $x_2$.  The "random intercepts" model discussed above can be expressed using the formula
+*y ~ x1 + x2 + (1 | b)*, where the special syntax (1 | b) indicates that a random intercept
+is included with every distinct value of $b$ defining a group that has its own random
+intercept.
+
+
 ## Random slopes
 
-Now suppose 
+Now suppose that certain variables 
 
 $$
 y_{ij} = \beta^\prime x_i + \theta_i + \epsilon_{ij}.
