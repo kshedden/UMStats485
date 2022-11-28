@@ -102,16 +102,16 @@ are estimated jointly, usually via maximum likelihood estimation (MLE) or the cl
 restricted maximum likelihood estimation (REML) which we will not define here.
 
 It would be possible to fit a model to correlated data using OLS, ignoring the correlations.  
-Let $\hat{\beta}_\mathrm{ols}$ denote this estimator, while $\hat{\beta}$ denotes the
-estimated mean parameters for the mixed model.  Further, let $\hat{\sigma}^2_{\text ols}$ denote
+Let $\check{\beta}$ denote this estimator, while $\hat{\beta}$ denotes the
+estimated mean parameters for the mixed model.  Further, let $\check{\sigma}^2$ denote
 the MLE of $\sigma^2$ for simple linear regression (essentially the sample variance of the residuals).
 
-It is a fact that $$\hat{\beta}_{\mathrm ols} \approx \hat{\beta}$$.  That is, we can still recover the
-mean parameters even when ignoring the correlations present in the data.  Further, $\hat{\sigma}^2_\text{ols}$
+It is a fact that $\check{\beta} \approx \hat{\beta}$$.  That is, we can still recover the
+mean parameters even when ignoring the correlations present in the data.  Further, $\check{\sigma}^2$
 will be approximately equal to $\sigma^2 + \tau^2$, the total variance from both random effects
 and unexplained variation.  Nevertheless, there are at least two important reasons that OLS is not
 the best choice for analyzing such data.  First, and most important, the OLS standard errors
-for $\hat{\beta}_{\mathrm ols}$ will be wrong, usually too small.  This will lead to overconfidence
+for $\check{\beta}$ will be wrong, usually too small.  This will lead to overconfidence
 about any findings.  Second, OLS will not recover $\beta$ as efficiently as possible, where
 "efficiency" here means that we get the most accurate estimate possible for a given sample
 size.
