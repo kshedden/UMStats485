@@ -102,7 +102,7 @@ are estimated jointly, usually via maximum likelihood estimation (MLE) or the cl
 restricted maximum likelihood estimation (REML) which we will not define here.
 
 It would be possible to fit a model to correlated data using OLS, ignoring the correlations.  
-Let $\hat{\beta}_{\mathrm ols}$ denote this estimator, while $\hat{\beta}$ denotes the
+Let $\hat{\beta}_\mathrm{ols}$ denote this estimator, while $\hat{\beta}$ denotes the
 estimated mean parameters for the mixed model.  Further, let $\hat{\sigma}^2_{\rm ols}$ denote
 the MLE of $\sigma^2$ for simple linear regression (essentially the sample variance of the residuals).
 
