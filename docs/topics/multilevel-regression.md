@@ -122,9 +122,10 @@ Most modern software for fitting multilevel models expects the data to be in lon
 That is, instead of having the data indexed by two subscripts $y_{ij}$, as above, with
 $i$ indexing blocks and $j$ indexing observations within blocks, we
 have only a single index for all observations in all blocks.  A second variable $b$
-is used to denote the block.  For
+is used to denote the block for each observation.  For
 example, we may have a response variable $y$, a block variable $b$, and covariates $x_1$
 and $x_2$.  Observation $y_i$ belongs to block $b_i$ and has covariates $x_{1i}$, $x_{2i}$, etc.
+
 The "random intercepts" model discussed above can be expressed using the formula
 *y ~ x1 + x2 + (1 | b)*, where the special syntax (1 | b) indicates that a random intercept
 is included with every distinct value of $b$ defining a group that has its own random
@@ -133,8 +134,19 @@ intercept.
 
 ## Random slopes
 
-Now suppose that certain variables 
+Now consider a certain explanatory variable, say $x_1$.  
+The "fixed" slope for $x_1$ is $\beta_1$, meaning that
+the average response differs by $\beta_1$ units for two observations that differ
+by one unit in $x_1$ and are identical in all other covariates.  However
+it may be that this variable operates differently in different blocks.  That is,
+there may be a slope $\gamma_i$ specifically for block $i$, leading to the
+following model:
 
 $$
-y_{ij} = \beta^\prime x_i + \theta_i + \epsilon_{ij}.
+y_{ij} = \beta^\prime x_i + \theta_i + \gamma_i x_{1ij} + \epsilon_{ij}.
 $$
+
+Here we view $\gamma_i$ as a random variable with mean zero and variance
+$\tau_1^2$, and as above $\theta_i$ is random witnh mean zero and variance
+$\tau^2$.  Further, we take $\gamma_i$ and $\theta_i$ to be independent
+of each other.
