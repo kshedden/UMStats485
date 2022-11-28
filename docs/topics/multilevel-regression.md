@@ -106,7 +106,7 @@ Let $\hat{\beta}_\mathrm{ols}$ denote this estimator, while $\hat{\beta}$ denote
 estimated mean parameters for the mixed model.  Further, let $\hat{\sigma}^2_{\text ols}$ denote
 the MLE of $\sigma^2$ for simple linear regression (essentially the sample variance of the residuals).
 
-It is a fact that $\hat{\beta}_{\mathrm ols} \approx \hat{\beta}$.  That is, we can still recover the
+It is a fact that $$\hat{\beta}_{\mathrm ols} \approx \hat{\beta}$$.  That is, we can still recover the
 mean parameters even when ignoring the correlations present in the data.  Further, $\hat{\sigma}^2_\text{ols}$
 will be approximately equal to $\sigma^2 + \tau^2$, the total variance from both random effects
 and unexplained variation.  Nevertheless, there are at least two important reasons that OLS is not
@@ -116,3 +116,10 @@ about any findings.  Second, OLS will not recover $\beta$ as efficiently as poss
 "efficiency" here means that we get the most accurate estimate possible for a given sample
 size.
 
+## Random slopes
+
+Now suppose 
+
+$$
+y_{ij} = \beta^\prime x_i + \theta_i + \epsilon_{ij}.
+$$
