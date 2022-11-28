@@ -131,9 +131,9 @@ sample size.
 
 Most modern software for fitting multilevel models expects the data to
 be in long form.  That is, instead of having the data indexed by two
-subscripts $y_{ij}$ with $i$ indexing blocks and $j$
-indexing observations within blocks, in long form we have only a single index for
-all observations in all blocks.  A second variable $b$ is used to
+subscripts $y_{ij}$ with $i$ indexing blocks and $j$ indexing
+observations within blocks, in long form we have only a single index
+for all observations in all blocks.  A second variable $b$ is used to
 denote the block for each observation.  For example, we may have a
 response variable $y$, a block variable $b$, and covariates $x_1$ and
 $x_2$.  Observation $y_i$ belongs to block $b_i$ and has covariates
@@ -164,5 +164,48 @@ variance $\tau_1^2$, and as above $\theta_i$ is random with mean zero
 and variance $\tau^2$.  Further, we take $\gamma_i$ and $\theta_i$ to
 be independent of each other.
 
-The formula for a model with random slopes can be expressed 
-as *y ~ x1 + x2 + (1 + x1 | b)*.
+The formula for a model with random slopes can be expressed as *y ~ x1
++ x2 + (1 + x1 | b)*.
+
+## Predicting random effects
+
+There are three distinct types of values in a multilevel regression:
+the data, the random effects, and the parameters.
+
+The data are always observed, and above would be denoted $y$, $x$, and
+$b$.  The data can be further partitioned into data that are modeled
+as random (here $y$), and data that are conditioned upon so can be
+viewed as either fixed (deterministic) or random (here $x$ and $b$).
+
+Parameters are unknown deterministic (nonrandom) quantities to be
+estimated.  In a multilevel analysis, the parameters can be
+partitioned into the *mean structure parameters* $\beta$ and the
+*variance structure parameters* $\sigma^2$ and $\tau^2$.
+
+The random effects $\theta_i$ and $\gamma_i$ are random variables but
+are not observed.
+
+In frequentist statistics, we can *estimate* parameters and *predict*
+unobserved random variables.  When we predict the random effects we
+usually use an approach called *Best Linear Unbiased Prediction*
+(BLUP).
+
+The difference between estimation and prediction is subtle.  One way
+of understanding this issue is that parameters determine the
+distribution of every data value, and thus as we gain more and more
+data, the parameter estimates will become arbitrarily precise (this is
+*statistical consistency*).
+
+Random effects generally relate to only a small number of
+observations, which does not necessarily increase as our sample size
+increases.  For example, we may have a longitudinal study in which we
+have $n$ people observed at birth and at age five years.  Suppose we
+use the model *y ~ x + (1 | b)* to describe this data.  We can let $n$
+grow to recover the parameters of the model, which are $\beta_0$ (the
+intercept), $\beta_1$ (the slope for $x$), $\tau^2$ (the variance of
+the random intercepts), and $\sigma^2$ (the unexplained variation).
+As $n$ grows, we will recover these four parameters to arbitrary
+precision.  However if we use the BLUP $\hat{b}_i$ to predict the
+random interept $b_i$, we will only ever have two observations for
+case $i$ and therefore the prediction cannot be consistent for the
+truth.
