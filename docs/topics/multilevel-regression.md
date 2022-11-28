@@ -101,8 +101,8 @@ The parameters of the model discussed above are $\beta$, $\tau^2$, and $\sigma^2
 are estimated jointly, usually via maximum likelihood estimation (MLE) or the closely-related
 restricted maximum likelihood estimation (REML) which we will not define here.
 
-It would be possible to fit a model to correlated data using OLS, ignoring the correlations.  
-Let $\check{\beta}$ denote this estimator, while $\hat{\beta}$ denotes the
+It would be possible to fit a model to correlated data using OLS, ignoring the correlations. Let 
+$\check{\beta}$ denote this estimator, while $\hat{\beta}$ denotes the
 estimated mean parameters for the mixed model.  Further, let $\check{\sigma}^2$ denote
 the MLE of $\sigma^2$ for simple linear regression (essentially the sample variance of the residuals).
 
