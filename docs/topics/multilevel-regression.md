@@ -28,8 +28,9 @@ a cluster sample, then each community is a block.
 
 Let $y_{ij}$ denote the $j^{\rm th}$ repeated measure for the $i^{\rm th}$ 
 block.  One way to account for the correlations in the data is to introduce
-a *random effect*, in this case a *random intercept*.  This is a random
-variable $\theta_i$ that can arise in a model as follows:
+a *random effect*, with the most basic random effect being a *random intercept*.  
+A random intercept is a random
+variable $\theta_i$ that arises in the following model:
 
 $$
 y_{ij} = \beta^\prime x_i + \theta_i + \epsilon_{ij}.
@@ -44,13 +45,13 @@ $$
 \beta^\prime = \beta_0 + \beta_1x_{i1} + \cdots \beta_p x_{ip}.
 $$
 
-This linear predictor is exactly the same as would arise in a
+This linear predictor is exactly the same as would be present in a
 single-level (conventional) linear model.
 
 The random intercepts $\theta_i$ are a collection of independent and
 identically distributed (IID) random variables assumed to follow
 a Gaussian distribution with mean zero and variance $\tau^2$. The
-*unexplained variation* is reprented through the random variables
+*unexplained variation* is represented through the random variables
 $\epsilon_{ij}$, which are IID Gaussian random variables with mean 
 zero and variance $\sigma^2$. 
 
@@ -91,7 +92,8 @@ Two observations in different blocks are independent so the covariance and corre
 is zero.
 
 It is important to note that the random effects $\theta_i$ are neither data (which must be observed)
-nor are they parameters, which are unknown values to be estimated based on the data.  Instead, they are "latent" data
+nor are they parameters which are unknown values to be estimated based on the data.  Instead, 
+the random effects are "latent" data
 that are not observed and are integrated out of the model before estimating the parameters
 using a procedure such as maximum likelihood estimation. 
 
@@ -100,7 +102,7 @@ are estimated jointly, usually via maximum likelihood estimation (MLE) or the cl
 restricted maximum likelihood estimation (REML) which we will not define here.
 
 It would be possible to fit a model to correlated data while ignoring the correlations, using
-OLS.  Let $\hat{\beta}_{\rm ols}$ denote this estimator, while $\hat{beta}$ denotes the
+OLS.  Let $\hat{\beta}_{\mathrm ols}$ denote this estimator, while $\hat{\beta}$ denotes the
 estimated mean parameters for the mixed model.  Further, let $\hat{\sigma}^2_{\rm ols}$ denote
 the MLE of $\sigma^2$ for simple linear regression (essentially the sample variance of the residuals).
 
