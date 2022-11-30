@@ -5,13 +5,7 @@ library(dplyr)
 library(ggplot2)
 
 pdf("autoreg_r.pdf")
-
 source("read.R")
-
-df = get_goes(2017)
-
-ti = df[, "Time"]
-fl = df[, "Flux1"]
 
 # Use blocks of size m, and use the first q observations to predict
 # the final observation.
@@ -22,26 +16,6 @@ q = 200
 # being predicted.
 tax = seq(-2*m, -2*(m-q))[1:q]
 tax = tax / 60
-
-rr = make_blocks(df, m, 0)
-tix = rr$time
-flx = rr$flux
-
-flx = log(1e-8 + flx)
-
-n = dim(flx)[1]
-p = dim(flx)[2]
-
-# Construct a design matrix and response vector.
-x = t(flx[1:q,])
-y = flx[n,]
-
-n = dim(x)[1]
-p = dim(x)[2]
-
-# Center the data
-y = y - mean(y)
-x = x - outer(array(1, n), colMeans(x))
 
 # Regress y on x using ridge regression, with penalty parameter f.
 ridge = function(x, y, f) {
@@ -54,12 +28,43 @@ ridge = function(x, y, f) {
 	return(b)
 }
 
+# Prepare a year for autoregression modeling
+prep_data = function(year) {
+	dx = get_goes(year)
+	rr = make_blocks(dx, m, 0)
+	tix = rr$time
+	flx = rr$flux
+	flx = log(1e-8 + flx)
+	n = dim(flx)[1]
+	x = t(flx[1:q,])
+	y = flx[n,]
+
+	# Center the data
+	n = dim(x)[1]
+	y = y - mean(y)
+	x = x - outer(array(1, n), colMeans(x))
+	
+	return(list(y=y, x=x))
+}
+
+pt = prep_data(2017)
+y = pt$y
+x = pt$x
+
+pt = prep_data(2019)
+ytest = pt$y
+xtest = pt$x
+
+tr = quantile(ytest, 0.5)
+ytestbin = 1*(ytest >= tr)
+
 # Consider how the regression coefficients look for various values
 # of the penalty parameter.
-for (f in c(1, 10, 100, 1000, 10000)) {
+for (f in c(0, 0.001, 0.1, 1, 10, 100, 1000, 10000)) {
 	b = ridge(x, y, f)
 	dp = data.frame(b=b, tax=tax)
 	plt = ggplot(aes(x=tax, y=b), data=dp) + geom_line()
+	plt = plt + ggtitle(sprintf("f=%.4f", f))
 	plt = plt + labs(x="Minutes before current time", y="Coefficient")
 	print(plt)
 }
