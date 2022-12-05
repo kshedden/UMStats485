@@ -19,6 +19,7 @@ ii = df$scientificName %in% species
 df = df[ii,]
 df = df %>% mutate(Date = make_datetime(year, month, day))
 df = df %>% select(scientificName, Date, elevation, decimalLatitude, decimalLongitude)
+write_csv(df, file.path(pa, "short.csv.gz"))
 
 circmean = function(x) {
     x = pi * x / 180
