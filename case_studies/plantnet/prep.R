@@ -29,7 +29,7 @@ circmean = function(x) {
 }
 
 # Mean latitude, longitude, and elevation for each species.
-dz = df %>% group_by(scientificName) %>% summarize(decimalLatitude=mean(decimalLatitude), 
+dz = df %>% group_by(scientificName) %>% summarize(decimalLatitude=mean(decimalLatitude),
               elevation=mean(elevation, na.rm=TRUE), decimalLongitude=circmean(decimalLongitude))
 
 # Create a long-form dataframe with a row for every day and for

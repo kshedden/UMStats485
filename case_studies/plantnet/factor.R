@@ -39,7 +39,7 @@ print(plt)
 stopifnot(all(species == dz$scientificName))
 
 # Factor the matrix once, then sort so that the
-# species scores are increasing for the first 
+# species scores are increasing for the first
 # factor.
 usv = svd(dx)
 ii = order(usv$v[, 1])
