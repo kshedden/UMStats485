@@ -1,7 +1,7 @@
 # Assess the evidence that the mean latitude, longitude, or elevation
 # of occurrences of a species are changing in time.  This is done by
 # fitting regression models with least squares, in which one of latitude,
-# longitude, or elevation is the dependent variable, and the other two are 
+# longitude, or elevation is the dependent variable, and the other two are
 # independent variables.  Two models are fit -- one including year
 # and one not including year, and we assess the statistical significance
 # of the year effect by comparing these two models.

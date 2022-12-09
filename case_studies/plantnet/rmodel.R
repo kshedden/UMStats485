@@ -24,7 +24,7 @@ fitmodel = function(v) {
 
     s = paste(tx, collapse=" + ")
     fml = sprintf("%s ~ year + %s + (1 + decade | scientificName)", v, s)
-	fml = as.formula(fml)
+    fml = as.formula(fml)
 
     # Fit the mixed model and print the model summary.
     m0 = lmer(fml, data=df)
@@ -55,21 +55,21 @@ make_plots = function(mm, rr, va) {
     # The plotted years as decades
     yx = (yr - meanyear) / 10
 
-	nspecies = dim(rr)[1]
-	dp = array(0, c(10*nspecies, 3))
-	ii = 0
+    nspecies = dim(rr)[1]
+    dp = array(0, c(10*nspecies, 3))
+    ii = 0
     for (i in 1:nspecies) {
-    	dp[(ii+1):(ii+10), 1] = i
-		dp[(ii+1):(ii+10), 2] = yr
-		dp[(ii+1):(ii+10), 3] = icept + rr[i, 1] + ys*yr + rr[i, 2]*yx
-    	ii = ii + 10
-    } 
+        dp[(ii+1):(ii+10), 1] = i
+        dp[(ii+1):(ii+10), 2] = yr
+        dp[(ii+1):(ii+10), 3] = icept + rr[i, 1] + ys*yr + rr[i, 2]*yx
+        ii = ii + 10
+    }
     dp = data.frame(dp)
     colnames(dp) = c("g", "x", "y")
 
-	plt = ggplot(aes(x=x, y=y, group=g), data=dp) + geom_line(color="grey")
-	plt = plt + labs(x="Year", y=titles[[v]])
-	print(plt)
+    plt = ggplot(aes(x=x, y=y, group=g), data=dp) + geom_line(color="grey")
+    plt = plt + labs(x="Year", y=titles[[v]])
+    print(plt)
 }
 
 for (v in va) {
